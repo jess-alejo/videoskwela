@@ -1,0 +1,32 @@
+%h1 Landing Page
+= link_to 'Privacy Policy', privacy_policy_path, class: "btn btn-primary"
+= icon('fas', 'flag')
+= icon('far', 'flag')
+= icon('fab', 'flag')
+%span.text-warning
+  = icon('fab', 'font-awesome', 'Font Awesome', id: 'my-icon', class: 'text-danger')
+.row
+  .col-md-4
+    .p-3.mb-3.swatch-primary
+      = link_to 'Primary', '#', class: 'btn btn-primary'
+  .col-md-4
+    .p-3.mb-3.swatch-secondary
+      = link_to 'Secondary', '#', class: 'btn btn-secondary'
+  .col-md-4
+    .p-3.mb-3.swatch-success
+      = link_to 'success', '#', class: 'btn btn-success'
+  .col-md-4
+    .p-3.mb-3.swatch-danger
+      = link_to 'danger', '#', class: 'btn btn-danger'
+  .col-md-4
+    .p-3.mb-3.swatch-warning
+      = link_to 'warning', '#', class: 'btn btn-warning'
+  .col-md-4
+    .p-3.mb-3.swatch-info
+      = link_to 'info', '#', class: 'btn btn-info'
+  .col-md-4
+    .p-3.mb-3.swatch-light
+      = link_to 'light', '#', class: 'btn btn-light'
+  .col-md-4
+    .p-3.mb-3.swatch-dark
+      = link_to 'dark', '#', class: 'btn btn-dark'
