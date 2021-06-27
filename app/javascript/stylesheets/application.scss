@@ -1,4 +1,4 @@
-$theme-colors: (primary: purple);
+@import "variables";
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import 'bootstrap/scss/bootstrap'
+@import 'bootstrap/scss/bootstrap';
