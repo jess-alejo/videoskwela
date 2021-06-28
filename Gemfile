@@ -59,3 +59,4 @@ gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'simple_form', '~> 5.1'
 
 gem 'faker', '~> 2.18'
+gem 'devise', '~> 4.8'
