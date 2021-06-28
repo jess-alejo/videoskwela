@@ -1,12 +1,14 @@
 -# frozen_string_literal: true
 
 .card-body
-  = simple_form_for(@course, wrapper: :floating_labels_form,
-    wrapper_mappings: { select: :floating_labels_select }) do |f|
+  = simple_form_for(@course, defaults: { wrapper_html: { class: 'mb-3' }, label_html: { class: 'form-label' } }) do |f|
     = f.error_notification
 
-    = f.input :title, wrapper_html: { class: 'form-floating mb-3'}
-    = f.input :description, wrapper_html: { class: 'form-floating mb-3'}
+    = f.input :title, wrapper_html: { class: 'mb-3' }
+
+    .form-group.mb-3
+      = f.label :content, class: 'form-label'
+      = f.rich_text_area :description
 
     .form-actions
       = f.button :submit, class: 'btn btn-primary'
