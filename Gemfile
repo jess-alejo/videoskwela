@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'font-awesome-sass', '~> 5.15', '>= 5.15.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'simple_form', '~> 5.1'
+
+gem 'faker', '~> 2.18'
