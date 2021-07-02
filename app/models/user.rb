@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses
 
   def to_s
