@@ -5,3 +5,9 @@
 @import "actiontext";
 
 @import "courses";
+
+.resource-container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+}

@@ -1,0 +1,24 @@
+.card
+  .card-header
+    .fa.fa-user
+    = user.email
+  %ul.list-group
+    %li.list-group-item
+      Signed up
+      = time_ago_in_words(user.created_at)
+      ago
+    %li.list-group-item
+      Sign In Count
+      = user.sign_in_count
+    %li.list-group-item
+      Current Sign In At
+      = user.current_sign_in_at
+    %li.list-group-item
+      Last Sign In At
+      = user.last_sign_in_at
+    %li.list-group-item
+      Current Sign In IP
+      = user.current_sign_in_ip
+    %li.list-group-item
+      Last Sign In IP
+      = user.last_sign_in_ip
