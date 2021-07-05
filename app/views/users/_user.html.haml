@@ -2,7 +2,7 @@
   .card-header
     .fa.fa-user
     = user.email
-  %ul.list-group
+  %ul.list-group.border-0
     %li.list-group-item
       Signed up
       = time_ago_in_words(user.created_at)
@@ -22,3 +22,9 @@
     %li.list-group-item
       Last Sign In IP
       = user.last_sign_in_ip
+    %li.list-group-item
+      Confirmed email?
+      - if user.confirmed_at.present?
+        .badge.bg-success Yes
+      - else
+        .badge.bg-danger No
