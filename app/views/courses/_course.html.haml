@@ -1,11 +1,21 @@
 .card.h-100
   .card-body
     %h5.card-title
-      .fa.fa-book
+      .fa.fa-graduation-cap
       = course.title
     %p.card-text
-      = course.description
+      = simple_format(course.short_description)
   %ul.list-group.list-group-flush
+    %li.list-group-item.d-flex.justify-content-between
+      .jea
+        .fa.fa-globe
+        = course.language
+      .jea
+        .fa.fa-signal
+        = course.level
+      .jea
+        .fa.fa-dollar
+        = number_to_currency course.price
     %li.list-group-item
       .far.fa-clock.me-1
       = course.created_at

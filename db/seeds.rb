@@ -13,6 +13,10 @@ if Rails.env.development?
     Course.create!(
       title: Faker::Educator.course_name,
       description: Faker::TvShows::GameOfThrones.quote,
+      short_description: Faker::Quote.famous_last_words,
+      language: %w[English Tagalog].sample,
+      level: %w[Beginner Intermediate Advanced].sample,
+      price: Faker::Number.between(from: 0, to: 100),
       author: user
     )
   end
