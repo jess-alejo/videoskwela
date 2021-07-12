@@ -1,2 +1,33 @@
 .resource-container
   = render  @users
+
+= search_form_for @q, class: 'row g-2 py-3' do |f|
+  .col-auto
+    = f.search_field :email_cont, class: 'form-control', placeholder: 'Email...'
+  .col-auto
+    = f.submit class: 'btn btn-primary me-1'
+    = link_to users_path, class: 'btn btn-secondary' do
+      .fa.fa-sync
+
+%table.table.table-bordered
+  %thead
+    %tr
+      %th ID
+      %th Email
+      %th Created At
+      %th Sign In Count
+      %th Current Sign In At
+      %th Last Sign In At
+      %th Current Sign In IP
+      %th Last Sign In IP
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.email
+        %td= user.created_at
+        %td= user.sign_in_count
+        %td= user.current_sign_in_at
+        %td= user.last_sign_in_at
+        %td= user.current_sign_in_ip
+        %td= user.last_sign_in_ip
