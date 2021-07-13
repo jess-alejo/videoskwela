@@ -12,8 +12,8 @@
       %small= f.error :description, class: 'text-danger'
 
     = f.input :short_description, wrapper_html: { class: 'mb-3' }
-    = f.input :language, collection: %w[English Tagalog], wrapper_html: { class: 'mb-3' }
-    = f.input :level, collection: %w[Beginner Intermediate Advanced], wrapper_html: { class: 'mb-3' }
+    = f.input :language, collection: Course::LANGUAGES, wrapper_html: { class: 'mb-3' }
+    = f.input :level, collection: Course::LEVELS, wrapper_html: { class: 'mb-3' }
     = f.input :price, wrapper_html: { class: 'mb-3' }
 
     .form-actions

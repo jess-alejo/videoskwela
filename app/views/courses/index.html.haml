@@ -2,6 +2,18 @@
   Courses:
   = @courses.count
 
-.course-container
-  = render @courses
+.row
+  .col-md-2
+    = search_form_for @q do |f|
+      = f.search_field :title_cont, placeholder: 'Title', class: 'form-control mb-2'
+      = f.search_field :short_description_cont, placeholder: 'Description', class: 'form-control mb-2'
+      = f.select :language_cont, Course::LANGUAGES, { include_blank: 'Select Language' }, class: 'form-select mb-2'
+      = f.select :level_cont, Course::LEVELS, { include_blank: 'Select Level' }, class: 'form-select mb-2'
+      = f.search_field :price_eq, placeholder: 'Price', class: 'form-control mb-2'
+      = f.search_field :author_email_cont, placeholder: 'Author', class: 'form-control mb-2'
+      = f.submit 'Search', class: 'btn btn-primary'
+      = link_to 'Refresh', courses_path, class: 'btn btn-secondary'
+  .col-md-10
+    .course-container
+      = render @courses
 
