@@ -3,8 +3,8 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
-    @q = Course.ransack(params[:q])
-    @courses = @q.result
+    @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @courses = @ransack_courses.result.includes(:author)
   end
 
   # GET /courses/1 or /courses/1.json

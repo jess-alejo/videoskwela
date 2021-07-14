@@ -1,7 +1,7 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
     %a.navbar-brand.d-flex{:href => "#"}
-      %span.bg-white.py-1.ps-2.pe-1.text-black.rounded-start Video
+      %span.bg-white.py-1.ps-2.pe-1.text-black.rounded-start You
       %span.bg-danger.py-1.ps-1.pe-2.text-white.rounded-end skwela
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
@@ -24,8 +24,8 @@
             = link_to users_path, class: "nav-link #{active_link(current_page?(users_path))}" do
               .fa.fa-users
               Users
-        = form_tag(courses_path, method: :get, class: 'd-flex') do
-          = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
+        = search_form_for(@ransack_courses, as: :courses_search, url: courses_path, class: 'd-flex') do |f|
+          = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
           %button.btn.btn-outline-success{:type => "submit"} Search
 
         %ul.navbar-nav.mr-right
