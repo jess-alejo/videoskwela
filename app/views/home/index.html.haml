@@ -1,0 +1,55 @@
+.p-5.mb-4.bg-light.rounded-3
+  .display-4
+    What do you want to learn today?
+
+  .p-4
+
+  .form-inline.my-2.my-lg-0.col-md-4
+    = form_tag(courses_path, method: :get, class: 'd-flex') do
+      = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
+      %button.btn.btn-outline-success{:type => "submit"} Search
+
+.card-group.mb-5
+  .card.card-body
+    %h1
+      .fa.fa-graduation-cap
+    = Course.count
+    online courses
+    .row
+    Explore a variety of fresh topics
+  .card.card-body
+    %h1
+      .fa.fa-chalkboard-teacher
+    = Course.distinct(:user_id).count
+    expert instructor
+    .row
+    Find the right instructor for you
+  .card.card-body
+    %h1
+      .fa.fa-user-graduate
+    = User.count
+    active learners
+    .row
+    Join the knowledge sharing community
+  .card.card-body
+    %h1
+      .fa.fa-infinity
+    Lifetime access
+    .row
+    Learn on your schedule
+
+
+%h2 Popular Courses
+.course-container.mb-5
+  - @popular_courses.each do |course|
+    = render 'courses/course', course: course
+
+%h2 Top Rated Courses
+.course-container.mb-5
+  - @top_rated_courses.each do |course|
+    = render 'courses/course', course: course
+
+%h2 New Courses
+.course-container
+  - @new_courses.each do |course|
+    = render 'courses/course', course: course

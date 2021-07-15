@@ -2,6 +2,9 @@ class Course < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
   validates :title, :description, :short_description, :level, :language, :price, presence: true
   has_rich_text :description
 
