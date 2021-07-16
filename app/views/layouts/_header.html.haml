@@ -1,8 +1,8 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
   .container-fluid
     %a.navbar-brand.d-flex{:href => "#"}
-      %span.bg-white.py-1.ps-2.pe-1.text-black.rounded-start You
-      %span.bg-danger.py-1.ps-1.pe-2.text-white.rounded-end skwela
+      %span.bg-white.py-1.ps-2.pe-1.text-black.rounded-start Libre
+      %span.bg-danger.py-1.ps-1.pe-2.text-white.rounded-end Course
     %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
@@ -24,19 +24,16 @@
             = link_to users_path, class: "nav-link #{active_link(current_page?(users_path))}" do
               .fa.fa-users
               Users
-          %li.nav-item
-            = link_to home_activity_path, class: "nav-link #{active_link(current_page?(home_activity_path))}" do
-              .fa.fa-bell
-              Activity
+
         = search_form_for(@ransack_courses, as: :courses_search, url: courses_path, class: 'd-flex') do |f|
           = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
           %button.btn.btn-outline-success{:type => "submit"} Search
 
         %ul.navbar-nav.mr-right
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
-            = link_to root_path, class: 'nav-link' do
-              .fa.fa-home
-              Another link
+          %li.nav-item
+            = link_to home_activity_path, class: "nav-link #{active_link(current_page?(home_activity_path))}" do
+              .fa.fa-bell
+              Activity
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
               %b= current_user.email
@@ -48,6 +45,6 @@
                 .fa.fa-sign-out-alt
                 %b Sign out
       - else
-        %ul.navbar-nav
+        %ul.navbar-nav.mr-right
           %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
           %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'

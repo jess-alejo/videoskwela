@@ -11,17 +11,17 @@ default: &default
 
 development:
   <<: *default
-  database: videoskwela_development
+  database: libre_course_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: videoskwela_test
+  database: libre_course_test
 
 production:
   <<: *default
-  database: videoskwela_production
-  username: videoskwela
-  password: <%= ENV['VIDEOSKWELA_DATABASE_PASSWORD'] %>
+  database: libre_course_production
+  username: libre_course
+  password: <%= ENV['LIBRE_COURSE_DATABASE_PASSWORD'] %>

@@ -1,5 +1,5 @@
 {
-  "name": "videoskwela",
+  "name": "librecourse",
   "private": true,
   "dependencies": {
     "@popperjs/core": "^2.9.2",

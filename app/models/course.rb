@@ -13,4 +13,7 @@ class Course < ApplicationRecord
   LANGUAGES = %w[English Tagalog Russian].freeze
   LEVELS = %w[Beginner Intermediate Advanced].freeze
 
+  def to_s
+    title
+  end
 end

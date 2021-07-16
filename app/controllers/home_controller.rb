@@ -8,6 +8,6 @@ class HomeController < ApplicationController
   end
 
   def activity
-    @activities = PublicActivity::Activity.all
+    @activities = PublicActivity::Activity.all.order(id: :desc)
   end
 end
