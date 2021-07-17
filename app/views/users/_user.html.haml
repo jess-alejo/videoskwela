@@ -28,3 +28,7 @@
         .badge.bg-success Yes
       - else
         .badge.bg-danger No
+    %li.list-group-item
+      - user.roles.each do |role|
+        .badge.bg-info
+          = role.name
