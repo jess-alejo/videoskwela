@@ -11,11 +11,19 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  validate :must_have_role, on: :update
+
   def assign_default_role
     add_role(:student) if roles.blank?
   end
 
   def to_s
     email
+  end
+
+  private
+
+  def must_have_role
+    errors.add(:roles, 'must have at least one role') if roles.blank?
   end
 end
