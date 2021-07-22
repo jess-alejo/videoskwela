@@ -18,8 +18,14 @@ class User < ApplicationRecord
 
   validate :must_have_role, on: :update
 
+  ROLES = [
+    ADMIN = 'admin',
+    STUDENT = 'student',
+    INSTRUCTOR = 'instructor'
+  ].freeze
+
   def assign_default_role
-    add_role(:student) if roles.blank?
+    add_role(User::STUDENT) if roles.blank?
   end
 
   def to_s
