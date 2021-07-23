@@ -32,6 +32,10 @@ class User < ApplicationRecord
     email
   end
 
+  def online?
+    updated_at > 5.minutes.ago
+  end
+
   private
 
   def must_have_role

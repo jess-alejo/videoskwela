@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
+    @users = @q.result(distinct: true).order(updated_at: :desc)
   end
 
   def show; end
