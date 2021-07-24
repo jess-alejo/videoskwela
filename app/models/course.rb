@@ -9,6 +9,7 @@ class Course < ApplicationRecord
   has_rich_text :description
 
   belongs_to :author, class_name: 'User', foreign_key: :user_id
+  has_many :lessons, dependent: :destroy
 
   LANGUAGES = %w[English Tagalog Russian].freeze
   LEVELS = %w[Beginner Intermediate Advanced].freeze
