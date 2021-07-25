@@ -2,49 +2,9 @@
 
 .row
   .col-xl-4
-    .card
-      .card-header
-        %h5.card-title.mb-0= @course.title
-      .card-body
-        .row.g-0
-          .col-sm-9.col-xl-12
-            %strong Description
-            %p= @course.description
-        %table.table.table-sm.mt-2.mb-4
-          %tbody
-            %tr
-              %th Language
-              %td= @course.language
-            %tr
-              %th Level
-              %td= @course.level
-            %tr
-              %th Price
-              %td= @course.price
-            %tr
-              %th Author
-              %td= @course.author
-      .card-footer
-        = link_to 'Edit', edit_course_path(@course), class: 'btn btn-sm btn-warning'
-        = link_to 'Back', courses_path, class: 'btn btn-sm btn-secondary'
+    = render 'course_card', course: @course
 
   .col-xl-8
-    .card
-      .card-header
-        %h5.card-title.mb-0
-          Lessons
-      .card-body
-        %table.table.table-striped
-          %thead
-            %tr
-              %th #
-              %th Title
-              %th Content
-          %tbody
-            - @lessons.each do |lesson|
-              %tr
-                %td= lesson.id
-                %td= link_to lesson.title, lesson_path(lesson)
-                %td= lesson.content
+    = render 'lessons/lessons_card', course: @course, lessons: @lessons
 
 

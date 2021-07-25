@@ -1,0 +1,25 @@
+.card
+  .card-header
+    %h5.card-title.mb-0
+      Lessons
+  .card-body
+    %table.table.table-borderless.table-hover
+      %thead
+        %tr
+          %th Title
+          %th Content
+          %th.col-md-1
+      %tbody
+        - lessons.each do |lesson|
+          %tr
+            %td= link_to lesson.title, [course, lesson]
+            %td= lesson.content
+            %td.text-end
+              .d-inline-block.me-2
+                = link_to edit_course_lesson_path(course, lesson), class: 'text-warning' do
+                  .fa.fa-edit
+              .d-inline-block
+                = link_to [course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do
+                  .fa.fa-trash
+  .card-footer.bg-white
+    = link_to 'New lesson', new_course_lesson_path(course), class: 'btn btn-primary btn-sm'

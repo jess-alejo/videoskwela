@@ -1,15 +1,12 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @lesson.title
-%p
-  %b Content:
-  = @lesson.content
-%p
-  %b Course:
-  = @lesson.course
-
-= link_to 'Edit', edit_lesson_path(@lesson)
-\|
-= link_to 'Back', lessons_path
+.row
+  .col-xl-4
+    = render 'courses/course_card', course: @course
+  .col-xl-8
+    .card
+      .card-header
+        %h5.card-title.mb-0= @lesson.title
+      .card-body
+        = simple_format(@lesson.content)
+      .card-footer.bg-white
+        = link_to 'Edit', edit_course_lesson_path(@course, @lesson), class: 'btn btn-sm btn-warning'
+        = link_to 'Back to all lessons', course_lessons_path(@course), class: 'btn btn-sm btn-outline-secondary'

@@ -1,5 +1,11 @@
-%h1 New lesson
-
-= render 'form'
-
-= link_to 'Back', lessons_path
+.row
+  .col-xl-4
+    = render 'courses/course_card', course: @course
+  .col-xl-8
+    .card
+      .card-header
+        %h5.card-title.mb-0 New lesson
+      .card-body
+        = render 'form'
+      .card-footer.bg-white
+        = link_to 'Back to all lessons', course_lessons_path(@course), class: 'btn btn-sm btn-outline-secondary'

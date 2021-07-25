@@ -6,7 +6,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def create?
-    @user.has_role?(:teacher)
+    @user.has_role?(:instructor)
   end
 
   def update?
