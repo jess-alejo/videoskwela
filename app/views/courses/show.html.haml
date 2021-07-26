@@ -1,4 +1,9 @@
-%p#notice= notice
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = @course.title
 
 .row
   .col-xl-4

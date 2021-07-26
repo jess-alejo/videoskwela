@@ -1,3 +1,13 @@
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, course_path(@course)
+    %li.breadcrumb-item
+      = link_to 'Lessons', course_lessons_path(@course)
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = @lesson.title
 .row
   .col-xl-4
     = render 'courses/course_card', course: @course
@@ -6,7 +16,6 @@
       .card-header
         %h5.card-title.mb-0= @lesson.title
       .card-body
-        = simple_format(@lesson.content)
+        = @lesson.content
       .card-footer.bg-white
         = link_to 'Edit', edit_course_lesson_path(@course, @lesson), class: 'btn btn-sm btn-warning'
-        = link_to 'Back to all lessons', course_lessons_path(@course), class: 'btn btn-sm btn-outline-secondary'

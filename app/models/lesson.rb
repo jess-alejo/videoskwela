@@ -5,6 +5,7 @@ class Lesson < ApplicationRecord
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
+  has_rich_text :content
   belongs_to :course
 
   validates :title, presence: true
