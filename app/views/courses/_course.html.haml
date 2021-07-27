@@ -21,7 +21,7 @@
       = course.created_at
     %li.list-group-item
       .fa.fa-chalkboard-teacher.me-1
-      = course.author
+      = link_to course.author, user_path(course.author)
   .card-footer
     = link_to 'Show', course, class: 'btn btn-sm btn-primary'
     - if user_signed_in?

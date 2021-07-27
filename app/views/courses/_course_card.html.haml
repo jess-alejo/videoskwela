@@ -18,6 +18,6 @@
           %td= number_to_currency course.price
         %tr
           %th Author
-          %td= course.author
+          %td= link_to course.author, user_path(course.author)
   .card-footer.bg-white
     = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
