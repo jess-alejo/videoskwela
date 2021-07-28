@@ -15,6 +15,7 @@ class LessonsController < ApplicationController
   # GET /lessons/new
   def new
     @lesson = @course.lessons.new
+    authorize @lesson
   end
 
   # GET /lessons/1/edit

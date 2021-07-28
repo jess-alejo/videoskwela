@@ -19,5 +19,6 @@
         %tr
           %th Author
           %td= link_to course.author, user_path(course.author)
-  .card-footer.bg-white
-    = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
+  - if policy(course).edit?
+    .card-footer.bg-white
+      = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
