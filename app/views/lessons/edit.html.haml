@@ -5,8 +5,6 @@
     %li.breadcrumb-item
       = link_to @course.title, course_path(@course)
     %li.breadcrumb-item
-      = link_to 'Lessons', course_lessons_path(@course)
-    %li.breadcrumb-item
       = link_to @lesson.title, course_lesson_path(@course, @lesson)
     %li.breadcrumb-item.active{"aria-current" => "page"} Edit
 
@@ -17,7 +15,9 @@
   .col-xl-8
     .card
       .card-header
-        %h5.card-title.mb-0 Edit lesson
+        %h5.card-title.mb-0
+          .far.fa-check-square
+          = @lesson.title
       .card-body
         = render 'form'
       .card-footer.bg-white

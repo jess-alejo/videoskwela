@@ -8,7 +8,10 @@
 
 
 if Rails.env.development?
-  user = User.create!(email: Faker::Internet.email, password: 'password')
+  user = User.new(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+  user.skip_confirmation!
+  user.save
+
   30.times do
     Course.create!(
       title: Faker::Educator.course_name,

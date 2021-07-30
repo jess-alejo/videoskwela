@@ -4,9 +4,7 @@
       = link_to 'Courses', courses_path
     %li.breadcrumb-item
       = link_to @course.title, course_path(@course)
-    %li.breadcrumb-item
-      = link_to 'Lessons', course_lessons_path(@course)
-    %li.breadcrumb-item.active{"aria-current" => "page"} New
+    %li.breadcrumb-item.active{"aria-current" => "page"} New Lesson
 
 .row
   .col-xl-4
@@ -14,6 +12,8 @@
   .col-xl-8
     .card
       .card-header
-        %h5.card-title.mb-0 New lesson
+        %h5.card-title.mb-0
+          .far.fa-check-square
+          New Lesson
       .card-body
         = render 'form'
