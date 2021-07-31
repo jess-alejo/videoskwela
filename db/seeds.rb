@@ -8,9 +8,16 @@
 
 
 if Rails.env.development?
-  user = User.new(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
-  user.skip_confirmation!
-  user.save
+  users = []
+  5.times do
+    user = User.new(email: Faker::Internet.email, password: 'password', password_confirmation: 'password')
+    user.skip_confirmation!
+    user.save
+
+    users << user
+  end
+
+  PublicActivity.enabled = false
 
   30.times do
     Course.create!(
@@ -20,7 +27,9 @@ if Rails.env.development?
       language: %w[English Tagalog].sample,
       level: %w[Beginner Intermediate Advanced].sample,
       price: Faker::Number.between(from: 0, to: 100),
-      author: user
+      author: users.sample
     )
   end
+
+  PublicActivity.enabled = false
 end

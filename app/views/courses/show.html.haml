@@ -6,10 +6,10 @@
       = @course.title
 
 .row
-  .col-xl-4
+  .col-xl-4.mb-3
     = render 'course_card', course: @course
 
-  .col-xl-8
+  .col-xl-8.mb-3
     = render 'lessons/lessons_card', course: @course, lessons: @lessons
 
 

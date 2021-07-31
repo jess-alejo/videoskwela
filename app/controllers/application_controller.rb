@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
+  # tracking activities
   include PublicActivity::StoreController
+
+  # authorization
   include Pundit
+
+  # pagination
+  include Pagy::Backend
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

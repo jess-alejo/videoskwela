@@ -1,6 +1,6 @@
 %h1
   Courses:
-  = @courses.count
+  = Course.count
 
 .row
   .col-md-2
@@ -16,4 +16,8 @@
   .col-md-10
     .course-container
       = render @courses
+
+    .mt-4.d-flex.justify-content-between
+      %span.text-muted= "Displaying #{@courses.count} records"
+      != pagy_bootstrap_nav(@pagy)
 

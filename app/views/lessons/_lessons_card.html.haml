@@ -7,9 +7,9 @@
     %table.table.table-hover
       %thead
         %tr
-          %th Title
+          %th.col-md-6 Title
           - if policy(course).edit?
-            %th Content
+            %th.col-md-5 Content
             %th.col-md-1
       %tbody
         - lessons.each do |lesson|
@@ -17,9 +17,9 @@
             - if policy(course).edit?
               %td= link_to lesson.title, [course, lesson]
               %td= lesson.content
-              %td.text-end
+              %td.text-end{ nowrap: true }
                 - if policy(lesson).edit?
-                  .d-inline-block.me-2
+                  .d-inline-block.me-1
                     = link_to edit_course_lesson_path(course, lesson), class: 'text-warning' do
                       .fa.fa-edit
                 - if policy(lesson).destroy?
