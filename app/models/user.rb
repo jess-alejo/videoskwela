@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses
+  has_many :enrollments
 
   after_create :assign_default_role
 
