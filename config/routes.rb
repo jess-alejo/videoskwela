@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :enrollments
   resources :lessons
+  resources :enrollments, only: :index
   devise_for :users
 
   resources :courses do
     resources :lessons
+    resources :enrollments, only: %i[new create]
   end
   resources :users, only: %i[index show edit update]
 

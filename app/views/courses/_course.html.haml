@@ -7,8 +7,7 @@
       = simple_format(course.short_description)
   %ul.list-group.list-group-flush
     %li.list-group-item.text-center
-      .fa.fa-dollar
-      = number_to_currency course.price
+      = enrollment_button(course)
     %li.list-group-item
       .fa.fa-tasks.me-1
       = course.lessons.count
