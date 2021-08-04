@@ -1,4 +1,4 @@
-class UserPolicy < ApplicationPolicy
+class EnrollmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -10,6 +10,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
+    @record.student_id == @user.id
+  end
+
+  def destroy?
     @user.has_role? :admin
   end
 end
