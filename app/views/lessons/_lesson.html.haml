@@ -1,0 +1,17 @@
+.card.mb-3
+  .card-header
+    %h5.card-title.mb-0
+      .far.fa-check-square.me-1
+      = lesson.title
+  .card-body
+    = lesson.content
+  - if policy(course).edit?
+    .card-footer
+      - if policy(lesson).edit?
+        = link_to edit_course_lesson_path(course, lesson), class: 'btn btn-outline-warning btn-sm me-1' do
+          .fa.fa-edit.me-1
+          Edit
+      - if policy(lesson).destroy?
+        = link_to [course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' do
+          .fa.fa-trash.me-1
+          Delete

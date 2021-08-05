@@ -12,12 +12,4 @@
   .col-xl-4
     = render 'courses/course_card', course: @course
   .col-xl-8
-    .card
-      .card-header
-        %h5.card-title.mb-0
-          .far.fa-check-square
-          = @lesson.title
-      .card-body
-        = @lesson.content
-      .card-footer.bg-white
-        = link_to 'Edit', edit_course_lesson_path(@course, @lesson), class: 'btn btn-sm btn-outline-warning'
+    = render 'lessons/lesson', course: @course, lesson: @lesson

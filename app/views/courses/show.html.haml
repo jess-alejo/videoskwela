@@ -12,6 +12,8 @@
     = render 'course_card', course: @course
 
   .col-xl-8.mb-3
-    = render 'lessons/lessons_card', course: @course, lessons: @lessons
+    - @lessons.each do |lesson|
+      = render 'lessons/lesson', course: @course, lesson: lesson
+
 
 

@@ -6,7 +6,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def show?
-    @user.has_role?(:admin) || @record.course.author == @user
+    @user.has_role?(:admin) || @record.course.author == @user || @user.enrolled?(@record.course)
   end
 
   def create?

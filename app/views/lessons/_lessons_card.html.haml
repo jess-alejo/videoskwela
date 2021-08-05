@@ -8,26 +8,26 @@
       %thead
         %tr
           %th.col-md-6 Title
-          - if policy(course).edit?
-            %th.col-md-5 Content
-            %th.col-md-1
+          %th.col-md-5
+          %th.col-md-1
       %tbody
         - lessons.each do |lesson|
           %tr
-            - if policy(course).edit?
-              %td= link_to lesson.title, [course, lesson]
-              %td= lesson.content
-              %td.text-end{ nowrap: true }
-                - if policy(lesson).edit?
-                  .d-inline-block.me-1
-                    = link_to edit_course_lesson_path(course, lesson), class: 'text-warning' do
-                      .fa.fa-edit
-                - if policy(lesson).destroy?
-                  .d-inline-block
-                    = link_to [course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do
-                      .fa.fa-trash
-            - else
-              %td= lesson.title
+            %td
+              - if policy(lesson).show?
+                = link_to lesson.title, [course, lesson]
+              - else
+                = lesson.title
+            %td= lesson.content
+            %td.text-end{ nowrap: true }
+              - if policy(lesson).edit?
+                .d-inline-block.me-1
+                  = link_to edit_course_lesson_path(course, lesson), class: 'text-warning' do
+                    .fa.fa-edit
+              - if policy(lesson).destroy?
+                .d-inline-block
+                  = link_to [course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do
+                    .fa.fa-trash
   - if policy(course).create?
     .card-footer.bg-white
       = link_to 'New lesson', new_course_lesson_path(course), class: 'btn btn-primary btn-sm'
