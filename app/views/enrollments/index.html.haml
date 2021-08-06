@@ -4,18 +4,33 @@
   %table.table.table-bordered.table-sm.table-striped
     %thead
       %tr
-        %th Course
-        %th Student
-        %th Rating
-        %th Review
-        %th Price
+        %th
+          .text-muted.fa.fa-user.me-1
+          Student
+        %th
+          .text-muted.fa.fa-clock.me-1
+          Enrolled At
+        %th
+          .text-muted.fa.fa-graduation-cap.me-1
+          Course
+        %th
+          .text-muted.fa.fa-dollar-sign.me-1
+          Price
+        %th
+          .text-warning.fa.fa-star.me-1
+          Rating
+        %th
+          .text-warning.fa.fa-comment.me-1
+          Review
 
     %tbody
       - @enrollments.each do |enrollment|
         %tr
-          %td= enrollment.course
           %td= enrollment.student
+          %td= enrollment.created_at.strftime("%d-%b-%Y %I:%M %p")
+          %td= enrollment.course
+          %td.text-end= number_to_currency enrollment.price
           %td= enrollment.rating
-          %td= enrollment.review
-          %td= number_to_currency enrollment.price
+          %td
+            = link_to 'See review', enrollment_path(enrollment) if enrollment.review
 

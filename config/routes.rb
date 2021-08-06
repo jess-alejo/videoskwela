@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :lessons
-  resources :enrollments, only: :index
+  resources :enrollments
   devise_for :users
 
   resources :courses do
