@@ -1,8 +1,10 @@
-- page_title @user.name + ' Profile'
+- page_title @user.email + ' Profile'
 
 .card
   .card-body
-    %h5.card-title Edit User
+    %h5.card-title
+      .fa.fa-user.me-1
+      = @user.email
     %p.card-text
       = simple_form_for @user do |f|
         = f.collection_check_boxes :role_ids, Role.all, :id, :name do |cb|

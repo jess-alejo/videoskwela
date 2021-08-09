@@ -1,7 +1,8 @@
 - page_title 'Users'
 
-.resource-container
-  = render  @users
+%h1
+  Users:
+  = @users.size
 
 = search_form_for @q, class: 'row g-2 py-3' do |f|
   .col-auto
@@ -22,14 +23,28 @@
       %th Last Sign In At
       %th Current Sign In IP
       %th Last Sign In IP
+      %th Roles
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.id
-        %td= user.email
+        %td
+          = link_to user.id, user
+        %td
+          = user.email
+          = email_confirmation_status(user)
+          = online_status(user)
+
         %td= user.created_at
         %td= user.sign_in_count
         %td= user.current_sign_in_at
         %td= user.last_sign_in_at
         %td= user.current_sign_in_ip
         %td= user.last_sign_in_ip
+        %td
+          .d-flex.justify-content-between
+            .roles
+              - user.roles.each do |role|
+                .badge.bg-info
+                  = role.name
+
+!= pagy_bootstrap_nav(@pagy)
