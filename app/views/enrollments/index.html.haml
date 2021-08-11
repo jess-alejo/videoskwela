@@ -1,24 +1,41 @@
 %h1 Listing enrollments
 
+= search_form_for @q, class: 'row g-2 py-3' do |f|
+  .col-auto
+    = f.search_field :student_email_cont, placeholder: 'Student', class: 'form-control mb-2'
+  .col-auto
+    = f.search_field :course_title_cont, placeholder: 'Course', class: 'form-control mb-2'
+  .col-auto
+    = f.search_field :rating_eq, placeholder: 'Rating', class: 'form-control mb-2'
+  .col-auto
+    = f.submit 'Search', class: 'btn btn-primary'
+  .col-auto
+    = link_to 'Refresh', enrollments_path, class: 'btn btn-secondary'
+
 .table-responsive
   %table.table.table-bordered.table-sm.table-striped
     %thead
       %tr
         %th
-          .text-muted.fa.fa-user.me-1
-          Student
+          = sort_link(@q, :student_email) do
+            .text-muted.fa.fa-user.me-1
+            Student
         %th
-          .text-muted.fa.fa-clock.me-1
-          Enrolled At
+          = sort_link(@q, :created_at) do
+            .text-muted.fa.fa-clock.me-1
+            Enrolled At
         %th
-          .text-muted.fa.fa-graduation-cap.me-1
-          Course
+          = sort_link(@q, :course_title) do
+            .text-muted.fa.fa-graduation-cap.me-1
+            Course
         %th
-          .text-muted.fa.fa-dollar-sign.me-1
-          Price
+          = sort_link(@q, :price) do
+            .text-muted.fa.fa-dollar-sign.me-1
+            Price
         %th
-          .text-warning.fa.fa-star.me-1
-          Rating
+          = sort_link(@q, :rating) do
+            .text-warning.fa.fa-star.me-1
+            Rating
         %th
           .text-warning.fa.fa-comment.me-1
           Review
