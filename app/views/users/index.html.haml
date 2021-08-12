@@ -30,7 +30,8 @@
         %td
           = link_to user.id, user
         %td
-          = user.email
+          .col-12
+            = user.email
           = email_confirmation_status(user)
           = online_status(user)
 

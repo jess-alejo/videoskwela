@@ -5,6 +5,9 @@ class Enrollment < ApplicationRecord
   belongs_to :course
   belongs_to :student, class_name: 'User', foreign_key: 'student_id'
 
+  validates_presence_of :rating, if: :review?
+  validates_presence_of :review, if: :rating?
+
   validates_uniqueness_of :student_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :student_id
 

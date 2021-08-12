@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'home/index'
-  get 'home/activity'
+  get 'activity', to: 'home#activity'
 
   root 'home#index'
 
