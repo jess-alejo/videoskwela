@@ -4,9 +4,18 @@ class EnrollmentsController < ApplicationController
 
   # GET /enrollments or /enrollments.json
   def index
+    @ransack_path = enrollments_path
     @q = Enrollment.ransack(params[:q])
     @pagy, @enrollments = pagy(@q.result.includes(:student, :course))
     authorize @enrollments
+  end
+
+  def students
+    @ransack_path = students_enrollments_path
+    @q = Enrollment.joins(:course).where(courses: { author: current_user }).ransack(params[:q])
+    @pagy, @enrollments = pagy(@q.result.includes(:student, :course))
+
+    render :index
   end
 
   # GET /enrollments/1 or /enrollments/1.json

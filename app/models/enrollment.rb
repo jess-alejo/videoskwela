@@ -13,6 +13,7 @@ class Enrollment < ApplicationRecord
 
   validate :cant_enroll_to_own_course, on: :create
 
+  scope :pending_review, -> { where(rating: [0, nil, ''], review: [0, nil, '']) }
   def to_s
     [student.to_s, course.to_s].join ' '
   end

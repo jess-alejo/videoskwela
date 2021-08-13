@@ -1,8 +1,11 @@
 - page_title 'Users'
 
-%h1
+%h1.h3
   Users:
   = @users.size
+  %small.text-muted
+    Users:
+    = @users.size
 
 = search_form_for @q, class: 'row g-2 py-3' do |f|
   .col-auto

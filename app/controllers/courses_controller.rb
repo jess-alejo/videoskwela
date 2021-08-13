@@ -3,8 +3,33 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
+    @ransack_path = courses_path
     @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+  end
+
+  def enrolled
+    @ransack_path = enrolled_courses_path
+    courses = Course.joins(:enrollments).where(enrollments: { student: current_user })
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+    render :index
+  end
+
+  def pending_review
+    @ransack_path = pending_review_courses_path
+    courses = Course.joins(:enrollments).merge(Enrollment.pending_review).where(enrollments: { student: current_user })
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+    render :index
+  end
+
+  def authored
+    @ransack_path = authored_courses_path
+    courses = Course.where(author: current_user)
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+    render :index
   end
 
   # GET /courses/1 or /courses/1.json
