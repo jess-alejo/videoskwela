@@ -31,10 +31,13 @@
                 = link_to enrolled_courses_path, class: "dropdown-item" do
                   .fa.fa-book.me-1
                   My Courses
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = current_user.enrollments.count
                 = link_to pending_review_courses_path, class: "dropdown-item" do
                   .fa.fa-star.me-1
                   Pending Review
-
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = current_user.enrollments.pending_review.count
           - if current_user.has_role? :instructor
             %li.nav-item.dropdown
               %a#instructorDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -44,13 +47,16 @@
                 = link_to authored_courses_path, class: "dropdown-item" do
                   .fa.fa-book.me-1
                   My Courses
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = current_user.courses.count
                 = link_to students_enrollments_path, class: "dropdown-item" do
                   .fa.fa-users.me-1
                   Students
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = Enrollment.joins(:course).where(courses: { author: current_user} ).count
                 = link_to new_course_path, class: "dropdown-item" do
                   .fa.fa-plus.me-1
                   New Course
-
           - if current_user.has_role? :admin
             %li.nav-item.dropdown
               %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -60,9 +66,13 @@
                 = link_to users_path, class: "dropdown-item" do
                   .fa.fa-users.me-1
                   Users
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = User.count
                 = link_to enrollments_path, class: "dropdown-item" do
                   .fa.fa-lock.me-1
                   Enrollments
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = Enrollment.count
                 = link_to activity_path, class: "dropdown-item" do
                   .fa.fa-bell.me-1
                   Activity
