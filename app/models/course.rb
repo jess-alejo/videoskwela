@@ -20,6 +20,6 @@ class Course < ApplicationRecord
   end
 
   def update_rating
-    update_attribute(:average_rating, Enrollment.average(:rating).to_f.round(2))
+    update_attribute(:average_rating, enrollments.merge(Enrollment.rated).average(:rating).to_f.round(2))
   end
 end

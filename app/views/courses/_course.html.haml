@@ -9,12 +9,22 @@
     %li.list-group-item.text-center.d-flex.flex-column.justify-content-between.gap-2
       = enrollment_button course
       = review_button course
-    %li.list-group-item
-      .text-warning.fa.fa-star.me-1
-      = course.average_rating
+    %li.list-group-item.d-flex
+      .col
+        - if course.average_rating.zero?
+          .badge.bg-success
+            New course
+        - else
+          .text-warning.fa.fa-star.me-1
+          = course.average_rating
+          average rating
+      .col.text-end
+        .text-warning.fa.fa-users.me-1
+        = pluralize(course.enrollments_count, 'student')
+
     %li.list-group-item
       .fa.fa-tasks.me-1
-      = course.lessons.count
+      = pluralize(course.lessons.count, 'lesson')
     %li.list-group-item.d-flex.justify-content-between
       .jea
         .fa.fa-globe.me-1
