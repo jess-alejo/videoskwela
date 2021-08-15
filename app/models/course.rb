@@ -18,4 +18,8 @@ class Course < ApplicationRecord
   def to_s
     title
   end
+
+  def update_rating
+    update_attribute(:average_rating, Enrollment.average(:rating).to_f.round(2))
+  end
 end

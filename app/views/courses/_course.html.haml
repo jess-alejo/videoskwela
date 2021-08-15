@@ -10,6 +10,9 @@
       = enrollment_button course
       = review_button course
     %li.list-group-item
+      .text-warning.fa.fa-star.me-1
+      = course.average_rating
+    %li.list-group-item
       .fa.fa-tasks.me-1
       = course.lessons.count
     %li.list-group-item.d-flex.justify-content-between

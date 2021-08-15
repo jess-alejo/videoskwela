@@ -14,6 +14,15 @@ class Enrollment < ApplicationRecord
   validate :cant_enroll_to_own_course, on: :create
 
   scope :pending_review, -> { where(rating: [0, nil, ''], review: [0, nil, '']) }
+
+  after_commit do
+    course.update_rating unless rating.to_i.zero?
+  end
+
+  after_destroy do
+    course.update_rating
+  end
+
   def to_s
     [student.to_s, course.to_s].join ' '
   end
