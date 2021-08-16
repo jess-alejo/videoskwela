@@ -32,7 +32,7 @@
                   .fa.fa-book.me-1
                   My Courses
                   .badge.bg-danger.rounded-pill.ms-2
-                    = current_user.enrollments.count
+                    = current_user.enrollments_count
                 = link_to pending_review_courses_path, class: "dropdown-item" do
                   .fa.fa-star.me-1
                   Pending Review
@@ -48,7 +48,7 @@
                   .fa.fa-book.me-1
                   My Courses
                   .badge.bg-danger.rounded-pill.ms-2
-                    = current_user.courses.count
+                    = current_user.courses_count
                 = link_to students_enrollments_path, class: "dropdown-item" do
                   .fa.fa-users.me-1
                   Students

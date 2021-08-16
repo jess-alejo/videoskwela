@@ -34,6 +34,14 @@
       - else
         .badge.bg-danger No
     %li.list-group-item
+      .clearfix
+        .float-start
+          Created Courses
+          = user.courses_count
+        .float-end
+          Enrolled Courses
+          = user.enrollments_count
+    %li.list-group-item
       .d-flex.justify-content-between
         .roles
           - user.roles.each do |role|

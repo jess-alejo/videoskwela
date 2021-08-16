@@ -3,7 +3,9 @@ class Enrollment < ApplicationRecord
   friendly_id :to_s, use: :slugged
 
   belongs_to :course, counter_cache: true
-  belongs_to :student, class_name: 'User', foreign_key: 'student_id'
+  # Course.find_each { |course| Course.reset_counters(course.id, :enrollments) }
+  belongs_to :student, class_name: 'User', foreign_key: 'student_id', counter_cache: true
+  # User.find_each { |user| User.reset_counters(user.id, :enrollments) }
 
   validates_presence_of :rating, if: :review?
   validates_presence_of :review, if: :rating?

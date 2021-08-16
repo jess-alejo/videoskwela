@@ -8,7 +8,8 @@ class Course < ApplicationRecord
   validates :title, :description, :short_description, :level, :language, :price, presence: true
   has_rich_text :description
 
-  belongs_to :author, class_name: 'User', foreign_key: :user_id
+  belongs_to :author, class_name: 'User', foreign_key: :user_id, counter_cache: true
+  # User.find_each { |user| User.reset_counters(user.id, :courses) }
   has_many :lessons, dependent: :destroy
   has_many :enrollments
 
