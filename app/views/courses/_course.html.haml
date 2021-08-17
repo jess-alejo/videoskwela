@@ -3,43 +3,41 @@
     %h5.card-title
       .fa.fa-graduation-cap
       = course.title
+    %small
+      .fa.fa-chalkboard-teacher.me-1.small
+      = link_to course.author, user_path(course.author), class: 'small text-decoration-none'
+    .d-flex.align-items-center
+      .rating.d-flex.align-items-center.text-warning.me-3
+        .fs-5.me-1
+          = course.average_rating
+        .small
+          = show_star_rating(course.average_rating)
+      .students.text-muted
+        .fa.fa-user-graduate.me-1
+        .small.d-inline-block
+          = pluralize(course.enrollments_count, 'student')
+
     %p.card-text
       = simple_format(course.short_description)
   %ul.list-group.list-group-flush
     %li.list-group-item.text-center.d-flex.flex-column.justify-content-between.gap-2
       = enrollment_button course
       = review_button course
-    %li.list-group-item
-      .clearfix
-        .float-start
-          - if course.average_rating.zero?
-            .badge.bg-success
-              New course
-          - else
-            .text-warning.fa.fa-star.me-1
-            = course.average_rating
-            average rating
-        .float-end
-          .text-warning.fa.fa-user-graduate.me-1
-          = pluralize(course.enrollments_count, 'student')
 
     %li.list-group-item
       .fa.fa-tasks.me-1
       = pluralize(course.lessons_count, 'lesson')
     %li.list-group-item.d-flex.justify-content-between
-      .jea
+      .language
         .fa.fa-globe.me-1
         = course.language
-      .jea
+      .level
         .fa.fa-signal.me-1
         = course.level
 
     %li.list-group-item
       .far.fa-clock.me-1
       = course.created_at
-    %li.list-group-item
-      .fa.fa-chalkboard-teacher.me-1
-      = link_to course.author, user_path(course.author)
   .card-footer
     = link_to 'Show', course, class: 'btn btn-sm btn-primary'
     - if user_signed_in?

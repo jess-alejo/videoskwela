@@ -28,4 +28,21 @@ module CoursesHelper
       end
     end
   end
+
+  def show_star_rating(rating)
+    full_star_icon_name = 'fa fa-star'
+    half_star_icon_name = 'fas fa-star-half-alt'
+    zero_star_icon_name = 'far fa-star'
+
+    rating_round_point5 = (rating * 2).round / 2.0
+
+    stars = (1..5).map do |i|
+      next(full_star_icon_name) if i <= rating_round_point5
+      next(half_star_icon_name) if rating_round_point5 + 0.5 == i
+
+      zero_star_icon_name
+    end
+
+    stars.collect { |star| content_tag(:i, nil, class: star) }.join.html_safe
+  end
 end
