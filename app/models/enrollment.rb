@@ -17,6 +17,7 @@ class Enrollment < ApplicationRecord
 
   scope :pending_review, -> { where(rating: [0, nil, ''], review: [0, nil, '']) }
   scope :rated, -> { where.not(rating: [0, nil, '']) }
+  scope :reviewed, -> { where.not(review: [0, nil, '']) }
 
   after_commit do
     course.update_rating unless rating.to_i.zero?

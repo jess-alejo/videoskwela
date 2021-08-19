@@ -29,7 +29,7 @@
   .card.card-body
     %h1
       .fa.fa-user-graduate
-    = User.count
+    = Enrollment.distinct(:student_id).count
     active learners
     .row
     Join the knowledge sharing community
@@ -40,6 +40,11 @@
     .row
     Learn on your schedule
 
+- if current_user
+  %h2 Continue Learning
+  .course-container.mb-5
+    - @enrolled_courses.each do |course|
+      = render 'courses/course', course: course
 
 %h2 Popular Courses
 .course-container.mb-5
@@ -52,6 +57,11 @@
     = render 'courses/course', course: course
 
 %h2 New Courses
-.course-container
+.course-container.mb-5
   - @new_courses.each do |course|
     = render 'courses/course', course: course
+
+%h2 What our students have to say
+.course-container.mb-5
+  - @course_reviews.each do |course_review|
+    = render 'enrollments/course_review', course_review: course_review

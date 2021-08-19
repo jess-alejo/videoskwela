@@ -1,0 +1,15 @@
+.card
+  .card-body
+    %h5.card-title
+      = course_review.course
+    .rating.d-flex.mb-2
+      .text-warning.me-2
+        = show_star_rating(course_review.rating)
+      .text-muted
+        = time_ago_in_words(course_review.updated_at)
+        ago
+    %figure.review
+      %blockquote.blockquote
+        %p.fs-6= course_review.review
+      %figcaption.blockquote-footer
+        = course_review.student
