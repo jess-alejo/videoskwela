@@ -14,6 +14,10 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :enrollments
 
+  scope :popular, -> { order(enrollments_count: :desc).first(3) }
+  scope :top_rated, -> { order(average_rating: :desc).first(3) }
+  scope :newly_added, -> { order(created_at: :desc).first(3) }
+
   LANGUAGES = %w[English Tagalog Russian].freeze
   LEVELS = %w[Beginner Intermediate Advanced].freeze
 

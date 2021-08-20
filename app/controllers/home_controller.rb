@@ -3,10 +3,10 @@ class HomeController < ApplicationController
 
   def index
     @enrolled_courses ||= recent_enrolled_courses
-    @popular_courses = Course.order(enrollments_count: :desc).first(3)
-    @top_rated_courses = Course.order(average_rating: :desc).first(3)
-    @new_courses = Course.order(created_at: :desc).first(3)
-    @course_reviews = Enrollment.reviewed.order(rating: :desc).first(3)
+    @popular_courses = Course.popular
+    @top_rated_courses = Course.top_rated
+    @new_courses = Course.newly_added
+    @course_reviews = Enrollment.reviewed.latest_good_reviews
   end
 
   def activity
