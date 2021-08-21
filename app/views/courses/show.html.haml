@@ -12,8 +12,12 @@
     = render 'course_card', course: @course
 
   .col-xl-8.mb-3
-    - @lessons.each do |lesson|
-      = render 'lessons/lesson', course: @course, lesson: lesson
+    - if @course.author == current_user
+      = render 'lessons/lessons_card', course: @course, lessons: @lessons
+    - else
+      - @lessons.each do |lesson|
+        = render 'lessons/lesson', course: @course, lesson: lesson
+
 
 
 

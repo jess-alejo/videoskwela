@@ -13,3 +13,4 @@
     = render 'courses/course_card', course: @course
   .col-xl-8
     = render 'lessons/lesson', course: @course, lesson: @lesson
+    = link_to 'Show all lessons', course_lessons_path(@course)

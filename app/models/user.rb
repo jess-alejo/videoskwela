@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses
   has_many :enrollments, foreign_key: 'student_id'
+  has_many :student_lessons, foreign_key: 'student_id'
 
   after_create :assign_default_role
 
@@ -44,6 +45,13 @@ class User < ApplicationRecord
   def enroll!(course, price)
     enrollments.create(course: course, price: price)
   end
+
+  def view_lesson(lesson)
+    student_lessons.find_or_create_by(lesson: lesson)
+  rescue ActiveRecord::RecordNotUnique
+    retry
+  end
+
   private
 
   def must_have_role

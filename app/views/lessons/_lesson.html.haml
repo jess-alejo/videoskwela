@@ -1,8 +1,11 @@
 .card.mb-3
   .card-header
     %h5.card-title.mb-0
-      .far.fa-check-square.me-1
-      = lesson.title
+      - if lesson.viewed_by? current_user
+        .far.fa-check-square.me-1
+      - else
+        .far.fa-square.me-1
+      = link_to lesson.title, course_lesson_path(course, lesson)
   .card-body
     = lesson.content
   - if policy(course).edit?
