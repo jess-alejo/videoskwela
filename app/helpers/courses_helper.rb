@@ -4,7 +4,11 @@ module CoursesHelper
       if course.author == current_user
         link_to 'View analytics', course_path(course)
       elsif current_user.enrolled?(course)
-        link_to 'Continue learning', course_path(course), class: 'btn btn-md btn-outline-primary'
+        link_to course_path(course), class: 'btn btn-md btn-outline-primary' do
+          "<i class='fa fa-spinner'></i>".html_safe + ' ' +
+            number_to_percentage(course.progress(current_user), precision: 0) + " " +
+            "Complete"
+        end
       elsif course.price > 0
         link_to number_to_currency(course.price), new_course_enrollment_path(course), class: 'btn btn-lg btn-success'
       else
