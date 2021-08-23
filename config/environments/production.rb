@@ -125,4 +125,6 @@ Rails.application.configure do
                                             sender_address: %("notifier" <support@herokuapp.com>),
                                             exception_recipients: %w[jess.programmer@gmail.com]
                                           }
+
+  config.action_mailer.default_url_options = { host: ENV['MAILER_URL'] }
 end
