@@ -16,4 +16,8 @@ class CoursePolicy < ApplicationPolicy
   def destroy?
     @user.has_role?(:admin) || @user == @record.author
   end
+
+  def author?
+    @user == @record.author
+  end
 end

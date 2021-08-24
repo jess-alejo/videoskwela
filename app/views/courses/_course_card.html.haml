@@ -23,4 +23,5 @@
           %td= link_to course.author, user_path(course.author)
   - if policy(course).edit?
     .card-footer.bg-white
+      = link_to 'Add lesson', new_course_lesson_path(course), class: 'btn btn-sm btn-primary' if policy(course).author?
       = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-outline-warning'

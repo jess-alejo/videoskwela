@@ -8,16 +8,28 @@
       = @course.title
 
 .row
-  .col-xl-4.mb-3
-    = render 'course_card', course: @course
+  .col-lg-8.order-1.order-lg-0.mb-3
+    %h4
+      .fa.fa-tasks
+      Lessons:
+      = @course.lessons_count
+      .float-end
+        .fa.fa-spinner
+        = number_to_percentage(@course.progress(current_user), precision: 0)
 
-  .col-xl-8.mb-3
-    - if @course.author == current_user
-      = render 'lessons/lessons_card', course: @course, lessons: @lessons
-    - else
+    .progress.my-2
+      - value = @course.progress(current_user)
+      .progress-bar.bg-success{style: "width: #{value}%", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{value}", :role => "progressbar"}
+        %small
+          = number_to_percentage(value, precision: 0)
+
+    %ul.list-group
       - @lessons.each do |lesson|
-        = render 'lessons/lesson', course: @course, lesson: lesson
+        = render 'lessons/lesson_preview', lesson: lesson
 
+  .col-lg-4.order-0.order-lg-1.mb-3
+    .sticky-top
+      = render 'course_card', course: @course
 
 
 
