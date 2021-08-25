@@ -1,0 +1,27 @@
+- course_progress = course.progress(current_user)
+- enrollment = current_user.enrollments.where(course: course).last
+
+.card
+  %div{ style: 'height: 200px; background-color: #ddd;' }
+  .card-body
+    %h5.card-title
+      = course.title.truncate(55)
+    %small
+      = "#{course.author.username}, Developer and Bootcamp Instructor"
+  .card-footer.bg-white.border-top-0
+    .row.g-0
+      .progress.my-2{ style: 'height: 5px;' }
+        .progress-bar.bg-success{style: "width: #{course_progress}%", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{course_progress}", :role => "progressbar", title: 'progress' }
+    .row.g-0
+      .col-6
+        %small
+          = link_to enrolled_course_link_title(course_progress), course_path(course), class: 'text-primary'
+      .col-6.text-end
+        %small.text-warning
+          = show_star_rating(enrollment.rating.to_i)
+    .row.g-0
+      %small.text-end
+        - if enrollment.rating.to_i.zero?
+          = link_to 'Leave a rating', edit_enrollment_path(enrollment)
+        - else
+          = link_to 'Edit my review', edit_enrollment_path(enrollment)

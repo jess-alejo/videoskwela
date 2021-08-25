@@ -49,4 +49,10 @@ module CoursesHelper
 
     stars.collect { |star| content_tag(:i, nil, class: star) }.join.html_safe
   end
+
+  def enrolled_course_link_title(course_progress)
+    return 'START COURSE' if course_progress.to_i.zero?
+
+    "#{number_to_percentage(course_progress, precision: 0)} complete"
+  end
 end

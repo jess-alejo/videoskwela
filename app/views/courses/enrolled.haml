@@ -1,0 +1,45 @@
+- page_title "All Courses"
+
+%h1
+  My learning
+
+.row
+  .col-md-3.mb-3
+    .card.mb-2
+      .card-header
+        Filter by
+      .card-body
+        = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path do |f|
+          = f.search_field :title_cont, placeholder: 'Title', class: 'form-control mb-2'
+          = f.search_field :short_description_cont, placeholder: 'Description', class: 'form-control mb-2'
+          = f.select :language_cont, Course::LANGUAGES, { include_blank: 'Language' }, class: 'form-select mb-2'
+          = f.select :level_cont, Course::LEVELS, { include_blank: 'Level' }, class: 'form-select mb-2'
+          = f.search_field :price_eq, placeholder: 'Price', class: 'form-control mb-2'
+          = f.search_field :author_email_cont, placeholder: 'Author', class: 'form-control mb-2'
+          .row.g-2
+            .col-lg-6
+              = f.submit 'Search', class: 'btn btn-primary w-100'
+            .col-lg-6
+              = link_to 'Refresh', @ransack_path, class: 'btn btn-secondary w-100'
+    .card
+      .card-header
+        Sort by
+      .list-group.list-group-flush
+        .list-group-item
+          = sort_link @ransack_courses, :price, 'Price'
+        .list-group-item
+          = sort_link @ransack_courses, :average_rating, 'Top Rated'
+        .list-group-item
+          = sort_link @ransack_courses, :enrollments_count, 'Popularity'
+        .list-group-item
+          = sort_link @ransack_courses, :created_at, 'Latest'
+  .col-md-9
+    .enrolled-courses-container
+      - @courses.each do |course|
+        = render 'enrolled', course: course
+
+    - if @courses.length > 0
+      .mt-4.d-flex.justify-content-between
+        %span.text-muted= "Displaying #{@courses.length} records"
+        != pagy_bootstrap_nav(@pagy)
+

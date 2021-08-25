@@ -13,7 +13,6 @@ class CoursesController < ApplicationController
     courses = Course.joins(:enrollments).where(enrollments: { student: current_user })
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
-    render :index
   end
 
   def pending_review

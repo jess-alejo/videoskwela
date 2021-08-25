@@ -7,7 +7,7 @@
       %span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       - if current_user
-        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %ul.navbar-nav.me-2.mb-2.mb-lg-0
           %li.nav-item
             = link_to root_path, class: "nav-link #{active_link(current_page?(root_path))}" do
               .fa.fa-home.me-1
@@ -16,10 +16,11 @@
             = link_to courses_path, class: "nav-link #{active_link(current_page?(courses_path))}" do
               .fa.fa-book.me-1
               Courses
-          .form-inline
-            = search_form_for(@ransack_courses, as: :courses_search, url: courses_path, class: 'd-flex') do |f|
-              = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
-              %button.btn.btn-outline-success{:type => "submit"} Search
+
+        .form-inline.me-auto
+          = search_form_for(@ransack_courses, as: :courses_search, url: courses_path, class: 'd-flex') do |f|
+            = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
+            %button.btn.btn-outline-success{:type => "submit"} Search
 
         %ul.navbar-nav.me-auto.mb-2.mb-lg-0
           - if current_user.has_role? :student

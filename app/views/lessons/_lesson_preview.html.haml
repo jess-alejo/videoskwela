@@ -7,10 +7,10 @@
 
   .float-end
     - if policy(lesson).edit?
-      .d-inline-block.me-1
-        = link_to edit_course_lesson_path(@course, lesson), class: 'text-warning' do
+      .d-inline-block.me-2
+        = link_to edit_course_lesson_path(@course, lesson), class: 'text-warning', title: 'edit' do
           .fa.fa-edit
     - if policy(lesson).destroy?
       .d-inline-block
-        = link_to [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' do
+        = link_to [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger', title: 'destroy' do
           .fa.fa-trash

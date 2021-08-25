@@ -52,6 +52,10 @@ class User < ApplicationRecord
     retry
   end
 
+  def username
+    email.split(/@/).first
+  end
+
   private
 
   def must_have_role
