@@ -12,7 +12,7 @@ class Course < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: :user_id, counter_cache: true
   # User.find_each { |user| User.reset_counters(user.id, :courses) }
   has_many :lessons, dependent: :destroy
-  has_many :enrollments
+  has_many :enrollments, dependent: :restrict_with_error
   has_many :student_lessons, through: :lessons
 
   scope :popular, -> { order(enrollments_count: :desc).first(3) }

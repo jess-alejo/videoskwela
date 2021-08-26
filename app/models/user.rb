@@ -12,9 +12,9 @@ class User < ApplicationRecord
          :trackable, :confirmable
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  has_many :courses
-  has_many :enrollments, foreign_key: 'student_id'
-  has_many :student_lessons, foreign_key: 'student_id'
+  has_many :courses                                       # dependent: :nullify
+  has_many :enrollments, foreign_key: 'student_id'        # dependent: :nullify
+  has_many :student_lessons, foreign_key: 'student_id'    # dependent: :nullify
 
   after_create :assign_default_role
 
