@@ -18,7 +18,8 @@
 
     %ul.list-group.mb-4
       - @lessons.each do |lesson|
-        = render 'lessons/lesson_preview', lesson: lesson
+        %li.list-group-item
+          = render 'lessons/lesson_preview', lesson: lesson
 
     %h4
       .fa.fa-comment.me-1

@@ -9,8 +9,19 @@
     %li.breadcrumb-item.active{"aria-current" => "page"}
       = @lesson.title
 .row
-  .col-xl-4
-    = render 'courses/course_card', course: @course
-  .col-xl-8
+  .col-lg-8
     = render 'lessons/lesson', course: @course, lesson: @lesson
-    = link_to 'Show all lessons', course_lessons_path(@course)
+  .col-lg-4
+    .card
+      .card-body
+        .d-flex.justify-content-between
+          %h5.card-title
+            = link_to @course.title, @course
+          .course-progress
+            .fa.fa-spinner
+            = number_to_percentage(@course.progress(current_user), precision: 0)
+
+        %ul.list-group.mb-3
+        - @lessons.each do |lesson|
+          %li.list-group-item{ class: ('list-group-item-success' if lesson == @lesson) }
+            = render 'lessons/lesson_preview', lesson: lesson
