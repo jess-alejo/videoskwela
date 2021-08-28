@@ -16,3 +16,5 @@ import 'bootstrap/dist/js/bootstrap'
 require("stylesheets/application.scss")
 require("trix")
 require("@rails/actiontext")
+
+import "chartkick/chart.js"

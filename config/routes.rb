@@ -17,12 +17,13 @@ Rails.application.routes.draw do
     resources :lessons
     resources :enrollments, only: %i[new create]
   end
-  
+
   resources :users, only: %i[index show edit update]
 
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'home/index'
   get 'activity', to: 'home#activity'
+  get 'analytics', to: 'home#analytics'
 
   root 'home#index'
 

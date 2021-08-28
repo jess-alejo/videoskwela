@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
+  before_action :authorize_user, except: :index
 
   def index
     @enrolled_courses ||= recent_enrolled_courses
@@ -13,11 +14,22 @@ class HomeController < ApplicationController
     @activities = PublicActivity::Activity.all.order(id: :desc)
   end
 
+  def analytics
+    @users = User.all
+    @enrollments = Enrollment.all
+  end
+
   private
 
   def recent_enrolled_courses
     return [] unless current_user
 
     Course.joins(:enrollments).where(enrollments: { student: current_user }).order(updated_at: :desc)
+  end
+
+  def authorize_user
+    return if current_user.has_role? :admin
+
+    redirect_to root_path, alert: "You are not allowed to access the #{action_name.titleize} page"
   end
 end
