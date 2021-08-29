@@ -8,6 +8,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :analytics, only: [] do
+    collection do
+      get :users_per_day
+      get :enrollments_per_day
+      get :course_popularity
+    end
+  end
+
   resources :courses do
     collection do
       get :enrolled

@@ -1,14 +1,14 @@
 .card.mb-3
   .card-body
     %h5.card-title Created users per day
-    = line_chart @users.group_by_day(:created_at).count
+    = line_chart users_per_day_analytics_path
 
 .card.mb-3
   .card-body
     %h5.card-title Enrollments created per day
-    = line_chart @enrollments.group_by_day(:created_at).count
+    = column_chart enrollments_per_day_analytics_path
 
 .card.mb-3
   .card-body
     %h5.card-title Course popularity
-    = bar_chart @enrollments.joins(:course).group('courses.title').count
+    = bar_chart course_popularity_analytics_path

@@ -14,10 +14,7 @@ class HomeController < ApplicationController
     @activities = PublicActivity::Activity.all.order(id: :desc)
   end
 
-  def analytics
-    @users = User.all
-    @enrollments = Enrollment.all
-  end
+  def analytics; end
 
   private
 
