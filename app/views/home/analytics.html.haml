@@ -1,14 +1,19 @@
 .card.mb-3
   .card-body
     %h5.card-title Created users per day
-    = line_chart users_per_day_analytics_path
+    = line_chart analytics_users_per_day_path
 
 .card.mb-3
   .card-body
     %h5.card-title Enrollments created per day
-    = column_chart enrollments_per_day_analytics_path
+    = column_chart analytics_enrollments_per_day_path
 
 .card.mb-3
   .card-body
     %h5.card-title Course popularity
-    = bar_chart course_popularity_analytics_path
+    = bar_chart analytics_course_popularity_path
+
+.card.mb-3
+  .card-body
+    %h5.card-title Most paid courses
+    = bar_chart analytics_money_makers_path
