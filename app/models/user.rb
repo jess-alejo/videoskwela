@@ -47,7 +47,8 @@ class User < ApplicationRecord
   end
 
   def view_lesson(lesson)
-    student_lessons.find_or_create_by(lesson: lesson)
+    student_lesson = student_lessons.find_or_create_by(lesson: lesson)
+    student_lesson.increment!(:impressions)
   rescue ActiveRecord::RecordNotUnique
     retry
   end
