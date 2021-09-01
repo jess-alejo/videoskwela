@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[show edit update destroy publish review approve]
 
   # GET /courses or /courses.json
   def index
@@ -56,7 +58,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: "Course was successfully created." }
+        format.html { redirect_to @course, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -70,7 +72,7 @@ class CoursesController < ApplicationController
     authorize @course
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: "Course was successfully updated." }
+        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -92,14 +94,30 @@ class CoursesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
-      @course = Course.friendly.find(params[:id])
-    end
+  def publish
+    @course.publish!
+    redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
+  end
 
-    # Only allow a list of trusted parameters through.
-    def course_params
-      params.require(:course).permit(:title, :description, :short_description, :level, :language, :price)
-    end
+  def review
+    @course.review!
+    redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
+  end
+
+  def approve
+    @course.approve!
+    redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_course
+    @course = Course.friendly.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def course_params
+    params.require(:course).permit(:title, :description, :short_description, :level, :language, :price)
+  end
 end

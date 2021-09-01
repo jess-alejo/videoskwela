@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
 
   # authorization
   include Pundit
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # pagination
   include Pagy::Backend
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  # callbacks
   before_action :authenticate_user!
   before_action :set_global_variables # , if: :user_signed_in?
 

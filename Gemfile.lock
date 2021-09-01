@@ -254,6 +254,10 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    workflow (2.0.2)
+    workflow-activerecord (4.1.8)
+      activerecord (>= 3.0, < 6.2)
+      workflow (~> 2.0)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.4.2)
@@ -294,6 +298,7 @@ DEPENDENCIES
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
+  workflow-activerecord (~> 4.1, >= 4.1.8)
 
 RUBY VERSION
    ruby 2.7.2p137

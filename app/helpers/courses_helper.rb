@@ -55,4 +55,18 @@ module CoursesHelper
 
     "#{number_to_percentage(course_progress, precision: 0)} complete"
   end
+
+  def badge_for_course_status(course)
+    bg = case course.workflow_state
+         when 'draft' then 'bg-secondary'
+         when 'awaiting_review' then 'bg-warning'
+         when 'being_reviewed' then 'bg-danger'
+         when 'published' then 'bg-success'
+         when 'rejected' then 'bg-dark'
+         end
+
+    content_tag :span, class: %W[badge #{bg} text-uppercase].join(' ') do
+      course.workflow_state.titleize
+    end
+  end
 end

@@ -21,6 +21,18 @@
         %tr
           %th Author
           %td= link_to course.author, user_path(course.author)
+
+        - if policy(course).author? || current_user.has_role?(:admin)
+          %tr
+            %th Status
+            %td
+              = badge_for_course_status(course)
+              - if policy(course).author? && course.can_publish?
+                = link_to 'Publish', publish_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1'
+              - if current_user.has_role? :admin
+                = link_to 'Review', review_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_review?
+                = link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_approve?
+
   - if policy(course).edit?
     .card-footer.bg-white
       = link_to 'Add lesson', new_course_lesson_path(course), class: 'btn btn-sm btn-primary' if policy(course).author?

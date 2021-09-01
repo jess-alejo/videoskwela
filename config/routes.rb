@@ -21,6 +21,11 @@ Rails.application.routes.draw do
       get :pending_review
       get :authored
     end
+    member do
+      patch :publish
+      patch :review
+      patch :approve
+    end
     resources :lessons
     resources :enrollments, only: %i[new create]
   end

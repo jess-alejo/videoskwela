@@ -69,3 +69,5 @@ gem 'exception_notification', '~> 4.4', '>= 4.4.3'
 gem 'pagy', '~> 4.10', '>= 4.10.1'
 gem 'chartkick', '~> 4.0', '>= 4.0.5'
 gem 'groupdate', '~> 5.2', '>= 5.2.2'
+
+gem 'workflow-activerecord', '~> 4.1', '>= 4.1.8'

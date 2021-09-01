@@ -5,6 +5,8 @@ class Course < ApplicationRecord
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  include WorkflowActiverecord
+
   validates :title, :description, :short_description, :level, :language, :price, presence: true
   validates :title, uniqueness: true
   has_rich_text :description
@@ -21,6 +23,21 @@ class Course < ApplicationRecord
 
   LANGUAGES = %w[English Tagalog Russian].freeze
   LEVELS = %w[Beginner Intermediate Advanced].freeze
+
+  workflow do
+    state :draft do
+      event :publish, transitions_to: :awaiting_review
+    end
+    state :awaiting_review do
+      event :review, transitions_to: :being_reviewed
+    end
+    state :being_reviewed do
+      event :approve, transitions_to: :published
+      event :reject, transitions_to: :rejected
+    end
+    state :published
+    state :rejected
+  end
 
   def to_s
     title
