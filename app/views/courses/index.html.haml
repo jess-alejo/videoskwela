@@ -1,7 +1,9 @@
 - page_title "All Courses"
 
 %h1
-  Courses:
+  Courses
+  = action_name.titleize
+  \:
   = @courses.length
 
 .row

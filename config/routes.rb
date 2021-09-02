@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :enrolled
       get :pending_review
       get :authored
+      get :pending_approval
     end
     member do
       patch :publish

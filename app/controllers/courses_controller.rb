@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
-    @ransack_courses = Course.ransack(params[:courses_search], search_key: :courses_search)
+    @ransack_courses = Course.published.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
@@ -31,6 +31,14 @@ class CoursesController < ApplicationController
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
     render :index
+  end
+
+  def pending_approval
+    authorize current_user, :approve_course?
+    @ransack_path = authored_courses_path
+    courses = Course.pending_approval
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
   # GET /courses/1 or /courses/1.json
@@ -95,16 +103,19 @@ class CoursesController < ApplicationController
   end
 
   def publish
+    authorize @course
     @course.publish!
     redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
   end
 
   def review
+    authorize @course
     @course.review!
     redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
   end
 
   def approve
+    authorize @course
     @course.approve!
     redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
   end

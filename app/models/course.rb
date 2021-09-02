@@ -20,6 +20,8 @@ class Course < ApplicationRecord
   scope :popular, -> { order(enrollments_count: :desc).first(3) }
   scope :top_rated, -> { order(average_rating: :desc).first(3) }
   scope :newly_added, -> { order(created_at: :desc).first(3) }
+  scope :pending_approval, -> { where(workflow_state: %w[awaiting_review being_reviewed]) }
+  scope :published, -> { where(workflow_state: 'published') }
 
   LANGUAGES = %w[English Tagalog Russian].freeze
   LEVELS = %w[Beginner Intermediate Advanced].freeze

@@ -69,6 +69,11 @@
                   Users
                   .badge.bg-danger.rounded-pill.ms-2
                     = User.count
+                = link_to pending_approval_courses_path, class: "dropdown-item" do
+                  .fa.fa-book.me-1
+                  Courses Pending Approval
+                  .badge.bg-danger.rounded-pill.ms-2
+                    = Course.pending_approval.count
                 = link_to enrollments_path, class: "dropdown-item" do
                   .fa.fa-lock.me-1
                   Enrollments

@@ -20,4 +20,16 @@ class CoursePolicy < ApplicationPolicy
   def author?
     @user == @record.author
   end
+
+  def publish?
+    author?
+  end
+
+  def review?
+    @user.has_role?(:admin)
+  end
+
+  def approve?
+    @user.has_role?(:admin)
+  end
 end

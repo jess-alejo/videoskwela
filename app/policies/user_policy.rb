@@ -12,4 +12,8 @@ class UserPolicy < ApplicationPolicy
   def update?
     @user.has_role? :admin
   end
+
+  def approve_course?
+    @user.has_role? :admin
+  end
 end
