@@ -51,7 +51,8 @@
         %tbody
           - @courses.each do |course|
             %tr
-              %td= course.title
+              %td
+                = link_to course.title, course
               %td= course.author
               %td
                 = badge_for_course_status(course)

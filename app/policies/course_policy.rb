@@ -5,6 +5,10 @@ class CoursePolicy < ApplicationPolicy
     end
   end
 
+  def show
+    @record.published? || @user.admin? || @record.author == @user || @user.enrolled?(@record)
+  end
+
   def create?
     @user.has_role?(:instructor)
   end

@@ -57,6 +57,10 @@ class User < ApplicationRecord
     email.split(/@/).first
   end
 
+  def admin?
+    has_role? :admin
+  end
+
   private
 
   def must_have_role
