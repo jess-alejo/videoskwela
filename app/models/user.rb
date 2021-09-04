@@ -61,6 +61,11 @@ class User < ApplicationRecord
     has_role? :admin
   end
 
+  def avatar_url
+    hash = Digest::MD5.hexdigest(email)
+    "http://www.gravatar.com/avatar/#{hash}"
+  end
+
   private
 
   def must_have_role

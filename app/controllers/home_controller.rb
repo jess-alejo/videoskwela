@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   end
 
   def activity
-    @activities = PublicActivity::Activity.all.order(id: :desc)
+    @pagy, @activities = pagy(PublicActivity::Activity.all.order(id: :desc))
   end
 
   def analytics; end
