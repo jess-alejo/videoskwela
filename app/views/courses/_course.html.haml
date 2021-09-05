@@ -21,6 +21,8 @@
       = simple_format(course.short_description)
   %ul.list-group.list-group-flush
     %li.list-group-item.text-center.d-flex.flex-column.justify-content-between.gap-2
+      .lead
+        = price_caption course
       = enrollment_button course
       = review_button course
 

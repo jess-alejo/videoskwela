@@ -10,15 +10,15 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def create?
-    @user.has_role?(:instructor)
+    @user&.has_role?(:instructor)
   end
 
   def update?
-    @user.has_role?(:admin) || @user == @record.author
+    @user&.has_role?(:admin) || @user == @record.author
   end
 
   def destroy?
-    @user.has_role?(:admin) || @user == @record.author
+    @user&.has_role?(:admin) || @user == @record.author
   end
 
   def author?
@@ -30,10 +30,10 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def review?
-    @user.has_role?(:admin)
+    @user&.has_role?(:admin)
   end
 
   def approve?
-    @user.has_role?(:admin)
+    @user&.has_role?(:admin)
   end
 end

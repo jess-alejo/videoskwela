@@ -17,12 +17,16 @@
           %td= course.level
         %tr
           %th Price
-          %td= number_to_currency course.price
+          %td
+            .d-grid
+              = price_caption(course)
+              .mt-2
+                = enrollment_button(course)
         %tr
           %th Author
           %td= link_to course.author, user_path(course.author)
 
-        - if policy(course).author? || current_user.has_role?(:admin)
+        - if current_user && (policy(course).author? || current_user.has_role?(:admin))
           %tr
             %th Status
             %td

@@ -54,4 +54,8 @@ class Course < ApplicationRecord
 
     student_lessons.where(student: student).count / lessons_count.to_f * 100
   end
+
+  def free?
+    price.zero?
+  end
 end

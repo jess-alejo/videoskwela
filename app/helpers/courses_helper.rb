@@ -1,4 +1,8 @@
 module CoursesHelper
+  def price_caption(course)
+    course.price.zero? ? 'Free' : number_to_currency(course.price)
+  end
+
   def enrollment_button(course)
     if current_user
       if course.author == current_user
@@ -16,7 +20,8 @@ module CoursesHelper
       end
       # logic to buy course
     else
-      link_to 'Check price', course_path(course), class: 'btn btn-md btn-success'
+      caption = course.price.zero? ? 'Enroll' : 'Buy now'
+      link_to caption, new_course_enrollment_path(course), class: 'btn btn-md btn-outline-success w-100'
     end
   end
 
