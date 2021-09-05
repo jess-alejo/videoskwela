@@ -15,7 +15,7 @@
   .card.card-body
     %h1
       .fa.fa-graduation-cap
-    = Course.count
+    = Course.published.count
     online courses
     .row
     Explore a variety of fresh topics
@@ -42,24 +42,32 @@
 
 - if current_user
   %h2 Continue Learning
-  .course-container.mb-5
+  .course-container.mb-3
     - @enrolled_courses.each do |course|
       = render 'courses/course', course: course
+  .text-end.mb-5
+    = link_to 'See more enrolled courses',   enrolled_courses_path
 
 %h2 Popular Courses
-.course-container.mb-5
+.course-container.mb-3
   - @popular_courses.each do |course|
     = render 'courses/course', course: course
+.text-end.mb-5
+  = link_to 'See more popular courses', courses_path(courses_search: { s: 'enrollments_count desc'})
 
 %h2 Top Rated Courses
-.course-container.mb-5
+.course-container.mb-3
   - @top_rated_courses.each do |course|
     = render 'courses/course', course: course
+.text-end.mb-5
+  = link_to 'See more top rated courses', courses_path(courses_search: { s: 'average_rating desc'})
 
 %h2 New Courses
-.course-container.mb-5
+.course-container.mb-3
   - @new_courses.each do |course|
     = render 'courses/course', course: course
+.mb-5.text-end
+  = link_to 'See more recent courses', courses_path(courses_search: { s: 'created_at desc' })
 
 %h2 What our students have to say
 .course-container.mb-5
