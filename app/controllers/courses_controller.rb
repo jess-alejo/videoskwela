@@ -2,7 +2,7 @@
 
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
-  before_action :set_course, only: %i[show edit update destroy publish review approve]
+  before_action :set_course, only: %i[show edit update destroy publish review approve analytics]
 
   # GET /courses or /courses.json
   def index
@@ -121,6 +121,9 @@ class CoursesController < ApplicationController
     redirect_to @course, notice: "Course is now #{@course.workflow_state.titleize.downcase}."
   end
 
+  def analytics
+    authorize @course, :author?
+  end
   private
 
   # Use callbacks to share common setup or constraints between actions.

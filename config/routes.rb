@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       patch :publish
       patch :review
       patch :approve
+      get :analytics
     end
     resources :lessons
     resources :enrollments, only: %i[new create]

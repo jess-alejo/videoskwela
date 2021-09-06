@@ -6,7 +6,10 @@ module CoursesHelper
   def enrollment_button(course)
     if current_user
       if course.author == current_user
-        link_to 'View analytics', course_path(course)
+        link_to analytics_course_path(course), class: 'btn btn-md btn-outline-info' do
+          "<i class='fa fa-chart-bar me-1'></i>".html_safe + ' ' +
+            'View analytics'
+        end
       elsif current_user.enrolled?(course)
         link_to course_path(course), class: 'btn btn-md btn-outline-primary' do
           "<i class='fa fa-spinner'></i>".html_safe + ' ' +

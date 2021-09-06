@@ -1,0 +1,30 @@
+- page_title @course.title
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, @course
+    %li.breadcrumb-item.active.active{"aria-current" => "page"}
+      Analytics
+
+.card.mb-3
+  .card-body
+    %h5.card-title Enrollments per day
+    = line_chart @course.enrollments.group_by_day(:created_at).count
+
+.card.mb-3
+  .card-body
+    %h5.card-title Daily revenue
+    = line_chart @course.enrollments.group_by_day(:created_at).sum(:price)
+
+.card.mb-3
+  .card-body
+    %h5.card-title User views (how many times unique users viewed the lesson)
+    = bar_chart @course.student_lessons.joins(:lesson).group('lessons.title').count
+
+.card.mb-3
+  .card-body
+    %h5.card-title Impressions (how many times the lesson was opened)
+    = bar_chart @course.student_lessons.joins(:lesson).group('lessons.title').sum(:impressions)
