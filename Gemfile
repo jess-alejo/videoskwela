@@ -71,3 +71,4 @@ gem 'chartkick', '~> 4.0', '>= 4.0.5'
 gem 'groupdate', '~> 5.2', '>= 5.2.2'
 
 gem 'workflow-activerecord', '~> 4.1', '>= 4.1.8'
+gem 'ranked-model', '~> 0.4.7'

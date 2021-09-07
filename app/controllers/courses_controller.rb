@@ -44,7 +44,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
     @course_reviews = @course.enrollments.reviewed
   end
 
