@@ -4,14 +4,14 @@ class LessonsController < ApplicationController
 
   # GET /lessons or /lessons.json
   def index
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   # GET /lessons/1 or /lessons/1.json
   def show
     authorize @lesson
     current_user.view_lesson(@lesson)
-    @lessons = @course.lessons
+    @lessons = @course.lessons.rank(:row_order)
   end
 
   # GET /lessons/new

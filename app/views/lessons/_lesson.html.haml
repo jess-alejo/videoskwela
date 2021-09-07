@@ -18,3 +18,16 @@
         = link_to [course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger btn-sm' do
           .fa.fa-trash.me-1
           Delete
+  .card-footer
+    - if lesson.previous_lesson
+      .float-start
+        = link_to course_lesson_path(@course, lesson.previous_lesson), class: 'btn btn-sm btn-info' do
+          %i.fa.fa-arrow-left.me-1
+          Previous
+    - if lesson.next_lesson
+      .float-end
+        = link_to course_lesson_path(@course, lesson.next_lesson), class: 'btn btn-sm btn-info' do
+          Next
+          %i.fa.fa-arrow-right.ms-1
+
+

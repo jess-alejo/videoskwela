@@ -24,4 +24,12 @@ class Lesson < ApplicationRecord
   def viewed_by?(student)
     student_lessons.find_by(student: student).present?
   end
+
+  def previous_lesson
+    course.lessons.where('row_order < ?', row_order).order(:row_order).last
+  end
+
+  def next_lesson
+    course.lessons.where('row_order > ?', row_order).order(:row_order).first
+  end
 end
