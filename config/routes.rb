@@ -28,7 +28,9 @@ Rails.application.routes.draw do
       patch :approve
       get :analytics
     end
-    resources :lessons
+    resources :lessons do
+      put :sort
+    end
     resources :enrollments, only: %i[new create]
   end
 

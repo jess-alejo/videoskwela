@@ -18,3 +18,8 @@ require("trix")
 require("@rails/actiontext")
 
 import "chartkick/chart.js"
+
+require("jquery")
+require("jquery-ui-dist/jquery-ui")
+require("./lesson-sortable")
+

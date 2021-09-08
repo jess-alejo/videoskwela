@@ -1,18 +1,24 @@
-- if lesson.viewed_by? current_user
-  .far.fa-check-square.me-1
-- else
-  .far.fa-square.me-1
-- if lesson.row_order
-  %span.mx-1
-    = "#{lesson.row_order_rank + 1}."
-= link_to lesson.title, course_lesson_path(@course, lesson)
-
-.float-end
-  - if policy(lesson).edit?
-    .d-inline-block.me-2
-      = link_to edit_course_lesson_path(@course, lesson), class: 'text-warning', title: 'edit' do
-        .fa.fa-edit
-  - if policy(lesson).destroy?
-    .d-inline-block
-      = link_to [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger', title: 'destroy' do
-        .fa.fa-trash
+.d-flex
+  - unless policy(@course).author?
+    .me-3
+      - if lesson.viewed_by? current_user
+        .far.fa-check-square
+      - else
+        .far.fa-square
+  .d-flex.flex-column.w-100
+    .lesson-title
+      = link_to course_lesson_path(@course, lesson) do
+        - if lesson.row_order
+          %span.mx-1
+            = "#{lesson.row_order_rank + 1}."
+        = lesson.title
+    -# .mt-2
+    -#   .float-end
+    -#     - if policy(lesson).edit?
+    -#       .d-inline-block.me-1
+    -#         = link_to edit_course_lesson_path(@course, lesson), class: 'btn btn-sm btn-outline-warning px-1 py-0', title: 'edit' do
+    -#           .fa.fa-edit
+    -#     - if policy(lesson).destroy?
+    -#       .d-inline-block
+    -#         = link_to [@course, lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-outline-danger px-1 py-0', title: 'destroy' do
+    -#           .fa.fa-trash-alt
