@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 class Course < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
+  tracked owner: proc { |controller, _model| controller.current_user }
 
   include WorkflowActiverecord
 
   validates :title, :description, :short_description, :level, :language, :price, presence: true
   validates :title, uniqueness: true
+
+  has_one_attached :image
   has_rich_text :description
 
   belongs_to :author, class_name: 'User', foreign_key: :user_id, counter_cache: true

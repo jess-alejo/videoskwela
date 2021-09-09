@@ -9,6 +9,10 @@
 
 .row
   .col-lg-8.order-1.order-lg-0.mb-3
+    - if @course.image.attached?
+      .border.rounded.p-1.mb-5
+        = image_tag @course.image, class: "img-fluid"
+
     %h4
       .fa.fa-tasks.me-1
       = pluralize(@course.lessons_count, 'Lesson')

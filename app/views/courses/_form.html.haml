@@ -1,20 +1,27 @@
 -# frozen_string_literal: true
 
 .card-body
-  = simple_form_for(@course, defaults: { wrapper_html: { class: 'mb-3' }, label_html: { class: 'form-label' } }) do |f|
+  = simple_form_for(@course, defaults: { wrapper_html: { class: 'mb-4' }, label_html: { class: 'form-label' } }) do |f|
     = f.error_notification
 
-    = f.input :title, wrapper_html: { class: 'mb-3' }
+    = f.input :title, wrapper_html: { class: 'mb-4' }
 
-    .form-group.mb-3
+    .form-group.mb-4
+      = f.label :image, class: 'form-label'
+      = f.file_field :image, class: 'form-control'
+      - if @course.image.attached?
+        .border.rounded.w-25.p-1.my-1
+          = image_tag @course.image, class: 'img-fluid'
+
+    .form-group.mb-4
       = f.label :description, class: 'form-label'
       = f.rich_text_area :description
       %small= f.error :description, class: 'text-danger'
 
-    = f.input :short_description, wrapper_html: { class: 'mb-3' }
-    = f.input :language, collection: Course::LANGUAGES, wrapper_html: { class: 'mb-3' }
-    = f.input :level, collection: Course::LEVELS, wrapper_html: { class: 'mb-3' }
-    = f.input :price, wrapper_html: { class: 'mb-3' }
+    = f.input :short_description, wrapper_html: { class: 'mb-4' }
+    = f.input :language, collection: Course::LANGUAGES, wrapper_html: { class: 'mb-4' }
+    = f.input :level, collection: Course::LEVELS, wrapper_html: { class: 'mb-4' }
+    = f.input :price, wrapper_html: { class: 'mb-4' }
 
     .form-actions
       = f.button :submit
