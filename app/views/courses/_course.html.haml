@@ -1,4 +1,8 @@
 .card.h-100
+  - if course.image.present?
+    = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title)
+  - else
+    %div{ style: 'height: 200px; background-color: #ddd;' }
   .card-body
     %h5.card-title
       .fa.fa-graduation-cap

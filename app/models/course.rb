@@ -12,8 +12,12 @@ class Course < ApplicationRecord
   validates :title, :description, :short_description, :level, :language, :price, presence: true
   validates :title, uniqueness: true
 
-  has_one_attached :image
   has_rich_text :description
+
+  has_one_attached :image
+  validates :image, attached: true,
+                    content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'is not a valid image type' },
+                    size: { less_than: 3.megabytes, message: 'is too large.' }
 
   belongs_to :author, class_name: 'User', foreign_key: :user_id, counter_cache: true
   # User.find_each { |user| User.reset_counters(user.id, :courses) }

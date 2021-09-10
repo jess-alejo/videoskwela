@@ -10,8 +10,8 @@
 .row
   .col-lg-8.order-1.order-lg-0.mb-3
     - if @course.image.attached?
-      .border.rounded.p-1.mb-5
-        = image_tag @course.image, class: "img-fluid"
+      .card.mb-4
+        = image_tag @course.image, class: "card-img-top p-1"
 
     %h4
       .fa.fa-tasks.me-1
