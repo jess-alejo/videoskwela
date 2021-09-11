@@ -75,3 +75,4 @@ gem 'ranked-model', '~> 0.4.7'
 
 gem 'aws-sdk-s3', require: false
 gem 'active_storage_validations', '~> 0.9.5'
+gem 'image_processing', '~> 1.12', '>= 1.12.1' # requires imagemagick
