@@ -9,10 +9,29 @@
 
 .row
   .col-lg-8.order-1.order-lg-0.mb-3
-    - if @course.image.attached?
-      .card.mb-4
-        = image_tag @course.image, class: "card-img-top p-1"
+    .rounded.border.mb-4.p-4
+      %h3.card-title
+        .fa.fa-graduation-cap.me-1
+        = @course.title
 
+      %ul.list-group.list-group-flush.border-none
+        %li.list-group-item.border-bottom-0
+          .far.fa-clock.me-1
+          Created
+          = @course.created_at
+        %li.list-group-item.border-bottom-0
+          .far.fa-clock.me-1
+          Last updated
+          = @course.created_at
+        %li.list-group-item.border-bottom-0
+          .fa.fa-globe.me-1
+          = @course.language
+        %li.list-group-item
+          .fa.fa-signal.me-1
+          = @course.level
+
+      .card-body
+        = @course.description
     %h4
       .fa.fa-tasks.me-1
       = pluralize(@course.lessons_count, 'Lesson')

@@ -1,9 +1,11 @@
 .card
-  .card-header
-    %h5.card-title.mb-0
+  - if @course.image.attached?
+    = image_tag @course.image, class: "card-img-top p-1", height: 200
+  .card-body
+    %h5.card-title
       .fa.fa-graduation-cap.me-1
       = course.title
-  .card-body
+
     .row.g-0
       .col-sm-9.col-xl-12
         = simple_format(course.short_description)

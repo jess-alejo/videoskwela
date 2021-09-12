@@ -14,7 +14,10 @@ class Lesson < ApplicationRecord
 
   has_many :student_lessons, dependent: :destroy
 
-  validates :title, presence: true
+  validates :title, presence: true,
+                    uniqueness: { scope: :course_id },
+                    length: { maximum: 70 }
+
   validates :content, presence: true
 
   def to_s

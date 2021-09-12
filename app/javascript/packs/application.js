@@ -21,5 +21,9 @@ import "chartkick/chart.js"
 
 require("jquery")
 require("jquery-ui-dist/jquery-ui")
-require("./lesson-sortable")
+
+import "./lesson-sortable"
+import "./trix-overrides"
+
+
 

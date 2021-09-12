@@ -11,19 +11,16 @@
       - if @course.image.attached?
         .border.rounded.w-25.p-1.mb-2
           = image_tag @course.image, class: 'img-fluid'
-      = f.input :image, as: :file, hint: 'Image must be less than 3MB',
+      = f.input :image, as: :file, hint: 'Image must be less than 500KB',
         label: false,
         input_html: { class: 'form-control'},
         label_html: { class: 'form-label' }
 
-    .form-group.mb-4
-      = f.label :description, class: 'form-label'
-      = f.rich_text_area :description
-
-    = f.input :short_description, wrapper_html: { class: 'mb-4' }
-    = f.input :language, collection: Course::LANGUAGES, wrapper_html: { class: 'mb-4' }
-    = f.input :level, collection: Course::LEVELS, wrapper_html: { class: 'mb-4' }
-    = f.input :price, wrapper_html: { class: 'mb-4' }
+    = f.input :description, as: :rich_text_area
+    = f.input :short_description
+    = f.input :language, collection: Course::LANGUAGES
+    = f.input :level, collection: Course::LEVELS
+    = f.input :price, input_html: { min: 0 }
 
     .form-actions
       = f.button :submit

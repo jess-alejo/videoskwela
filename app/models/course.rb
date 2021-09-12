@@ -1,23 +1,38 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
+  # find course by title
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  # record activity
   include PublicActivity::Model
   tracked owner: proc { |controller, _model| controller.current_user }
 
+  # handle state management
   include WorkflowActiverecord
 
-  validates :title, :description, :short_description, :level, :language, :price, presence: true
-  validates :title, uniqueness: true
+  # validations
+  validates :level, :language, presence: true
+
+  validates :price, presence: true,
+                    numericality: { greater_than_or_equal_to: 0 }
+
+  validates :title, presence: true,
+                    uniqueness: true,
+                    length: { maximum: 70 }
 
   has_rich_text :description
+  validates :description, presence: true,
+                          length: { minimum: 5 }
+
+  validates :short_description, presence: true,
+                                length: { maximum: 300 }
 
   has_one_attached :image
   validates :image, attached: true,
                     content_type: { in: ['image/png', 'image/jpg', 'image/jpeg'], message: 'is not a valid image type' },
-                    size: { less_than: 3.megabytes, message: 'is too large.' }
+                    size: { less_than: 500.kilobytes, message: 'size should be under 500 kilobytes.' }
 
   belongs_to :author, class_name: 'User', foreign_key: :user_id, counter_cache: true
   # User.find_each { |user| User.reset_counters(user.id, :courses) }
