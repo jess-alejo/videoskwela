@@ -11,6 +11,9 @@
 .row
   .col-lg-8
     = render 'lessons/lesson', course: @course, lesson: @lesson
+    - if @lesson.video.attached?
+      %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
+        %source{ src: rails_blob_url(@lesson.video), type: "#{@lesson.video.content_type}" }
   .col-lg-4
     .card
       .card-body

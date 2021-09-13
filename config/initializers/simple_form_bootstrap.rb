@@ -50,7 +50,7 @@ SimpleForm.setup do |config|
   #
   # vertical default_wrapper
   # config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
-  config.wrappers :vertical_form, tag: 'div', class: 'mb-3', error_class: 'form-group-invalid',
+  config.wrappers :vertical_form, tag: 'div', class: 'mb-4', error_class: 'form-group-invalid',
                                   valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.use :placeholder
@@ -91,7 +91,7 @@ SimpleForm.setup do |config|
 
   # vertical input for inline radio buttons and check boxes
   config.wrappers :vertical_collection_inline, item_wrapper_class: 'form-check form-check-inline',
-                                               item_label_class: 'form-check-label', tag: 'fieldset', class: 'form-group mb-3', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
+                                               item_label_class: 'form-check-label', tag: 'fieldset', class: 'form-group mb-4', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
     b.use :html5
     b.optional :readonly
     b.wrapper :legend_tag, tag: 'legend', class: 'col-form-label pt-0' do |ba|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
   before_action :set_course
@@ -86,6 +88,6 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:title, :content, :row_order_position)
+    params.require(:lesson).permit(:title, :content, :row_order_position, :video, :video_thumbnail)
   end
 end
