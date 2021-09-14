@@ -19,6 +19,7 @@ class Lesson < ApplicationRecord
   has_one_attached :video_thumbnail
   validates :video_thumbnail, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
                               size: { less_than: 500.kilobytes, message: 'should be under 500 kilobytes' }
+  # presence: { unless: -> { video.blank? } }
 
   belongs_to :course, counter_cache: true
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) }

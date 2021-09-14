@@ -8,15 +8,34 @@
   = f.input :content, as: :rich_text_area
   = f.hidden_field :course
 
-  = f.input :video, as: :file,
-      input_html: { class: 'form-control'},
-      label_html: { class: 'form-label' },
-      wrapper_html: { class: 'mb-4' }
+  - if @lesson.video
+    .badge
+      = @lesson.video.filename
 
-  = f.input :video_thumbnail, as: :file,
-      input_html: { class: 'form-control' },
-      label_html: { class: 'form-label' },
-      wrapper_html: { class: 'mb-4' }
+  .form-group.mb-4
+    = f.label :video, class: 'form-label'
+    - if @lesson.video.attached?
+      %figure.w-50
+        %video(controls="true" width="100%" preload="metadata")
+          %source{ src: rails_blob_url(@lesson.video), type: "#{@lesson.video.content_type}" }
+        %figcaption= @lesson.video.filename
+
+    = f.input :video, as: :file,
+        input_html: { class: 'form-control'},
+        hint: "MP4 file less than 50MB",
+        label: false
+
+  .form-group.mb-4
+    = f.label :video_thumbnail, 'Video Thumbnail', class: 'form-label'
+    - if @lesson.video_thumbnail.attached?
+      %figure.w-50
+        = image_tag @lesson.video_thumbnail, class: 'img-fluid'
+        %figcaption= @lesson.video_thumbnail.filename
+
+    = f.input :video_thumbnail, as: :file,
+      hint: "PNG, JPG or JPEG files less than 500KB",
+      label: false,
+      input_html: { class: 'form-control'}
 
   .form-actions
     = f.button :submit
