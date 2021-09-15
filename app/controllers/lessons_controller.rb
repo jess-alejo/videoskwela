@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LessonsController < ApplicationController
-  before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_lesson, only: %i[show edit update destroy remove_video remove_video_thumbnail]
   before_action :set_course
 
   # GET /lessons or /lessons.json
@@ -73,6 +73,18 @@ class LessonsController < ApplicationController
     authorize lesson, :edit?
     lesson.update(lesson_params)
     render body: nil
+  end
+
+  def remove_video
+    authorize @lesson, :edit?
+    @lesson.video.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video was successfully removed.'
+  end
+
+  def remove_video_thumbnail
+    authorize @lesson, :edit?
+    @lesson.video_thumbnail.purge
+    redirect_to edit_course_lesson_path(@course, @lesson), notice: 'Video thumbnail was successfully removed.'
   end
 
   private

@@ -18,7 +18,14 @@
       %figure.w-50
         %video(controls="true" width="100%" preload="metadata")
           %source{ src: rails_blob_url(@lesson.video), type: "#{@lesson.video.content_type}" }
-        %figcaption= @lesson.video.filename
+        %figcaption.d-flex.justify-content-between
+          = @lesson.video.filename
+          = link_to remove_video_thumbnail_course_lesson_path(@course, @lesson),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'text-danger',
+            title: 'remove' do
+            %i.fa.fa-trash-alt
 
     = f.input :video, as: :file,
         input_html: { class: 'form-control'},
@@ -30,7 +37,15 @@
     - if @lesson.video_thumbnail.attached?
       %figure.w-50
         = image_tag @lesson.video_thumbnail, class: 'img-fluid'
-        %figcaption= @lesson.video_thumbnail.filename
+        %figcaption.d-flex.justify-content-between
+          = @lesson.video_thumbnail.filename
+          = link_to remove_video_thumbnail_course_lesson_path(@course, @lesson),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'text-danger',
+            title: 'remove' do
+            %i.fa.fa-trash-alt
+
 
     = f.input :video_thumbnail, as: :file,
       hint: "PNG, JPG or JPEG files less than 500KB",
