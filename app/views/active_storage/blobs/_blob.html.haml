@@ -4,6 +4,10 @@
   - elsif blob.video?
     %video(controls="true" width="100%" preload="metadata")
       %source{src: rails_blob_url(blob), type:"#{blob.content_type}"}
+  - elsif blob.audio?
+    %audio(controls="true")
+      %source{ src: rails_blob_url(blob), type: "#{blob.content_type}"}
+      Your browser does not support the audio tag
   - else
     = link_to blob.filename, rails_blob_url(blob)
 

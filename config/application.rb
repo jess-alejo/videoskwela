@@ -25,6 +25,7 @@ module VideoSkwela
       ActionText::ContentHelper.allowed_attributes.add 'controls'
 
       ActionText::ContentHelper.allowed_tags.add 'video'
+      ActionText::ContentHelper.allowed_tags.add 'audio'
       ActionText::ContentHelper.allowed_tags.add 'source'
     end
   end
