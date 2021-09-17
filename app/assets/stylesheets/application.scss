@@ -19,5 +19,9 @@ a {
 .ui-state-highlight {
   height: 3em;
   line-height: 1.2em;
-  background-color: #7E93A8;
+  background-color: #7e93a8;
+}
+
+.dropdown {
+  z-index: 9999;
 }
