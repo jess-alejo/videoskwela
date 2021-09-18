@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: %i[index show edit update]
+  resources :youtube, only: :show
 
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'home/index'

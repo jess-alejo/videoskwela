@@ -24,6 +24,4 @@ require("jquery-ui-dist/jquery-ui")
 
 import "./lesson-sortable"
 import "./trix-overrides"
-
-
-
+import "./youtube"
