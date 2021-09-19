@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :enrollments, foreign_key: 'student_id'        # dependent: :nullify
   has_many :student_lessons, foreign_key: 'student_id'    # dependent: :nullify
 
+  has_many :comments, dependent: :nullify
+
   after_create :assign_default_role
 
   validate :must_have_role, on: :update

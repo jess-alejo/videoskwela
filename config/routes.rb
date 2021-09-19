@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get :analytics
     end
     resources :lessons do
+      resources :comments
       put :sort
       member do
         delete :remove_video

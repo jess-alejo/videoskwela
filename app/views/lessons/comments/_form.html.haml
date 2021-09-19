@@ -1,0 +1,9 @@
+.card
+  .card-body
+    = simple_form_for [@course, @lesson, @comment] do |f|
+      = f.label :content, label: 'Comment', required: false, class: 'form-label'
+      = f.input_field :content, required: true, class: 'form-control mb-2'
+      .d-flex.flex-row-reverse
+        = button_tag class: 'btn btn-primary btn-sm' do
+          %i.fa.fa-paper-plane.me-1
+          Submit

@@ -14,6 +14,8 @@ class LessonsController < ApplicationController
     authorize @lesson
     current_user.view_lesson(@lesson)
     @lessons = @course.lessons.rank(:row_order)
+    @comments = @lesson.comments
+    @comment = Comment.new(user: current_user, lesson: @lesson)
   end
 
   # GET /lessons/new

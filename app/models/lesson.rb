@@ -25,6 +25,7 @@ class Lesson < ApplicationRecord
   # Course.find_each { |course| Course.reset_counters(course.id, :lessons) }
 
   has_many :student_lessons, dependent: :destroy
+  has_many :comments, dependent: :nullify
 
   validates :title, presence: true,
                     uniqueness: { scope: :course_id },

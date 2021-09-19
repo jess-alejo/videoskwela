@@ -11,6 +11,11 @@
 .row
   .col-lg-8
     = render 'lessons/lesson', course: @course, lesson: @lesson
+
+    %h5 Comments
+    - @comments.each do |comment|
+      = render 'lessons/comments/comment', comment: comment
+    = render 'lessons/comments/form', comment: @comment
   .col-lg-4
     .card
       .card-body
