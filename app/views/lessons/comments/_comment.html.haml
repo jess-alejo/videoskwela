@@ -1,17 +1,23 @@
-.d-flex.mb-4
-  .border.rounded-circle.mt-2.mr-3.d-flex.align-items-center.justify-content-center{ style: 'height: 32px; width: 32px;' }
+.d-flex.mb-4{ id: dom_id(comment) }
+  .border.rounded-circle.mt-2.me-3.d-flex.align-items-center.justify-content-center{ style: 'height: 32px; width: 32px;' }
     = image_tag comment.user.avatar_url, style: 'width: 100%; border-radius: 100px'
 
-  .flex-grow-1.py-1.px-3
-    .d-flex.justify-content-between.mb-1
-      .fw-bold
-        = comment.user.username if comment.user
-      .text-muted{ style: 'font-size: .75rem'}
-        - if comment.created_at < 1.hour.ago
-          = comment.created_at.strftime('%B %d, %Y, %H:%M %p')
-        - else
+  .card.flex-grow-1
+    .card-header.d-flex.justify-content-between
+      .comment-owner
+        = link_to comment.user.username, user_path(comment.user.username)
+        .d-inline.text-muted
+          commented
           = time_ago_in_words comment.created_at
           ago
-    .border.rounded.py-1.px-2
-      %p
+      - if policy(@lesson).edit?
+        .comment-button
+          = link_to course_lesson_comment_path(@course, @lesson, comment),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'text-danger',
+            title: 'delete' do
+            %i.fa.fa-trash-alt
+    .card-body
+      %p.card-text
         = comment.content

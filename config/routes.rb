@@ -29,7 +29,7 @@ Rails.application.routes.draw do
       get :analytics
     end
     resources :lessons do
-      resources :comments
+      resources :comments, only: %i[create destroy]
       put :sort
       member do
         delete :remove_video
