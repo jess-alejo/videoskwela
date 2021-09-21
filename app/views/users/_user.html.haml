@@ -7,44 +7,68 @@
       - if user.online?
         .badge.bg-success
           %small online
-  %ul.list-group.border-0
-    %li.list-group-item
-      Signed up
-      = time_ago_in_words(user.created_at)
-      ago
-    %li.list-group-item
-      Sign In Count
-      = user.sign_in_count
-    %li.list-group-item
-      Current Sign In At
-      = user.current_sign_in_at
-    %li.list-group-item
-      Last Sign In At
-      = user.last_sign_in_at
-    %li.list-group-item
-      Current Sign In IP
-      = user.current_sign_in_ip
-    %li.list-group-item
-      Last Sign In IP
-      = user.last_sign_in_ip
-    %li.list-group-item
-      Confirmed email?
-      - if user.confirmed_at.present?
-        .badge.bg-success Yes
-      - else
-        .badge.bg-danger No
-    %li.list-group-item
-      .clearfix
-        .float-start
-          Created Courses
-          = user.courses_count
-        .float-end
-          Enrolled Courses
-          = user.enrollments_count
-    %li.list-group-item
-      .d-flex.justify-content-between
-        .roles
-          - user.roles.each do |role|
-            .badge.bg-info
-              = role.name
-        = link_to 'Edit', edit_user_path(user), class: 'btn btn-warning btn-sm ml-auto' if policy(user).edit?
+  .card-body
+    %dl.row
+      %dt.col-sm-3
+        Signed up
+      %dd.col-sm-9
+        = time_ago_in_words(user.created_at)
+        ago
+
+      %dt.col-sm-3
+        Sign In Count
+      %dd.col-sm-9
+        = user.sign_in_count
+
+      %dt.col-sm-3
+        Current Sign In At
+      %dd.col-sm-9
+        = user.current_sign_in_at
+
+      %dt.col-sm-3
+        Last Sign In At
+      %dd.col-sm-9
+        = user.last_sign_in_at
+
+      %dt.col-sm-3
+        Current Sign In IP
+      %dd.col-sm-9
+        = user.current_sign_in_ip
+
+      %dt.col-sm-3
+        Last Sign In IP
+      %dd.col-sm-9
+        = user.last_sign_in_ip
+
+      %dt.col-sm-3
+        Confirmed email?
+      %dd.col-sm-9
+        - if user.confirmed_at.present?
+          .badge.bg-success Yes
+        - else
+          .badge.bg-danger No
+
+      %dt.col-sm-3
+        Created Courses
+      %dd.col-sm-9
+        = user.courses_count
+
+      %dt.col-sm-3
+        Enrolled Courses
+      %dd.col-sm-9
+        = user.enrollments_count
+
+      %dt.col-sm-3
+        Comments
+      %dd.col-sm-9
+        = user.comments_count
+
+      %dt.col-sm-3
+        Roles
+      %dd.col-sm-9
+        .d-flex.justify-content-between
+          .roles
+            - user.roles.each do |role|
+              .badge.bg-info
+                = role.name
+          = link_to 'Edit', edit_user_path(user), class: 'btn btn-warning btn-sm py-0' if policy(user).edit?
