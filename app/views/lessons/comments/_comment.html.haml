@@ -10,7 +10,7 @@
           commented
           = time_ago_in_words comment.created_at
           ago
-      - if policy(@lesson).edit?
+      - if policy(comment).destroy?
         .comment-button
           = link_to course_lesson_comment_path(@course, @lesson, comment),
             method: :delete,
