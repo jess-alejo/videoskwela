@@ -15,40 +15,49 @@
     = link_to users_path, class: 'btn btn-secondary' do
       .fa.fa-sync
 
-%table.table.table-bordered
-  %thead
-    %tr
-      %th ID
-      %th Email
-      %th Created At
-      %th Sign In Count
-      %th Current Sign In At
-      %th Last Sign In At
-      %th Current Sign In IP
-      %th Last Sign In IP
-      %th Roles
-  %tbody
-    - @users.each do |user|
+.table-responsive
+  %table.table.table-bordered
+    %thead
       %tr
-        %td
-          = link_to user.id, user
-        %td
-          .col-12
-            = user.email
-          = email_confirmation_status(user)
-          = online_status(user)
+        %th= sort_link(@q, :id, 'ID')
+        %th= sort_link(@q, :email, 'Email')
+        %th= sort_link(@q, :created_at,'Created At')
+        %th Sign In Count
+        %th Current Sign In At
+        %th Last Sign In At
+        %th Current Sign In IP
+        %th Last Sign In IP
+        %th= sort_link(@q, :courses_count)
+        %th= sort_link(@q, :enrollments_count)
+        %th= sort_link(@q, :comments_count)
+        %th= sort_link(@q, :student_lessons_count)
+        %th Roles
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            = link_to user.id, user
+          %td
+            .col-12
+              = user.email
+            = email_confirmation_status(user)
+            = online_status(user)
 
-        %td= user.created_at
-        %td= user.sign_in_count
-        %td= user.current_sign_in_at
-        %td= user.last_sign_in_at
-        %td= user.current_sign_in_ip
-        %td= user.last_sign_in_ip
-        %td
-          .d-flex.justify-content-between
-            .roles
-              - user.roles.each do |role|
-                .badge.bg-info
-                  = role.name
+          %td= user.created_at
+          %td= user.sign_in_count
+          %td= user.current_sign_in_at
+          %td= user.last_sign_in_at
+          %td= user.current_sign_in_ip
+          %td= user.last_sign_in_ip
+          %td= user.courses_count
+          %td= user.enrollments_count
+          %td= user.comments_count
+          %td= user.student_lessons_count
+          %td
+            .d-flex.justify-content-between
+              .roles
+                - user.roles.each do |role|
+                  .badge.bg-info
+                    = role.name
 
 != pagy_bootstrap_nav(@pagy)

@@ -1,18 +1,24 @@
-.d-flex
-  - unless policy(@course).author?
-    .me-3
-      - if lesson.viewed_by? current_user
-        .far.fa-check-square
-      - else
-        .far.fa-square
-  .d-flex.flex-column.w-100
-    .lesson-title
-      = link_to course_lesson_path(@course, lesson) do
-        - if lesson.row_order
-          %span.mx-1
-            = "#{lesson.row_order_rank + 1}."
-        = lesson.title
-    -# .mt-2
+.container.g-0
+  .row
+    - unless policy(@course).author?
+      .col-auto
+        - if lesson.viewed_by? current_user
+          .far.fa-check-square
+        - else
+          .far.fa-square
+    .col
+      .lesson-title
+        = link_to course_lesson_path(@course, lesson) do
+          - if lesson.row_order
+            %span.mx-1
+              = "#{lesson.row_order_rank + 1}."
+          = lesson.title
+
+    .col-auto.text-end
+      %span.text-muted{ title: 'unique viewers' }
+        %i.fa.fa-eye.me-1
+        = lesson.student_lessons_count
+
     -#   .float-end
     -#     - if policy(lesson).edit?
     -#       .d-inline-block.me-1
