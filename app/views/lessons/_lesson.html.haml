@@ -1,6 +1,6 @@
 %figure.mb-4{ style: "min-height: 480px; position: relative;" }
   - if @lesson.video.attached?
-    %video(controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata")
+    %video(oncontextmenu="return false;" controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata" controlslist="nodownlaod")
       %source{ src: rails_blob_url(@lesson.video), type: "#{@lesson.video.content_type}" }
   - else
     .bg-light.mb-4.h-100.w-100{ style: "position: absolute;" }
