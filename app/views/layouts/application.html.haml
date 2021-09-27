@@ -5,6 +5,10 @@
     %title
       = content_for?(:title) ? yield(:title) : "Videoskwela"
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{description: 'Online learning and skill sharing platform'}
+    %meta{keywords: 'online education, course platform, video tutorials, udemy clone'}
+    %meta{author: 'Jess Alejo'}
+    -# = favicon_link_tag 'favicon.ico'
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
