@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
-  before_action :authorize_user, except: :index
+  skip_before_action :authenticate_user!, only: %i[index privacy_policy]
+  before_action :authorize_user, except: %i[index privacy_policy]
 
   def index
     @enrolled_courses ||= recent_enrolled_courses
@@ -15,6 +15,8 @@ class HomeController < ApplicationController
   end
 
   def analytics; end
+
+  def privacy_policy; end
 
   private
 

@@ -3,16 +3,13 @@
   .container
     .row
       .col-md-4
-        Copyright
-        ©
-        = Time.now.year
-        Videoskwela.
+        Copyright © 2021 Videoskwela.
         .row
         .fa.fa-envelope.me-1
         = mail_to 'jess.programmer@gmail.com'
         .row
       .col-md-4
-        Privacy policy
+        = link_to 'Privacy policy', privacy_policy_path
         .row
         Terms and conditions
       .col-md-4
