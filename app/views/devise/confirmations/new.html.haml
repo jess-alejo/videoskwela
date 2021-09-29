@@ -1,0 +1,19 @@
+.devise-form
+  %h1.h3.mb-3.fw-normal
+    Resend confirmation instructions
+  = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post },
+    wrapper: :floating_labels_form,
+    wrapper_mappings: { select: :floating_labels_select }) do |f|
+    = f.error_notification
+    = f.full_error :confirmation_token
+    .form-inputs
+      = f.input :email,
+        required: true,
+        autofocus: true,
+        value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+        input_html: { autocomplete: "email" }
+    .form-actions.mb-3
+      = f.button :submit, "Resend confirmation instructions", class: 'w-100 btn btn-lg btn-primary'
+
+  .small
+    = render "devise/shared/links"
