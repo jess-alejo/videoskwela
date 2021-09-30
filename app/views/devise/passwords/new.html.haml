@@ -6,10 +6,10 @@
     wrapper_mappings: { select: :floating_labels_select }) do |f|
     = f.error_notification
     .form-inputs
-      = f.input :email,                       |
-        required: true,                       |
-        autofocus: true,                      |
-        input_html: { autocomplete: "email" } |
+      = f.input :email,
+        required: true,
+        autofocus: true,
+        input_html: { autocomplete: "email" }
     .form-actions.mb-3
       = f.button :submit, "Send me reset password instructions", class: 'w-100 btn btn-lg btn-primary'
 
