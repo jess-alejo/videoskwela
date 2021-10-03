@@ -39,6 +39,8 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :enrollments, dependent: :restrict_with_error
   has_many :student_lessons, through: :lessons
+  has_many :course_tags, dependent: :destroy
+  has_many :tags, through: :course_tags
 
   scope :popular, -> { order(enrollments_count: :desc).first(3) }
   scope :top_rated, -> { order(average_rating: :desc).first(3) }

@@ -21,8 +21,10 @@ import "chartkick/chart.js"
 
 require("jquery")
 require("jquery-ui-dist/jquery-ui")
+require("selectize")
 
 import "./lesson-sortable"
 import "./trix-overrides"
 import "./youtube"
 import "./videos"
+import "./initializer"

@@ -17,8 +17,8 @@
     = render 'layouts/google_analytics' if Rails.env.production?
   %body
     = render 'layouts/header'
-    = render 'layouts/messages'
 
     .container.mt-4
+      = render 'layouts/messages'
       = yield
     = render 'layouts/footer'

@@ -44,6 +44,11 @@
     %li.list-group-item
       .far.fa-clock.me-1
       = course.created_at
+    - if course.tags.present?
+      %li.list-group-item
+        - course.tags.each do |tag|
+          .badge.bg-info
+            = tag.name
   .card-footer
     = link_to 'Show', course, class: 'btn btn-sm btn-primary'
     - if user_signed_in?
