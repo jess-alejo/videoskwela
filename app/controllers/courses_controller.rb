@@ -3,12 +3,13 @@
 class CoursesController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   before_action :set_course, only: %i[show edit update destroy publish review approve analytics]
+  before_action :set_tags
 
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
     @ransack_courses = Course.published.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author, :course_tags))
   end
 
   def enrolled
@@ -136,5 +137,9 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:title, :description, :short_description, :level, :language, :price, :image,
                                    tag_ids: [])
+  end
+
+  def set_tags
+    @tags = Tag.order(course_tags_count: :desc)
   end
 end

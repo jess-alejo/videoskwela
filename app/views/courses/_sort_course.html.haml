@@ -1,0 +1,12 @@
+.card.mb-3
+  .card-header
+    Sort by
+  .list-group.list-group-flush
+    .list-group-item
+      = sort_link @ransack_courses, :price, 'Price'
+    .list-group-item
+      = sort_link @ransack_courses, :average_rating, 'Top Rated'
+    .list-group-item
+      = sort_link @ransack_courses, :enrollments_count, 'Popularity'
+    .list-group-item
+      = sort_link @ransack_courses, :created_at, 'Latest'

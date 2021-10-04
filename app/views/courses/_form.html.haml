@@ -1,12 +1,13 @@
 -# frozen_string_literal: true
-
 .card-body
   = simple_form_for(@course, defaults: { wrapper_html: { class: 'mb-4' }, label_html: { class: 'form-label' } }) do |f|
     = f.error_notification
 
     = f.input :title, wrapper_html: { class: 'mb-4' }
 
-    = f.select :tag_ids, Tag.all.pluck(:name, :id), {}, { multiple: true, class: 'selectize' }
+    .course_tag_ids.mb-3
+      = f.label :tag_ids, 'Tags', class: 'form-label'
+      = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize' }
 
     .form-group.mb-4
       = f.label :image, class: 'form-label'
@@ -25,4 +26,4 @@
     = f.input :price, input_html: { min: 0 }
 
     .form-actions
-      = f.button :submit
+      = f.button :submit, class: 'btn btn-primary'
