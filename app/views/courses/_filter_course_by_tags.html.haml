@@ -4,7 +4,8 @@
   .list-group-list-group-flush
     .list-group-item
       - @tags.each do |tag|
-        = link_to courses_path(courses_search: { course_tags_tag_id_eq: tag.id }), class: 'btn btn-info me-2' do
+        = link_to url_for(controller: controller_name, action: action_name, courses_search: { course_tags_tag_id_eq: tag.id }),
+          class: 'btn btn-info me-2' do
           = tag.name
           %span.badge.rounded-pill.bg-light.text-dark
             = tag.course_tags_count
