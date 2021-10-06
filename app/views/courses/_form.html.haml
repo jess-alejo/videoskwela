@@ -7,7 +7,7 @@
 
     .course_tag_ids.mb-3
       = f.label :tag_ids, 'Tags', class: 'form-label'
-      = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize' }
+      = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize-tags' }
 
     .form-group.mb-4
       = f.label :image, class: 'form-label'
