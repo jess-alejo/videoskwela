@@ -140,6 +140,6 @@ class CoursesController < ApplicationController
   end
 
   def set_tags
-    @tags = Tag.order(course_tags_count: :desc)
+    @tags = Tag.where.not(course_tags_count: 0).order(course_tags_count: :desc)
   end
 end

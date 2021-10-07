@@ -5,7 +5,7 @@
     .list-group-item
       - @tags.each do |tag|
         = link_to url_for(controller: controller_name, action: action_name, courses_search: { course_tags_tag_id_eq: tag.id }),
-          class: 'btn btn-info me-2' do
+          class: 'btn btn-info btn-sm me-2 mb-2' do
           = tag.name
-          %span.badge.rounded-pill.bg-light.text-dark
+          %span.badge.rounded-pill.bg-light.text-dark.ms-2
             = tag.course_tags_count

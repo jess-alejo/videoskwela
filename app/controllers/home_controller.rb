@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @top_rated_courses = Course.published.top_rated
     @new_courses = Course.published.newly_added
     @course_reviews = Enrollment.reviewed.latest_good_reviews
+    @popular_tags = Tag.order(course_tags_count: :desc).limit(10)
   end
 
   def activity

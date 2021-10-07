@@ -69,6 +69,13 @@
 .mb-5.text-end
   = link_to 'See more recent courses', courses_path(courses_search: { s: 'created_at desc' })
 
+%h2 Popular Topics
+.d-flex.g-5.mb-5
+  - @popular_tags.each do |tag|
+    = link_to courses_path(courses_search: { course_tags_tag_id_eq: tag.id }),
+      class: 'btn btn-info btn-sm me-1 mb-2' do
+      = tag.name
+
 %h2 What our students have to say
 .course-container.mb-5
   - @course_reviews.each do |course_review|

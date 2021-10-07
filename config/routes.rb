@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index show edit update]
   resources :youtube, only: :show
-  resources :tags, only: :create
+  resources :tags, only: %i[index create destroy]
 
   get 'privacy_policy', to: 'home#privacy_policy'
   get 'activity',       to: 'home#activity'
