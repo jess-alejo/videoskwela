@@ -38,6 +38,13 @@
               - if current_user.has_role? :admin
                 = link_to 'Review', review_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_review?
                 = link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_approve?
+        %tr
+          %th Tags
+          %td
+            - course.tags.each do |tag|
+              .badge.bg-info
+                = tag.name
+
 
   - if policy(course).edit?
     .card-footer.bg-white

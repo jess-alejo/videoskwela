@@ -50,17 +50,26 @@
         - @lessons.each do |lesson|
           .list-group-item.d-flex
             = render 'lessons/lesson_preview', lesson: lesson
-    %h4
-      .fa.fa-comment.me-1
-      = pluralize(@course_reviews.size, 'Reviews')
 
-    %ul.list-group
-      - @course_reviews.each do |course_review|
-        = render 'enrollments/course_review', course_review: course_review
+    - if @course_reviews.size.positive?
+      %h4
+        .fa.fa-comment.me-1
+        = pluralize(@course_reviews.size, 'Reviews')
+
+      %ul.list-group
+        - @course_reviews.each do |course_review|
+          = render 'enrollments/course_review', course_review: course_review
+
+
+    - if @similar_courses.size.positive?
+      %h4
+        .fa.fa-graduation-cap.me-1
+        Similar Courses
+      .course-container
+        - @similar_courses.each do |course|
+          = render 'courses/course', course: course
 
   .col-lg-4.order-0.order-lg-1.mb-3
     .sticky-top
       = render 'course_card', course: @course
-
-
 

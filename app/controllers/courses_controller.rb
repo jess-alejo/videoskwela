@@ -47,6 +47,7 @@ class CoursesController < ApplicationController
   def show
     @lessons = @course.lessons.rank(:row_order)
     @course_reviews = @course.enrollments.reviewed
+    @similar_courses = @course.similar_courses
   end
 
   # GET /courses/new

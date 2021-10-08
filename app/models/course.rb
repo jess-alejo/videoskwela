@@ -83,4 +83,9 @@ class Course < ApplicationRecord
   def free?
     price.zero?
   end
+
+  def similar_courses
+    course_ids = CourseTag.where(tag_id: tags.ids).pluck(:course_id).uniq
+    Course.where(id: course_ids - [id])
+  end
 end
