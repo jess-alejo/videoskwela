@@ -1,56 +1,39 @@
-.card.h-100
-  - if course.image.present?
-    = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title)
-  - else
-    %div{ style: 'height: 200px; background-color: #ddd;' }
+.card.card-hover.mb-3.h-100
+  = link_to course, class: 'card-image-top' do
+    - if course.image.present?
+      = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title)
+    - else
+      %div{ style: 'height: 200px; background-color: #ddd;' }
   .card-body
-    %h5.card-title
-      .fa.fa-graduation-cap
-      = course.title
-    %small
-      .fa.fa-chalkboard-teacher.me-1.small
-      = link_to course.author, user_path(course.author), class: 'small text-decoration-none'
-    .d-flex.align-items-center
-      .rating.d-flex.align-items-center.text-warning.me-3
-        .fs-5.me-1
-          = course.average_rating
-        .small
-          = show_star_rating(course.average_rating)
-      .students.text-muted
-        .fa.fa-user-graduate.me-1
-        .small.d-inline-block
-          = pluralize(course.enrollments_count, 'student')
+    %h4.mb-2.text-truncate-line-2
+      = link_to course, class: 'text-inherit' do
+        = course.title
 
-    %p.card-text
-      = simple_format(course.short_description)
-  %ul.list-group.list-group-flush
-    %li.list-group-item.text-center.d-flex.flex-column.justify-content-between.gap-2
-      .lead
-        = price_caption course
-      = enrollment_button course
-      = review_button course
-
-    %li.list-group-item
-      .fa.fa-tasks.me-1
-      = pluralize(course.lessons_count, 'lesson')
-    %li.list-group-item.d-flex.justify-content-between
-      .language
+    %ul.mb-3.list-inline
+      %li.list-inline-item
         .fa.fa-globe.me-1
         = course.language
-      .level
+      %li.list-inline-item
         .fa.fa-signal.me-1
         = course.level
 
-    %li.list-group-item
-      .far.fa-clock.me-1
-      = course.created_at
-    - if course.tags.present?
-      %li.list-group-item
-        - course.tags.each do |tag|
-          .badge.bg-info
-            = tag.name
+    .d-flex.align-items-center
+      .rating.d-flex.align-items-center.text-warning.me-2
+        .small.me-2
+          = show_star_rating(course.average_rating)
+        .fs-5.fw-lighter
+          = course.average_rating
+      .students.text-muted
+        .small.d-inline-block
+          = "(#{course.enrollments_count})"
+
   .card-footer
-    = link_to 'Show', course, class: 'btn btn-sm btn-primary'
-    - if user_signed_in?
-      = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning' if policy(course).edit?
-      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' if policy(course).destroy?
+    .row.align-items-center.g-0
+      .col-auto
+        = image_tag(course.author.avatar_url, class: 'rounded-circle avatar-xs')
+      .col.ms-2
+        %span
+          = course.author.username
+      .col-auto
+        = link_to '#', class: 'text-muted' do
+          %i.fa.fa-bookmark

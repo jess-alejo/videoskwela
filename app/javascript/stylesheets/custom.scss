@@ -1,3 +1,53 @@
 // Your variable overrides
-$body-bg: rgb(216, 76, 76);
-$body-color: #111;
+// $body-bg: rgb(216, 76, 76);
+// $body-color: #111;
+body {
+  color: rgb(43,41,52);
+  background-color: rgb(245, 244, 248);
+}
+
+.card {
+  border: 0;
+  box-shadow: 0 1px 3px rgba(3,0,71,.09);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  background-color: #fff;
+  border-top: 1px solid #ecebf1;
+  padding: 1rem 1.5rem;
+}
+
+.card-hover {
+  transition: box-shadow .25s ease;
+}
+
+.card-hover:focus, .card-hover:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+}
+
+.rounded-end-md, .rounded-top-md {
+  border-top-right-radius: .5rem!important;
+}
+
+.rounded-top-md {
+  border-top-left-radius: .5rem!important;
+}
+
+.text-truncate-line-2 {
+  max-height: 3.5rem;
+  overflow: hidden;
+}
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #818686!important;
+}
+
+.avatar-xs {
+  height: 1.5rem;
+  width: 1.5rem;
+}

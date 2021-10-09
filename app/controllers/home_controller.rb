@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   def recent_enrolled_courses
     return [] unless current_user
 
-    Course.joins(:enrollments).where(enrollments: { student: current_user }).order(updated_at: :desc).take(3)
+    Course.joins(:enrollments).where(enrollments: { student: current_user }).order(updated_at: :desc).take(4)
   end
 
   def authorize_user

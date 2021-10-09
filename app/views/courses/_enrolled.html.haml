@@ -1,7 +1,7 @@
 - course_progress = course.progress(current_user)
 - enrollment = current_user.enrollments.where(course: course).last
 
-.card
+.card.h-100.mb-3
   - if course.image.present?
     = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title)
   - else

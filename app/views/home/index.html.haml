@@ -42,30 +42,34 @@
 
 - if current_user
   %h2 Continue Learning
-  .course-container.mb-3
+  .row.g-3
     - @enrolled_courses.each do |course|
-      = render 'courses/course', course: course
+      .col-sm-6.col-md-3
+        = render 'courses/enrolled', course: course
   .text-end.mb-5
     = link_to 'See more enrolled courses',   enrolled_courses_path
 
 %h2 Popular Courses
-.course-container.mb-3
+.row.g-4.mb-3
   - @popular_courses.each do |course|
-    = render 'courses/course', course: course
+    .col-sm-6.col-md-3
+      = render 'courses/course', course: course
 .text-end.mb-5
   = link_to 'See more popular courses', courses_path(courses_search: { s: 'enrollments_count desc'})
 
 %h2 Top Rated Courses
-.course-container.mb-3
+.row.g-4.mb-3
   - @top_rated_courses.each do |course|
-    = render 'courses/course', course: course
+    .col-sm-6.col-md-3
+      = render 'courses/course', course: course
 .text-end.mb-5
   = link_to 'See more top rated courses', courses_path(courses_search: { s: 'average_rating desc'})
 
 %h2 New Courses
-.course-container.mb-3
+.row.g-4.mb-3
   - @new_courses.each do |course|
-    = render 'courses/course', course: course
+    .col-sm-6.col-md-3
+      = render 'courses/course', course: course
 .mb-5.text-end
   = link_to 'See more recent courses', courses_path(courses_search: { s: 'created_at desc' })
 
@@ -77,6 +81,7 @@
       = tag.name
 
 %h2 What our students have to say
-.course-container.mb-5
+.row.g-4.mb-3
   - @course_reviews.each do |course_review|
-    = render 'enrollments/course_review', course_review: course_review
+    .col-sm-6.col-md-3
+      = render 'enrollments/course_review', course_review: course_review

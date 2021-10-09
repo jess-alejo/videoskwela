@@ -42,9 +42,9 @@ class Course < ApplicationRecord
   has_many :course_tags, dependent: :destroy
   has_many :tags, through: :course_tags
 
-  scope :popular, -> { order(enrollments_count: :desc).first(3) }
-  scope :top_rated, -> { order(average_rating: :desc).first(3) }
-  scope :newly_added, -> { order(created_at: :desc).first(3) }
+  scope :popular, -> { order(enrollments_count: :desc).first(4) }
+  scope :top_rated, -> { order(average_rating: :desc).first(4) }
+  scope :newly_added, -> { order(created_at: :desc).first(4) }
   scope :pending_approval, -> { where(workflow_state: %w[awaiting_review being_reviewed]) }
   scope :published, -> { where(workflow_state: 'published') }
 
