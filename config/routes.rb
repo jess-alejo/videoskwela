@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # devise_for :users
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
+  resources :course_creator
   resources :lessons
   resources :enrollments do
     collection do

@@ -1,0 +1,16 @@
+.alert-box .alert {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  /* width: 50%; */
+  margin: auto;
+  z-index: 10000;
+  box-shadow: 0 0 10px 5px rgba(0,0,0,0.2);
+}
+
+@media screen and (min-width: 64em) {
+  .alert-box .alert  {
+    width: 50%;
+  }
+}
