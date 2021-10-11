@@ -1,0 +1,19 @@
+.card
+  .card-header
+    %h5
+      = wizard_steps.index(step) + 1
+      \/
+      = wizard_steps.count
+      = step.to_s.humanize
+    .progress{ style: 'height: 4px' }
+      .progress-bar.bg-success{ style: "width: #{@progress}%"}
+  .card-body
+  .card-footer
+    .float-start
+      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+        %i.fa.fa-arrow-left
+        Previous
+    .float-end
+      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+        %i.fa.fa-arrow-right
+        Next

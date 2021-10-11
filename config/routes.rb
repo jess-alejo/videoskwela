@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   # devise_for :users
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :course_creator
   resources :lessons
   resources :enrollments do
     collection do
@@ -39,6 +38,8 @@ Rails.application.routes.draw do
       end
     end
     resources :enrollments, only: %i[new create]
+    # resources :course_wizard, module: 'courses'
+    resources :course_wizard, controller: 'courses/course_wizard'
   end
 
   resources :users, only: %i[index show edit update]

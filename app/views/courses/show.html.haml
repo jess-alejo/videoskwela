@@ -13,6 +13,7 @@
       %h3.card-title
         .fa.fa-graduation-cap.me-1
         = @course.title
+        = link_to 'course creator', course_course_wizard_index_path(@course)
 
       %ul.list-group.list-group-flush.border-none
         %li.list-group-item.border-bottom-0
