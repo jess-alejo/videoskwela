@@ -8,6 +8,14 @@
     .progress{ style: 'height: 4px' }
       .progress-bar.bg-success{ style: "width: #{@progress}%"}
   .card-body
+    = simple_form_for(@course, url: course_course_wizard_path(@course), method: :put, defaults: { wrapper_html: { class: 'mb-4' }, label_html: { class: 'form-label' } }) do |f|
+      = f.error_notification
+      = f.input :title, wrapper_html: { class: 'mb-4' }
+      = f.input :short_description
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+
   .card-footer
     .float-start
       = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
@@ -16,4 +24,4 @@
     .float-end
       = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
         %i.fa.fa-arrow-right
-        Next
+        Skip

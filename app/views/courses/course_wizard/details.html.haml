@@ -8,6 +8,20 @@
     .progress{ style: 'height: 4px' }
       .progress-bar.bg-success{ style: "width: #{@progress}%"}
   .card-body
+    = simple_form_for @course,
+      url: course_course_wizard_path,
+      method: :put do |f|
+      = f.input :language, as: :radio_buttons, collection: Course::LANGUAGES, wrapper: :vertical_collection_inline
+      = f.input :level, as: :radio_buttons, collection: Course::LEVELS, wrapper: :vertical_collection_inline
+      = f.input :price, collection: [0, 9, 19, 49, 99, 149, 199]
+
+      .course_tag_ids.mb-3
+        = f.label :tag_ids, 'Tags', class: 'form-label'
+        = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize-tags' }
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+
   .card-footer
     .float-start
       = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
@@ -16,4 +30,4 @@
     .float-end
       = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
         %i.fa.fa-arrow-right
-        Next
+        Skip

@@ -3,13 +3,19 @@
 module Courses
   class CourseWizardController < ApplicationController
     include Wicked::Wizard
-    before_action :set_course, only: %i[show finish_wizard]
-    before_action :set_progress, only: :show
+    before_action :set_course, only: %i[show update finish_wizard]
+    before_action :set_progress, only: %i[show update]
+    before_action :set_tags, only: %i[show update]
 
     steps :basic_info, :details
 
     def show
       render_wizard
+    end
+
+    def update
+      @course.update(course_params)
+      render_wizard @course
     end
 
     def finish_wizard_path
@@ -28,6 +34,20 @@ module Courses
                   else
                     0
                   end
+    end
+
+    def set_tags
+      case step
+      when :basic_info
+      when :details
+        @tags = Tag.all
+      end
+    end
+
+    def course_params
+      params.require(:course)
+            .permit(:title, :description, :short_description, :level, :language, :price, :image,
+                    tag_ids: [])
     end
   end
 end
