@@ -1,12 +1,31 @@
+- page_title @course.title
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, course_path(@course)
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = step.to_s.humanize
+
+.container.d-flex.justify-content-center.align-items-center.mb-4
+  .progresses
+    .steps.bg-success
+      %span
+        %i.fa.fa-check
+    %span.line.bg-success
+    .steps.bg-light.border.border-success.border-4
+      %span.font-weight-bold.text-success 2
+    %span.line.bg-secondary
+    .steps.bg-light.border.border-secondary.border-4
+      %span.font-weight-bold.text-secondary 3
+
 .card
   .card-header
     %h5
-      = wizard_steps.index(step) + 1
-      \/
-      = wizard_steps.count
       = step.to_s.humanize
-    .progress{ style: 'height: 4px' }
-      .progress-bar.bg-success{ style: "width: #{@progress}%"}
+
   .card-body
     = simple_form_for @course,
       url: course_course_wizard_path,

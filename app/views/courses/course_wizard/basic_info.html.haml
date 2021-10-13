@@ -1,12 +1,30 @@
+- page_title @course.title
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, course_path(@course)
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = step.to_s.humanize
+
+.container.d-flex.justify-content-center.align-items-center.mb-4
+  .progresses
+    .steps.bg-light.border.border-success.border-4
+      %span.font-weight-bold.text-success 1
+    %span.line.bg-secondary
+    .steps.bg-light.border.border-secondary.border-4
+      %span.font-weight-bold.text-secondary 2
+    %span.line.bg-secondary
+    .steps.bg-light.border.border-secondary.border-4
+      %span.font-weight-bold.text-secondary 3
+
 .card
   .card-header
     %h5
-      = wizard_steps.index(step) + 1
-      \/
-      = wizard_steps.count
       = step.to_s.humanize
-    .progress{ style: 'height: 4px' }
-      .progress-bar.bg-success{ style: "width: #{@progress}%"}
+
   .card-body
     = simple_form_for(@course, url: course_course_wizard_path(@course), method: :put, defaults: { wrapper_html: { class: 'mb-4' }, label_html: { class: 'form-label' } }) do |f|
       = f.error_notification
@@ -18,9 +36,7 @@
 
   .card-footer
     .float-start
-      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
-        %i.fa.fa-arrow-left
-        Previous
+      = link_to 'Cancel', course_path(@course), class: 'btn btn-sm btn-secondary'
     .float-end
       = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
         %i.fa.fa-arrow-right

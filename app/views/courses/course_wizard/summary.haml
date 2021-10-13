@@ -1,0 +1,57 @@
+- page_title @course.title
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, course_path(@course)
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = step.to_s.humanize
+
+.container.d-flex.justify-content-center.align-items-center.mb-4
+  .progresses
+    .steps.bg-success
+      %span
+        %i.fa.fa-check
+    %span.line.bg-success
+    .steps.bg-success
+      %span
+        %i.fa.fa-check
+    %span.line.bg-success
+    .steps.bg-light.border.border-success.border-4
+      %span.font-weight-bold.text-success 3
+
+.card
+  .card-header
+    %h5
+      = step.to_s.humanize
+
+  .card-body
+    %table.table.table-sm.mt-2.mb-4
+      %tbody
+        %tr
+          %th Title
+          %td= @course.title
+        %tr
+          %th Short Description
+          %td= @course.short_description
+        %tr
+          %th Language
+          %td= @course.language
+        %tr
+          %th Level
+          %td= @course.level
+        %tr
+          %th Price
+          %td= @course.price
+
+  .card-footer
+    .float-start
+      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+        %i.fa.fa-arrow-left
+        Previous
+    .float-end
+      = link_to course_path(@course), class: 'btn btn-sm btn-success' do
+        %i.fa.fa-check.fa-fw
+        Finish

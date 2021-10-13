@@ -7,13 +7,15 @@ module Courses
     before_action :set_progress, only: %i[show update]
     before_action :set_tags, only: %i[show update]
 
-    steps :basic_info, :details
+    steps :basic_info, :details, :summary
 
     def show
+      authorize @course, :update?
       render_wizard
     end
 
     def update
+      authorize @course, :update?
       @course.update(course_params)
       render_wizard @course
     end
