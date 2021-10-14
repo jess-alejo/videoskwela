@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get :money_makers
   end
 
-  resources :courses do
+  resources :courses, except: :edit do
     collection do
       get :enrolled
       get :pending_review

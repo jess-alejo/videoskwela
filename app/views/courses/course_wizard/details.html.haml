@@ -1,52 +1,26 @@
-- page_title @course.title
+= render layout: 'courses/course_wizard/step' do
+  .container.d-flex.justify-content-center.align-items-center.mb-4
+    .progresses
+      .steps.bg-success
+        %span
+          %i.fa.fa-check
+      %span.line.bg-success
+      .steps.bg-light.border.border-success.border-4
+        %span.font-weight-bold.text-success 2
+      %span.line.bg-secondary
+      .steps.bg-light.border.border-secondary.border-4
+        %span.font-weight-bold.text-secondary 3
 
-%nav{"aria-label" => "breadcrumb"}
-  %ol.breadcrumb
-    %li.breadcrumb-item
-      = link_to 'Courses', courses_path
-    %li.breadcrumb-item
-      = link_to @course.title, course_path(@course)
-    %li.breadcrumb-item.active{"aria-current" => "page"}
-      = step.to_s.humanize
+  = simple_form_for @course,
+    url: course_course_wizard_path,
+    method: :put do |f|
+    = f.input :language, as: :radio_buttons, collection: Course::LANGUAGES, wrapper: :vertical_collection_inline
+    = f.input :level, as: :radio_buttons, collection: Course::LEVELS, wrapper: :vertical_collection_inline
+    = f.input :price, collection: [0, 9, 19, 49, 99, 149, 199]
 
-.container.d-flex.justify-content-center.align-items-center.mb-4
-  .progresses
-    .steps.bg-success
-      %span
-        %i.fa.fa-check
-    %span.line.bg-success
-    .steps.bg-light.border.border-success.border-4
-      %span.font-weight-bold.text-success 2
-    %span.line.bg-secondary
-    .steps.bg-light.border.border-secondary.border-4
-      %span.font-weight-bold.text-secondary 3
+    .course_tag_ids.mb-3
+      = f.label :tag_ids, 'Tags', class: 'form-label'
+      = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize-tags' }
 
-.card
-  .card-header
-    %h5
-      = step.to_s.humanize
-
-  .card-body
-    = simple_form_for @course,
-      url: course_course_wizard_path,
-      method: :put do |f|
-      = f.input :language, as: :radio_buttons, collection: Course::LANGUAGES, wrapper: :vertical_collection_inline
-      = f.input :level, as: :radio_buttons, collection: Course::LEVELS, wrapper: :vertical_collection_inline
-      = f.input :price, collection: [0, 9, 19, 49, 99, 149, 199]
-
-      .course_tag_ids.mb-3
-        = f.label :tag_ids, 'Tags', class: 'form-label'
-        = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize-tags' }
-
-      .form-actions
-        = f.button :submit, class: 'btn btn-primary'
-
-  .card-footer
-    .float-start
-      = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
-        %i.fa.fa-arrow-left
-        Previous
-    .float-end
-      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
-        %i.fa.fa-arrow-right
-        Skip
+    .form-actions
+      = f.button :submit, class: 'btn btn-primary'

@@ -1,0 +1,29 @@
+- page_title @course.title
+
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item
+      = link_to @course.title, course_path(@course)
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = step.to_s.humanize
+
+.card
+  .card-header
+    %h5
+      = step.to_s.humanize
+
+  .card-body
+    = yield
+
+  .card-footer
+    .float-start
+      - previous_path = wizard_steps.index(step) == 0 ? course_path(@course) : previous_wizard_path
+      = link_to previous_path, class: 'btn btn-sm btn-info' do
+        %i.fa.fa-arrow-left
+        Back
+    .float-end
+      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+        %i.fa.fa-arrow-right
+        = wizard_steps.index(step) + 1 == wizard_steps.count ? 'Finish' : 'Skip'
