@@ -1,7 +1,7 @@
 .card.card-hover.mb-3.h-100
   = link_to course, class: 'card-image-top' do
     - if course.image.present?
-      = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title)
+      = image_tag(course.image, class: 'card-img-top', height: 200, alt: course.title, style: 'object-fit: cover')
     - else
       %div{ style: 'height: 200px; background-color: #ddd;' }
   .card-body
