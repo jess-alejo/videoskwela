@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      You have enrolled to the course
+      = link_to @enrollment.course, url_for(@enrollment.course)
+    %p
+      %b Enrollment Date:
+      = @enrollment.created_at
+
+    %p
+      %b Course Price
+      = @enrollment.course.price
+
+    %p
+      %b Paid Price
+      = @enrollment.price
+
+    %p After completing the course, you will be entitled to a Certificate of Completion.
+
+    %p Regards,
+
+    %p
+      = link_to 'Videoskwela', root_url
