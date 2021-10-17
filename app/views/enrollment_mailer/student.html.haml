@@ -5,18 +5,22 @@
   %body
     %h1
       You have enrolled to the course
-      = link_to @enrollment.course, url_for(@enrollment.course)
+      = link_to @course, url_for(@course)
     %p
       %b Enrollment Date:
       = @enrollment.created_at
 
     %p
       %b Course Price
-      = @enrollment.course.price
+      = number_to_currency @course.price
 
     %p
       %b Paid Price
-      = @enrollment.price
+      = number_to_currency @enrollment.price
+
+    %p
+      %b Instructor
+      = @course.author
 
     %p After completing the course, you will be entitled to a Certificate of Completion.
 

@@ -41,6 +41,7 @@ class Enrollment < ApplicationRecord
   end
 
   def send_email
-    EnrollmentMailer.new_enrollment(self).deliver_later
+    EnrollmentMailer.student(self).deliver_later
+    EnrollmentMailer.author(self).deliver_later
   end
 end

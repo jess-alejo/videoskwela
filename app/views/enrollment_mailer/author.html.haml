@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      You have a new student enrolled to the course
+      = link_to @course, url_for(@course)
+    %p
+      %b Enrollment Date:
+      = @enrollment.created_at
+
+    %p
+      %b Course Price
+      = number_to_currency @course.price
+
+    %p
+      %b Paid Price
+      = number_to_currency @enrollment.price
+
+    %p
+      %b Student
+      = @enrollment.student
+
+    %p Regards,
+
+    %p
+      = link_to 'Videoskwela', root_url
