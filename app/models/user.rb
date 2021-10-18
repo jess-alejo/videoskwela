@@ -19,6 +19,9 @@ class User < ApplicationRecord
   has_many :comments, dependent: :nullify
 
   after_create :assign_default_role
+  after_create do
+    UserMailer.new_user(self).deliver_later
+  end
 
   validate :must_have_role, on: :update
 
@@ -27,10 +30,6 @@ class User < ApplicationRecord
     STUDENT = 'student',
     INSTRUCTOR = 'instructor'
   ].freeze
-
-  def assign_default_role
-    add_role(User::STUDENT) if roles.blank?
-  end
 
   def to_s
     email
@@ -72,5 +71,9 @@ class User < ApplicationRecord
 
   def must_have_role
     errors.add(:roles, 'must have at least one role') if roles.blank?
+  end
+
+  def assign_default_role
+    add_role(User::STUDENT) if roles.blank?
   end
 end

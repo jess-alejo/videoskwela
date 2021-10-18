@@ -24,7 +24,10 @@ class Enrollment < ApplicationRecord
     course.update_rating unless rating.to_i.zero?
   end
 
-  after_commit :send_email, on: :create
+  after_create do
+    EnrollmentMailer.student(self).deliver_later
+    EnrollmentMailer.author(self).deliver_later
+  end
 
   after_destroy do
     course.update_rating
@@ -38,10 +41,5 @@ class Enrollment < ApplicationRecord
 
   def cant_enroll_to_own_course
     errors.add(:base, 'You can not enroll to your own course') if course && course.author == student
-  end
-
-  def send_email
-    EnrollmentMailer.student(self).deliver_later
-    EnrollmentMailer.author(self).deliver_later
   end
 end
