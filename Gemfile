@@ -80,3 +80,7 @@ gem 'image_processing', '~> 1.12', '>= 1.12.1' # requires imagemagick
 gem 'recaptcha', '~> 5.8', '>= 5.8.1'
 
 gem 'wicked'
+
+group :development do
+  gem 'letter_opener', '~> 1.7'
+end
