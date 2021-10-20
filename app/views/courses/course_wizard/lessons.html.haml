@@ -1,0 +1,49 @@
+= render layout: 'courses/course_wizard/step' do
+  .container.d-flex.justify-content-center.align-items-center.mb-5
+    .progresses
+      .steps.bg-white.border.border-success.border-4
+        %span.text-success
+          %i.fa.fa-check
+        .step-label
+          .small.text-muted
+            Details
+
+      %span.line.bg-success
+
+      .steps.bg-white.border.border-success.border-4
+        %span.text-success
+          %i.fa.fa-check
+        .step-label
+          .small.text-muted
+            Basic Info
+
+      %span.line.bg-success
+
+      .steps.bg-white.border.border-warning.border-4
+        %span.font-weight-bold.text-warning 3
+        .step-label
+          .small.text-muted
+            Lessons
+
+      %span.line.bg-secondary
+
+      .steps.bg-white.border.border-secondary.border-4
+        %span.font-weight-bold.text-secondary 4
+        .step-label
+          .small.text-muted
+            Summary
+
+  = simple_form_for @course,
+    url: course_course_wizard_path,
+    method: :put do |f|
+    #lessons
+    = f.simple_fields_for :lessons do |lesson|
+      = render 'lesson_fields', f: lesson
+
+    .form-actions.mb-3
+      = link_to_add_association f, :lessons, class: 'btn btn-primary me-2' do
+        %i.fa.fa-plus.fa-fw
+        Add Lesson
+
+    .form-actions
+      = f.button :submit, "Save & Continue", class: 'btn btn-primary'

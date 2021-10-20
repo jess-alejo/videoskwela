@@ -7,7 +7,7 @@ module Courses
     before_action :set_progress, only: %i[show update]
     before_action :set_tags, only: %i[show update]
 
-    steps :basic_info, :details, :summary
+    steps :basic_info, :details, :lessons, :summary
 
     def show
       authorize @course, :update?
@@ -49,7 +49,8 @@ module Courses
     def course_params
       params.require(:course)
             .permit(:title, :description, :short_description, :level, :language, :price, :image,
-                    tag_ids: [])
+                    tag_ids: [],
+                    lessons_attributes: %i[id title content _destroy])
     end
   end
 end

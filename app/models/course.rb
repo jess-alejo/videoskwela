@@ -42,6 +42,8 @@ class Course < ApplicationRecord
   has_many :course_tags, dependent: :destroy
   has_many :tags, through: :course_tags
 
+  accepts_nested_attributes_for :lessons, reject_if: :all_blank, allow_destroy: true
+
   scope :popular, -> { order(enrollments_count: :desc).first(4) }
   scope :top_rated, -> { order(average_rating: :desc).first(4) }
   scope :newly_added, -> { order(created_at: :desc).first(4) }

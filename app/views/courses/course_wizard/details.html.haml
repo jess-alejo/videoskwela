@@ -23,4 +23,4 @@
       = f.select :tag_ids, @tags.pluck(:name, :id), {}, { multiple: true, class: 'selectize-tags' }
 
     .form-actions
-      = f.button :submit, class: 'btn btn-primary'
+      = f.button :submit, "Save & Continue", class: 'btn btn-primary'

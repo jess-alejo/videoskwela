@@ -18,6 +18,7 @@ require("trix")
 require("@rails/actiontext")
 
 import "chartkick/chart.js"
+import "cocoon-js-vanilla"
 
 require("jquery")
 require("jquery-ui-dist/jquery-ui")

@@ -84,3 +84,5 @@ gem 'wicked'
 group :development do
   gem 'letter_opener', '~> 1.7'
 end
+
+gem 'cocoon', '~> 1.2', '>= 1.2.15'

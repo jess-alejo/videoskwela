@@ -96,6 +96,7 @@ GEM
       xpath (~> 3.2)
     chartkick (4.0.5)
     childprocess (3.0.0)
+    cocoon (1.2.15)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     devise (4.8.0)
@@ -309,6 +310,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   chartkick (~> 4.0, >= 4.0.5)
+  cocoon (~> 1.2, >= 1.2.15)
   devise (~> 4.8)
   exception_notification (~> 4.4, >= 4.4.3)
   faker (~> 2.18)
