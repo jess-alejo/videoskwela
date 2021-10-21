@@ -1,0 +1,5 @@
+.container.d-flex.justify-content-center.align-items-center.mb-5
+  .progresses
+    - wizard_steps.each do |step|
+      = wicked_progress(step)
+      = wicked_progress_line(step)

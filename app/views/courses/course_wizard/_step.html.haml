@@ -10,11 +10,9 @@
       = step.to_s.humanize
 
 .card
-  .card-header
-    %h5
-      = step.to_s.humanize
-
   .card-body
+    = render 'progress_status'
+
     = yield
 
   .card-footer

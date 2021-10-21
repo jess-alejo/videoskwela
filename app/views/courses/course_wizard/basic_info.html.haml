@@ -1,16 +1,5 @@
 - page_title @course.title
 = render layout: 'courses/course_wizard/step' do
-  .container.d-flex.justify-content-center.align-items-center.mb-4
-    .progresses
-      .steps.bg-light.border.border-success.border-4
-        %span.font-weight-bold.text-success 1
-      %span.line.bg-secondary
-      .steps.bg-light.border.border-secondary.border-4
-        %span.font-weight-bold.text-secondary 2
-      %span.line.bg-secondary
-      .steps.bg-light.border.border-secondary.border-4
-        %span.font-weight-bold.text-secondary 3
-
   = simple_form_for(@course, url: course_course_wizard_path(@course), method: :put, defaults: { wrapper_html: { class: 'mb-4' }, label_html: { class: 'form-label' } }) do |f|
     = f.error_notification
     = f.input :title, input_html: { autocomplete: 'off' }
