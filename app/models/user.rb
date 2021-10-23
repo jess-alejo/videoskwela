@@ -9,7 +9,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :trackable, :confirmable
+         :trackable, :confirmable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses                                       # dependent: :nullify
@@ -65,6 +66,20 @@ class User < ApplicationRecord
   def avatar_url
     hash = Digest::MD5.hexdigest(email)
     "http://www.gravatar.com/avatar/#{hash}"
+  end
+
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+
+    unless user
+        user = User.create(
+           email: data['email'],
+           password: Devise.friendly_token[0,20],
+           confirmed_at: Time.now
+        )
+    end
+    user
   end
 
   private

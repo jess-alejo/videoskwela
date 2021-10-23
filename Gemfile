@@ -79,10 +79,17 @@ gem 'image_processing', '~> 1.12', '>= 1.12.1' # requires imagemagick
 
 gem 'recaptcha', '~> 5.8', '>= 5.8.1'
 
+# authenticate with Google via OAuth2 in OmniAuth.
+gem 'omniauth-google-oauth2', '~> 1.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+# multi-step form
 gem 'wicked'
 
 group :development do
   gem 'letter_opener', '~> 1.7'
 end
 
+# nested forms
 gem 'cocoon', '~> 1.2', '>= 1.2.15'
+

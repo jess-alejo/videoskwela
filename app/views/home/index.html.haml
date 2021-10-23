@@ -11,6 +11,11 @@
       = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
       %button.btn.btn-outline-success{:type => "submit"} Search
 
+  .py-4
+    = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-danger' do
+      %i.fab.fa-google.fa-fw
+      Sign in with Google
+
 .card-group.mb-5
   .card.card-body
     %h1
