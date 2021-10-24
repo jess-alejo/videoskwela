@@ -1,11 +1,12 @@
 @import "variables";
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
 
-@import 'selectize/dist/css/selectize';
-@import 'selectize/dist/css/selectize.default';
+@import "selectize/dist/css/selectize";
+@import "selectize/dist/css/selectize.default";
 
-@import './custom.scss';
-@import './progresses';
+@import "./custom.scss";
+@import "./progresses";
 @import "./footer";
+@import "./buttons";

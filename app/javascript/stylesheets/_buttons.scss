@@ -1,0 +1,21 @@
+@mixin button-theme($btn-color) {
+  color: white;
+  background-color: $btn-color;
+  border-color: darken($btn-color, 10%);
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    color: white !important;
+    background-color: darken($btn-color, 5%);
+    border-color: $btn-color;
+  }
+}
+
+.btn-google {
+  @include button-theme(rgb(219, 68, 55));
+}
+.btn-github {
+  @include button-theme(rgb(33, 31, 31));
+}
