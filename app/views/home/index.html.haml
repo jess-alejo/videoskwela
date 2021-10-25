@@ -12,14 +12,15 @@
       %button.btn.btn-outline-success{:type => "submit"} Search
 
   .py-4
-    .d-flex.flex-column.g-2.col-md-3{ style: 'gap: .5rem;' }
-      = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-google' do
-        %i.fab.fa-google.fa-fw
-        Sign in with Google
+    - unless current_user
+      .d-flex.flex-column.g-2.col-md-3{ style: 'gap: .5rem;' }
+        = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-google' do
+          %i.fab.fa-google.fa-fw
+          Sign in with Google
 
-      = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-github' do
-        %i.fab.fa-github.fa-fw
-        Sign in with Github
+        = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-github' do
+          %i.fab.fa-github.fa-fw
+          Sign in with Github
 
 .card-group.mb-5
   .card.card-body
