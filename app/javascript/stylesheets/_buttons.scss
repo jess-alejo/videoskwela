@@ -1,14 +1,14 @@
 @mixin button-theme($btn-color) {
   color: white;
   background-color: $btn-color;
-  border-color: darken($btn-color, 10%);
+  border-color: darken($btn-color, 5%);
 
   &:hover,
   &:focus,
   &:active,
   &.active {
     color: white !important;
-    background-color: darken($btn-color, 5%);
+    background-color: darken($btn-color, 10%);
     border-color: $btn-color;
   }
 }
@@ -18,4 +18,7 @@
 }
 .btn-github {
   @include button-theme(rgb(33, 31, 31));
+}
+.btn-facebook {
+  @include button-theme(rgb(59, 89, 152))
 }

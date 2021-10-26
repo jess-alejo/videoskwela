@@ -86,6 +86,9 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 # OmniAuth strategy for GitHub.
 gem 'omniauth-github', '~> 2.0'
 
+# Facebook OAuth2 Strategy for OmniAuth
+gem 'omniauth-facebook', '~> 4.0'
+
 # multi-step form
 gem 'wicked'
 

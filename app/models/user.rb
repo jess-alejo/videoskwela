@@ -10,7 +10,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable, :confirmable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 github]
+         :omniauthable, omniauth_providers: %i[google_oauth2 github facebook]
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses                                       # dependent: :nullify

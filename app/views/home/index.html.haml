@@ -6,21 +6,31 @@
 
   .p-4
 
-  .form-inline.my-2.my-lg-0.col-md-4
+  .form-inline.my-2.my-lg-0.col-lg-3
     = search_form_for(@ransack_courses, as: :courses_search, url: courses_path, class: 'd-flex') do |f|
-      = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control me-2'
+      = f.search_field :title_or_short_description_cont, autocomplete: 'off', placeholder: 'Search course', type: 'search', class: 'form-control form-control-lg me-2'
       %button.btn.btn-outline-success{:type => "submit"} Search
 
   .py-4
     - unless current_user
-      .d-flex.flex-column.g-2.col-md-3{ style: 'gap: .5rem;' }
-        = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-google' do
-          %i.fab.fa-google.fa-fw
-          Sign in with Google
+      .d-flex.flex-column.g-2.col-lg-3{ style: 'gap: .5rem;' }
+        .row.g-2
+          .col-12.col-lg-6
+            = link_to "Register", new_user_registration_path, class: 'btn btn-primary btn-lg btn-block', style: "width: 100%"
+          .col-12.col-lg-6
+            = link_to "Login", new_user_session_path, class: 'btn btn-primary btn-lg btn-block', style: "width: 100%;"
 
-        = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-github' do
+        = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-lg btn-google' do
+          Continue with
+          %i.fab.fa-google.fa-fw
+
+        = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-lg btn-github' do
+          Continue with
           %i.fab.fa-github.fa-fw
-          Sign in with Github
+
+        = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-lg btn-facebook' do
+          Continue with
+          %i.fab.fa-facebook.fa-fw
 
 .card-group.mb-5
   .card.card-body
