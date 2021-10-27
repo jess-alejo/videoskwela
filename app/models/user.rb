@@ -14,8 +14,8 @@ class User < ApplicationRecord
 
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_many :courses                                       # dependent: :nullify
-  has_many :enrollments, foreign_key: 'student_id'        # dependent: :nullify
-  has_many :student_lessons, foreign_key: 'student_id'    # dependent: :nullify
+  has_many :enrollments, foreign_key: "student_id"        # dependent: :nullify
+  has_many :student_lessons, foreign_key: "student_id"    # dependent: :nullify
 
   has_many :comments, dependent: :nullify
 
@@ -27,13 +27,13 @@ class User < ApplicationRecord
   validate :must_have_role, on: :update
 
   ROLES = [
-    ADMIN = 'admin',
-    STUDENT = 'student',
-    INSTRUCTOR = 'instructor'
+    ADMIN = "admin",
+    STUDENT = "student",
+    INSTRUCTOR = "instructor"
   ].freeze
 
   def to_s
-    email
+    name || username
   end
 
   def online?
@@ -64,28 +64,39 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    hash = Digest::MD5.hexdigest(email)
-    "http://www.gravatar.com/avatar/#{hash}"
+    if uid.present?
+      image
+    else
+      hash = Digest::MD5.hexdigest(email)
+      "https://www.gravatar.com/avatar/#{hash}"
+    end
   end
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.where(email: data['email']).first
+    user = User.find_by(email: data["email"])
 
-    unless user
-        user = User.create(
-           email: data['email'],
-           password: Devise.friendly_token[0,20],
-           confirmed_at: Time.now
-        )
-    end
+    user ||= User.create(
+      email: data["email"],
+      password: Devise.friendly_token[0, 20]
+    )
+
+    user.name = access_token.info.name
+    user.image = access_token.info.image
+    user.provider = access_token.provider
+    user.uid = access_token.uid
+    user.token = access_token.credentials.token
+    user.expires_at = access_token.credentials.expires_at
+    user.refresh_token = access_token.credentials.refresh_token
+    user.confirmed_at = Time.now # auto-confirm user from omniauth
+
     user
   end
 
   private
 
   def must_have_role
-    errors.add(:roles, 'must have at least one role') if roles.blank?
+    errors.add(:roles, "must have at least one role") if roles.blank?
   end
 
   def assign_default_role
