@@ -1,0 +1,33 @@
+%center
+  %h1
+    Certificate of Completion
+
+%center{ style: 'font-size: 24px;' }
+  %p
+    This is to certify that
+  %p
+    %b
+      = @enrollment.student
+  %p
+    has successfully completed the course
+  %p
+    %b
+      = @enrollment.course.title
+  %p
+    on the Videoskwela platform.
+
+%p
+
+%b Certificate id:
+#{@enrollment.slug}
+
+%p
+
+%b Certificate url:
+#{request.base_url}#{request.original_fullpath}
+
+%center
+  %h3
+    = image_tag wicked_pdf_asset_base64('logo.png'), height: "30", width: "auto"
+    %p
+    Videoskwela

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     collection do
       get :students
     end
+
+    member do
+      get :certificate
+    end
   end
 
   namespace :analytics do
