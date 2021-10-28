@@ -48,6 +48,19 @@ class CoursesController < ApplicationController
     @lessons = @course.lessons.rank(:row_order)
     @course_reviews = @course.enrollments.reviewed
     @similar_courses = @course.similar_courses
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@course.title}, #{current_user.email}",
+               page_size: "Letter",
+               template: "courses/show.html.haml",
+               orientation: "Landscape",
+               lowquality: true,
+               zoom: 1,
+               dpi: 75
+      end
+    end
   end
 
   # GET /courses/new
