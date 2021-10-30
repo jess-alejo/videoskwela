@@ -1,0 +1,13 @@
+.card
+  .card-body
+    %b.card-title Certificate
+
+    %p Get certificate by completing entire course.
+    - if course.completed? current_user
+      - enrollment = current_user.enrollments.find_by(course_id: course)
+      = link_to "View certificate", certificate_enrollment_path(enrollment, format: :pdf),
+        class: 'btn btn-success w-100',
+        target: '_blank',
+        role: 'button'
+    - else
+      = link_to "View certificate", nil, class: 'btn btn-outline-success w-100 disabled', disabled: true, target: '_blank', 'aria-disabled' => true

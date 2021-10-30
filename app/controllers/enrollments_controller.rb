@@ -73,10 +73,7 @@ class EnrollmentsController < ApplicationController
         render pdf: "#{@enrollment.course.title}, #{@enrollment.student.email}",
                page_size: "Letter",
                template: "enrollments/certificate.html.haml",
-               orientation: "Landscape",
-               lowquality: true,
-               zoom: 1,
-               dpi: 75
+               orientation: "Landscape"
       end
     end
   end

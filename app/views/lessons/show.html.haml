@@ -17,7 +17,7 @@
       = render 'lessons/comments/comment', comment: comment
     = render 'lessons/comments/form', comment: @comment
   .col-lg-4
-    .card
+    .card.mb-3
       .card-body
         .d-flex.justify-content-between
           %h5.card-title
@@ -30,3 +30,5 @@
         - @lessons.each do |lesson|
           %li.list-group-item{ class: ('list-group-item-success' if lesson == @lesson) }
             = render 'lessons/lesson_preview', lesson: lesson
+
+    = render 'courses/certificate', course: @course
