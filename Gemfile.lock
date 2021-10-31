@@ -347,6 +347,7 @@ GEM
     wicked_pdf (2.1.0)
       activesupport
     wkhtmltopdf-binary (0.12.6.5)
+    wkhtmltopdf-heroku (2.12.6.0)
     workflow (2.0.2)
     workflow-activerecord (4.1.8)
       activerecord (>= 3.0, < 6.2)
@@ -404,7 +405,8 @@ DEPENDENCIES
   webpacker (~> 5.0)
   wicked
   wicked_pdf (~> 2.1)
-  wkhtmltopdf-binary (~> 0.12.6.5)
+  wkhtmltopdf-binary
+  wkhtmltopdf-heroku
   workflow-activerecord (~> 4.1, >= 4.1.8)
 
 RUBY VERSION

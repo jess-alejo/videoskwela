@@ -101,4 +101,5 @@ gem 'cocoon', '~> 1.2', '>= 1.2.15'
 
 # PDF
 gem 'wicked_pdf', '~> 2.1' # PDF for Ruby on Rails
-gem 'wkhtmltopdf-binary', '~> 0.12.6.5' # PDF dependency
+gem 'wkhtmltopdf-binary', group: :development
+gem 'wkhtmltopdf-heroku', group: :production
