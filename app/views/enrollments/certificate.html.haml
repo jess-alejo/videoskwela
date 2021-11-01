@@ -1,33 +1,99 @@
+:css
+  p {
+    font-size: 28px;
+  }
+
+  .border-outside {
+    width: 1200px;
+    height: 850px;
+    padding: 20px;
+    text-align: center;
+    border: 10px solid #563d7c;
+  }
+
+  .border-inside {
+    width: 1150px;
+    height: 800px;
+    padding: 20px;
+    text-align: center;
+    border: 5px solid #563d7c;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 64px;
+  }
+
+  .student,
+  .course {
+    font-weight: bold;
+    font-size: 36px;
+    font-family: "Gothic"
+  }
+
+  .certificate-info {
+    padding: 10px
+  }
+
+  .brand {
+    display: flex;
+    padding: 20px;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .brand-name {
+    padding-left: 5px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .main {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
 %center
-  %h1
-    Certificate of Completion
+  .border-outside
+    .border-inside
+      .main
+        %h1.title
+          Certificate of Completion
 
-%center{ style: 'font-size: 24px;' }
-  %p
-    This is to certify that
-  %p
-    %b
-      = @enrollment.student
-  %p
-    has successfully completed the course
-  %p
-    %b
-      = @enrollment.course.title
-  %p
-    on the Videoskwela platform.
+        %p
+          This is to certify that
 
-%p
+        .student
+          = @enrollment.student
 
-%b Certificate id:
-#{@enrollment.slug}
+        %p
+          has successfully completed the course
 
-%p
+        .course
+          = @enrollment.course.title
 
-%b Certificate url:
-#{request.base_url}#{request.original_fullpath}
+        %p
+          on the Videoskwela platform.
 
-%center
-  %h3
-    = image_tag wicked_pdf_asset_base64('logo.png'), height: "30", width: "auto"
-    %p
-    Videoskwela
+
+        .certificate-info
+          .certificate-id
+            %b Certificate id:
+            = @enrollment.slug
+
+          .certificate-url
+            %b Certificate url:
+            #{request.base_url}#{request.original_fullpath}
+
+        .brand
+          .brand-logo
+            = image_tag wicked_pdf_asset_base64("logo.png"),
+              height: "48",
+              width: "auto"
+          .brand-name
+            Videoskwela
