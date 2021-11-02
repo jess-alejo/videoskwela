@@ -1,21 +1,21 @@
 - page_title @lesson.title
 
-%nav{"aria-label" => "breadcrumb"}
+%nav{ "aria-label" => "breadcrumb" }
   %ol.breadcrumb
     %li.breadcrumb-item
-      = link_to 'Courses', courses_path
+      = link_to "Courses", courses_path
     %li.breadcrumb-item
       = link_to @course.title, course_path(@course)
-    %li.breadcrumb-item.active{"aria-current" => "page"}
+    %li.breadcrumb-item.active{ "aria-current" => "page" }
       = @lesson.title
 .row
   .col-lg-8
-    = render 'lessons/lesson', course: @course, lesson: @lesson
+    = render "lessons/lesson", course: @course, lesson: @lesson
 
     %h5 Comments
     - @comments.each do |comment|
-      = render 'lessons/comments/comment', comment: comment
-    = render 'lessons/comments/form', comment: @comment
+      = render "lessons/comments/comment", comment: comment
+    = render "lessons/comments/form", comment: @comment
   .col-lg-4
     .card.mb-3
       .card-body
@@ -28,7 +28,5 @@
 
         %ul.list-group.mb-3
         - @lessons.each do |lesson|
-          %li.list-group-item{ class: ('list-group-item-success' if lesson == @lesson) }
-            = render 'lessons/lesson_preview', lesson: lesson
-
-    = render 'courses/certificate', course: @course
+          %li.list-group-item{ class: ("list-group-item-success" if lesson == @lesson) }
+            = render "lessons/lesson_preview", lesson: lesson

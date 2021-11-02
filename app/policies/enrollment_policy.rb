@@ -16,4 +16,8 @@ class EnrollmentPolicy < ApplicationPolicy
   def destroy?
     @user.has_role? :admin
   end
+
+  def certificate?
+    @record.course.completed? @record.student
+  end
 end

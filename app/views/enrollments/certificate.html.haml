@@ -1,34 +1,43 @@
 :css
+  html, body {
+    height: 100%;
+  }
+
   p {
     font-size: 28px;
   }
 
   .border-outside {
-    width: 1200px;
-    height: 850px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     padding: 20px;
     text-align: center;
     border: 10px solid #563d7c;
   }
 
   .border-inside {
-    width: 1150px;
-    height: 800px;
-    padding: 20px;
-    text-align: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+
     border: 5px solid #563d7c;
   }
 
   .title {
     font-weight: bold;
     font-size: 64px;
+    padding: 32px auto;
   }
 
   .student,
   .course {
     font-weight: bold;
     font-size: 36px;
-    font-family: "Gothic"
   }
 
   .certificate-info {
