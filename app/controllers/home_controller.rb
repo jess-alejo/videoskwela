@@ -3,11 +3,12 @@ class HomeController < ApplicationController
   before_action :authorize_user, except: %i[index privacy_policy]
 
   def index
+    courses = Course.includes(:author, image_attachment: :blob)
     @enrolled_courses ||= recent_enrolled_courses
-    @popular_courses = Course.published.popular
-    @top_rated_courses = Course.published.top_rated
-    @new_courses = Course.published.newly_added
-    @course_reviews = Enrollment.reviewed.latest_good_reviews
+    @popular_courses = courses.published.popular
+    @top_rated_courses = courses.published.top_rated
+    @new_courses = courses.published.newly_added
+    @course_reviews = Enrollment.includes([:course, :student]).reviewed.latest_good_reviews
     @popular_tags = Tag.order(course_tags_count: :desc).limit(10)
   end
 
@@ -24,7 +25,8 @@ class HomeController < ApplicationController
   def recent_enrolled_courses
     return [] unless current_user
 
-    Course.joins(:enrollments).where(enrollments: { student: current_user }).order(updated_at: :desc).take(4)
+    Course.joins(:enrollments).includes([:author, image_attachment: :blob])
+      .where(enrollments: { student: current_user }).order(updated_at: :desc).take(4)
   end
 
   def authorize_user

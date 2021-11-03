@@ -8,8 +8,9 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
-    @ransack_courses = Course.published.ransack(params[:courses_search], search_key: :courses_search)
-    @pagy, @courses = pagy(@ransack_courses.result.includes(:author, :course_tags))
+    courses = Course.includes([image_attachment: :blob])
+    @ransack_courses = courses.published.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
   def enrolled
