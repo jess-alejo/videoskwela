@@ -94,6 +94,8 @@ gem 'wicked'
 
 group :development do
   gem 'letter_opener', '~> 1.7'
+  gem 'bullet'
+  gem 'hirb', '~> 0.7.3'
 end
 
 # nested forms
