@@ -1,0 +1,5 @@
+%h2 What our students have to say
+.row.g-4.mb-3
+  - @course_reviews.each do |course_review|
+    .col-sm-6.col-md-3
+      = render "enrollments/course_review", course_review: course_review

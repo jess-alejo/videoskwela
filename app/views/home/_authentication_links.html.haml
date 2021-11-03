@@ -1,0 +1,29 @@
+.d-flex.flex-column.g-2.col-lg-3{ style: "gap: .5rem;" }
+  .row.g-2
+    .col-12.col-lg-6
+      = link_to "Register", new_user_registration_path,
+        class: "btn btn-primary btn-lg btn-block",
+        style: "width: 100%"
+
+    .col-12.col-lg-6
+      = link_to "Login", new_user_session_path,
+        class: "btn btn-primary btn-lg btn-block",
+        style: "width: 100%;"
+
+  = link_to user_google_oauth2_omniauth_authorize_path,
+    method: :post,
+    class: "btn btn-lg btn-google" do
+    Continue with
+    %i.fab.fa-google.fa-fw
+
+  = link_to user_github_omniauth_authorize_path,
+    method: :post,
+    class: "btn btn-lg btn-github" do
+    Continue with
+    %i.fab.fa-github.fa-fw
+
+  = link_to user_facebook_omniauth_authorize_path,
+    method: :post,
+    class: "btn btn-lg btn-facebook" do
+    Continue with
+    %i.fab.fa-facebook.fa-fw

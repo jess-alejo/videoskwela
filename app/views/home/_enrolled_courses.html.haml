@@ -1,0 +1,8 @@
+- if current_user
+  %h2 Continue Learning
+  .row.g-3
+    - @enrolled_courses.each do |course|
+      .col-sm-6.col-md-3
+        = render "courses/enrolled", course: course
+  .text-end.mb-5
+    = link_to "See more enrolled courses", enrolled_courses_path
