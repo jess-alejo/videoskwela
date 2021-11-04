@@ -1,6 +1,9 @@
 .card
-  - if @course.image.attached?
-    = image_tag @course.image, class: "card-img-top p-1", height: 200
+  - if course.image.attached?
+    = image_tag course.image,
+      class: "card-img-top p-1",
+      height: 200
+
   .card-body
     %h5.card-title
       .fa.fa-graduation-cap.me-1
@@ -45,7 +48,7 @@
               .badge.bg-info
                 = tag.name
 
-    = render "courses/certificate", course: course
+    = render "courses/certificate", course: course if current_user.enrolled? course
 
   - if policy(course).edit?
     .card-footer.bg-white

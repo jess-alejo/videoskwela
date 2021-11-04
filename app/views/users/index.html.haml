@@ -1,4 +1,4 @@
-- page_title 'Users'
+- page_title "Users"
 
 %h1.h3
   Users:
@@ -7,21 +7,21 @@
     Users:
     = @users.size
 
-= search_form_for @q, class: 'row g-2 py-3' do |f|
+= search_form_for @q, class: "row g-2 py-3" do |f|
   .col-auto
-    = f.search_field :email_cont, class: 'form-control', placeholder: 'Email...'
+    = f.search_field :email_cont, class: "form-control", placeholder: "Email..."
   .col-auto
-    = f.submit class: 'btn btn-primary me-1'
-    = link_to users_path, class: 'btn btn-secondary' do
+    = f.submit class: "btn btn-primary me-1"
+    = link_to users_path, class: "btn btn-secondary" do
       .fa.fa-sync
 
 .table-responsive
   %table.table.table-bordered
     %thead
       %tr
-        %th= sort_link(@q, :id, 'ID')
-        %th= sort_link(@q, :email, 'Email')
-        %th= sort_link(@q, :created_at,'Created At')
+        %th= sort_link(@q, :id, "ID")
+        %th= sort_link(@q, :email, "Email")
+        %th= sort_link(@q, :created_at, "Created At")
         %th Sign In Count
         %th Current Sign In At
         %th Last Sign In At

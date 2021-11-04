@@ -34,12 +34,15 @@ class EnrollmentsController < ApplicationController
 
   # POST /enrollments or /enrollments.json
   def create
-    if @course.price > 0
-      redirect_to new_course_enrollment_path(@course), alert: 'You can not access paid courses yet'
-    else
-      current_user.enroll!(@course, @course.price)
-      redirect_to course_path(@course), notice: 'You are now enrolled'
-    end
+    current_user.enroll!(@course, @course.price)
+    redirect_to course_path(@course), notice: 'You are now enrolled'
+
+    # if @course.price > 0
+    #   redirect_to new_course_enrollment_path(@course), alert: 'You can not access paid courses yet'
+    # else
+    #   current_user.enroll!(@course, @course.price)
+    #   redirect_to course_path(@course), notice: 'You are now enrolled'
+    # end
   end
 
   # PATCH/PUT /enrollments/1 or /enrollments/1.json

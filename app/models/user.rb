@@ -93,6 +93,20 @@ class User < ApplicationRecord
     user
   end
 
+  def calculate_enrollment_expenses
+    update_column :enrollment_expenses, enrollments.sum(:price)
+    update_balance
+  end
+
+  def calculate_course_income
+    update_column :course_income, courses.sum(:income)
+    update_balance
+  end
+
+  def update_balance
+    update_column :balance, (course_income - enrollment_expenses)
+  end
+
   private
 
   def must_have_role

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update]
 
   def index
-    @q = User.ransack(params[:q])
+    @q = User.includes([:roles, :roles_users]).ransack(params[:q])
     @pagy, @users = pagy(@q.result(distinct: true).order(updated_at: :desc))
     authorize @users
   end

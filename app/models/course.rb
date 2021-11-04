@@ -94,4 +94,9 @@ class Course < ApplicationRecord
     course_ids = CourseTag.where(tag_id: tags.ids).pluck(:course_id).uniq
     Course.where(id: course_ids - [id])
   end
+
+  def calculate_income
+    update_column :income, enrollments.sum(:price)
+    author.calculate_course_income
+  end
 end

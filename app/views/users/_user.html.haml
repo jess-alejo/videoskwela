@@ -1,7 +1,7 @@
 .card
   .card-header
     .d-flex.justify-content-between.align-items-center
-      = link_to user_path(user), class: 'text-decoration-none text-reset' do
+      = link_to user_path(user), class: "text-decoration-none text-reset" do
         .fa.fa-user.me-1
         = user.email
       - if user.online?
@@ -71,4 +71,22 @@
             - user.roles.each do |role|
               .badge.bg-info
                 = role.name
-          = link_to 'Edit', edit_user_path(user), class: 'btn btn-warning btn-sm py-0' if policy(user).edit?
+          = link_to "Edit", edit_user_path(user),
+            class: "btn btn-warning btn-sm py-0" if policy(user).edit?
+
+  .card-footer
+    %dl.row
+      %dt.col-sm-3
+        Course Income
+      %dd.col-sm-9
+        = user.course_income
+
+      %dt.col-sm-3
+        Enrollment Expenses
+      %dd.col-sm-9
+        = user.course_income
+
+      %dt.col-sm-3
+        Balance
+      %dd.col-sm-9
+        = user.balance
