@@ -36,4 +36,8 @@ class CoursePolicy < ApplicationPolicy
   def approve?
     @user&.has_role?(:admin)
   end
+
+  def certificate?
+    @user&.enrolled? course
+  end
 end

@@ -48,7 +48,7 @@
               .badge.bg-info
                 = tag.name
 
-    = render "courses/certificate", course: course if current_user.enrolled? course
+    = render "courses/certificate", course: course if policy(course).certificate?
 
   - if policy(course).edit?
     .card-footer.bg-white
