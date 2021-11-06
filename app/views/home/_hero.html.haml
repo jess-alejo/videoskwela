@@ -1,0 +1,18 @@
+.bg-primary
+  .container
+    .row.align-items-center
+      .col-xl-5.col-lg-6.col-md-12
+        .py-5.py-lg-0
+          %h1.text-white.display-4.fw-bold
+            Welcome to Videoskwela
+          %p.text-white-50.mb-4.lead
+            Hand-picked Instructor and expertly crafted courses, designed for the modern students and entrepreneur.
+
+          .p-4
+          = render "search_courses"
+
+          .py-4
+            = render "authentication_links" unless current_user
+
+      .col-xl-7.col-lg-6.col-md-12.text-lg-end.text-center
+        = image_tag("/hero_image.png", alt: "", class: "img-fluid")
