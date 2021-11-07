@@ -1,28 +1,30 @@
-.card-group.mb-5
-  .card.card-body
-    %h1
-      .fa.fa-graduation-cap
-    = Course.published.count
-    online courses
-    .row
-    Explore a variety of fresh topics
-  .card.card-body
-    %h1
-      .fa.fa-chalkboard-teacher
-    = Course.distinct(:user_id).count
-    expert instructor
-    .row
-    Find the right instructor for you
-  .card.card-body
-    %h1
-      .fa.fa-user-graduate
-    = Enrollment.distinct(:student_id).count
-    active learners
-    .row
-    Join the knowledge sharing community
-  .card.card-body
-    %h1
-      .fa.fa-infinity
-    Lifetime access
-    .row
-    Learn on your schedule
+.bg-white
+  .container
+    .card-group.mb-5
+      .card-body.border-light
+        %h1
+          .fa.fa-graduation-cap
+        = Course.published.count
+        online courses
+        .row
+        Explore a variety of fresh topics
+      .card-body
+        %h1
+          .fa.fa-chalkboard-teacher
+        = Course.distinct(:user_id).count
+        expert instructor
+        .row
+        Find the right instructor for you
+      .card-body
+        %h1
+          .fa.fa-user-graduate
+        = Enrollment.distinct(:student_id).count
+        active learners
+        .row
+        Join the knowledge sharing community
+      .card-body
+        %h1
+          .fa.fa-infinity
+        Lifetime access
+        .row
+        Learn on your schedule

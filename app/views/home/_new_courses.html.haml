@@ -1,8 +1,9 @@
-%h2 New Courses
-.row.g-4.mb-3
-  - @new_courses.each do |course|
-    .col-sm-6.col-md-3
-      = render "courses/course", course: course
-.mb-5.text-end
-  = link_to "See more recent courses",
-    courses_path(courses_search: { s: "created_at desc" })
+.container
+  %h2 New Courses
+  .row.g-4.mb-3
+    - @new_courses.each do |course|
+      .col-sm-6.col-md-3
+        = render "courses/course", course: course
+  .mb-5.text-end
+    = link_to "See more recent courses",
+      courses_path(courses_search: { s: "created_at desc" })

@@ -1,8 +1,9 @@
-%h2 Popular Courses
-.row.g-4.mb-3
-  - @popular_courses.each do |course|
-    .col-sm-6.col-md-3
-      = render "courses/course", course: course
-.text-end.mb-5
-  = link_to "See more popular courses",
-    courses_path(courses_search: { s: "enrollments_count desc" })
+.container
+  %h2 Popular Courses
+  .row.g-4.mb-3
+    - @popular_courses.each do |course|
+      .col-sm-6.col-md-3
+        = render "courses/course", course: course
+  .text-end.mb-5
+    = link_to "See more popular courses",
+      courses_path(courses_search: { s: "enrollments_count desc" })

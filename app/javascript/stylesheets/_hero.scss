@@ -1,0 +1,17 @@
+.bg-hero {
+  background-color: #9e8de1;
+
+  .container {
+    max-width: 1199px;
+  }
+}
+
+.hero-image {
+  /* The image used */
+  background-image: url("/hero_image.png");
+  height: auto;
+  background-position: top right;
+  background-repeat: no-repeat;
+  // background-size: cover;
+  // color: white;
+}

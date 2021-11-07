@@ -1,6 +1,7 @@
-%h2 Popular Topics
-.d-flex.g-5.mb-5
-  - @popular_tags.each do |tag|
-    = link_to courses_path(courses_search: { course_tags_tag_id_eq: tag.id }),
-      class: "btn btn-info btn-sm me-1 mb-2" do
-      = tag.name
+.container
+  %h2 Popular Topics
+  .d-flex.g-5.mb-5
+    - @popular_tags.each do |tag|
+      = link_to courses_path(courses_search: { course_tags_tag_id_eq: tag.id }),
+        class: "btn btn-info btn-sm me-1 mb-2" do
+        = tag.name
