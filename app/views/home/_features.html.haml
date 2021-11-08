@@ -1,0 +1,41 @@
+.bg-white.py-4
+  .container
+    .row
+      .col-md-6.col-lg-3
+        .card-body
+          %i.fa.fa-graduation-cap.fa-3x.text-warning
+          .d-block.mt-2
+            .fs-5
+              = Course.published.count
+              online courses
+            %p
+              Explore a variety of fresh topics
+
+      .col-md-6.col-lg-3
+        .card-body
+          %i.fa.fa-3x.text-info.fa-chalkboard-teacher
+          .d-block.mt-2
+            .fs-5
+              = Course.distinct(:user_id).count
+              expert instructor
+            %p
+              Find the right instructor for you
+
+      .col-md-6.col-lg-3
+        .card-body
+          %i.fa.fa-user-graduate.fa-3x.text-success
+          .d-block.mt-2
+            .fs-5
+              = Enrollment.distinct(:student_id).count
+              active learners
+            %p
+              Join the knowledge sharing community
+
+      .col-md-6.col-lg-3
+        .card-body
+          %i.fa.fa-infinity.fa-3x.text-danger
+          .d-block.mt-2
+            .fs-5
+              Lifetime access
+            %p
+              Learn on your schedule
