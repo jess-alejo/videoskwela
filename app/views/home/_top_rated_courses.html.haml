@@ -1,9 +1,10 @@
-.container
-  %h2 Top Rated Courses
+.container.mb-5
+  .pb-3
+    %h3 Top Rated Courses
   .row.g-4.mb-3
     - @top_rated_courses.each do |course|
       .col-sm-6.col-md-3
         = render "courses/course", course: course
-  .text-end.mb-5
+  .text-end
     = link_to "See more top rated courses",
       courses_path(courses_search: { s: "average_rating desc" })
