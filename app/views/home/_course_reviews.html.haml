@@ -1,7 +1,7 @@
 .container.mb-5
   .pb-3
     %h3 What our students have to say
-  .row.g-4.mb-3
+  .row.row-cols-1.row-cols-md-2.row-cols-lg-4.g-3.mb-3
     - @course_reviews.each do |course_review|
-      .col-sm-6.col-md-3
+      .col
         = render "enrollments/course_review", course_review: course_review

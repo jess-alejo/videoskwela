@@ -1,9 +1,9 @@
 .container.mb-5
   .pb-3
     %h3 Top Rated Courses
-  .row.g-4.mb-3
+  .row.row-cols-1.row-cols-md-2.row-cols-lg-4.g-3.mb-3
     - @top_rated_courses.each do |course|
-      .col-sm-6.col-md-3
+      .col
         = render "courses/course", course: course
   .text-end
     = link_to "See more top rated courses",

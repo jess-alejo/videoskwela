@@ -2,9 +2,9 @@
   .container.mb-5
     .pb-3
       %h3 Continue Learning
-    .row.g-3
+    .row.row-cols-1.row-cols-md-2.row-cols-lg-4.g-3.mb-3
       - @enrolled_courses.each do |course|
-        .col-sm-6.col-md-3
+        .col
           = render "courses/enrolled", course: course
     .text-end
       = link_to "See more enrolled courses", enrolled_courses_path
