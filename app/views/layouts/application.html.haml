@@ -1,24 +1,28 @@
 !!!
-%html{ lang: 'en' }
+%html{ lang: "en" }
   %head
-    %meta{:charset => 'utf-8' }
+    %meta{ charset: "utf-8" }
     %title
       = content_for?(:title) ? yield(:title) : "Videoskwela"
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
-    %meta{description: 'Online learning and skill sharing platform'}
-    %meta{keywords: 'online education, course platform, video tutorials, udemy clone'}
-    %meta{author: 'Jess Alejo'}
-    -# = favicon_link_tag 'favicon.ico'
+    %meta{ content: "width=device-width,initial-scale=1", name: "viewport" }
+    %meta{ description: "Online learning and skill sharing platform" }
+    %meta{ keywords: "online education, course platform, video tutorials" }
+    %meta{ author: "Jess Alejo" }
+    = favicon_link_tag "favicon.ico"
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    = render 'layouts/google_analytics' if Rails.env.production?
+    = stylesheet_link_tag "application", media: "all",
+      "data-turbolinks-track": "reload"
+
+    = stylesheet_pack_tag "application", media: "all",
+      "data-turbolinks-track": "reload"
+
+    = javascript_pack_tag "application", "data-turbolinks-track": "reload"
+    = render "layouts/google_analytics" if Rails.env.production?
   %body
-    = render 'layouts/header'
+    = render "layouts/header"
 
     .container.mt-4
-      = render 'layouts/messages'
+      = render "layouts/messages"
       = yield
-    = render 'layouts/footer'
+    = render "layouts/footer"
