@@ -15,7 +15,7 @@ module Users
     end
 
     def failure
-      redirect_to root_path, "Failure. Please try again"
+      redirect_to root_path, alert: "We were unable to authenticate you using your selected provider. Please try again"
     end
 
     private
