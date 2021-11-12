@@ -1,15 +1,15 @@
-= render layout: 'courses/course_wizard/step' do
+= render layout: "courses/course_wizard/step" do
   = simple_form_for @course,
     url: course_course_wizard_path,
     method: :put do |f|
     #lessons
     = f.simple_fields_for :lessons do |lesson|
-      = render 'lesson_fields', f: lesson
+      = render "lesson_fields", f: lesson
 
     .form-actions.mb-3
-      = link_to_add_association f, :lessons, class: 'btn btn-primary me-2' do
+      = link_to_add_association f, :lessons, class: "btn btn-primary me-2" do
         %i.fa.fa-plus.fa-fw
         Add Lesson
 
     .form-actions
-      = f.button :submit, "Save & Continue", class: 'btn btn-primary'
+      = f.button :submit, "Save & Continue", class: "btn btn-primary"

@@ -35,4 +35,8 @@ module CourseCreatorHelper
     bg = previous_step?(step) ? "bg-success" : "bg-secondary"
     content_tag(:span, nil, class: "line #{bg}")
   end
+
+  def previous_path(step, course)
+    wizard_steps.index(step) == 0 ? course_path(course) : previous_wizard_path
+  end
 end
