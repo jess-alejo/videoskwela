@@ -38,6 +38,6 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def certificate?
-    @user&.enrolled? course
+    @user&.enrolled? @record
   end
 end
