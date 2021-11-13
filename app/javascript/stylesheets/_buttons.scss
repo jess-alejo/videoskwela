@@ -22,3 +22,24 @@
 .btn-facebook {
   @include button-theme(rgb(59, 89, 152))
 }
+
+.btn-circle.btn-xl {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.33;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
+}

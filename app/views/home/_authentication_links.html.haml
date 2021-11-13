@@ -10,23 +10,21 @@
         class: "btn btn-success btn-lg btn-block",
         style: "width: 100%;"
 
-  .row.row-cols-1.row-cols-lg-3.g-3
-    .col
-      = link_to user_google_oauth2_omniauth_authorize_path,
-        method: :post,
-        class: "btn btn-lg btn-google" do
-        Continue with
-        %i.fab.fa-google.fa-fw
-    .col
-      = link_to user_github_omniauth_authorize_path,
-        method: :post,
-        class: "btn btn-lg btn-github" do
-        Continue with
-        %i.fab.fa-github.fa-fw
+  .pt-4
+    %p.text-center.text-white.mb-3
+      OR LOGIN WITH
+      .d-flex.align-items-center.justify-content-around
+        = link_to user_google_oauth2_omniauth_authorize_path,
+          method: :post,
+          class: "btn btn-xl btn-circle btn-google" do
+          %i.fab.fa-google
 
-    .col
-      = link_to user_facebook_omniauth_authorize_path,
-        method: :post,
-        class: "btn btn-lg btn-facebook" do
-        Continue with
-        %i.fab.fa-facebook.fa-fw
+        = link_to user_github_omniauth_authorize_path,
+          method: :post,
+          class: "btn btn-circle btn-xl btn-github" do
+          %i.fab.fa-github
+
+        = link_to user_facebook_omniauth_authorize_path,
+          method: :post,
+          class: "btn btn-circle btn-xl btn-facebook" do
+          %i.fab.fa-facebook
