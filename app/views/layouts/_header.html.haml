@@ -1,12 +1,42 @@
-%nav.navbar.navbar-expand-lg
+%nav.navbar.navbar-expand-lg.bg-hero.navbar-dark
   .container-fluid.px-0
-    %a.navbar-brand.d-flex{:href => root_url}
+    %a.navbar-brand.d-flex{ href: root_url }
       = image_tag("logo.svg", alt: "Videoskwela logo", width: 34, height: 32)
       %span.d-inline.ms-2
         Videoskwela
-    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
+
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
       %span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
+
+    .collapse.navbar-collapse{ id: "navbarSupportedContent" }
+      %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        %li.nav-item
+          = link_to root_path, class: "nav-link" do
+            .fa.fa-home.fa-fw
+            Home
+        %li.nav-item
+          = link_to tags_path, class: "nav-link" do
+            .fa.fa-tags.fa-fw
+            Tags
+        %li.nav-item
+          = link_to courses_path, class: "nav-link" do
+            .fa.fa-graduation-cap
+            Courses
+
+        /SEARCH IN NAVBAR
+        - if @ransack_courses.present?
+          = search_form_for @ransack_courses, as: :courses_search,
+            url: courses_path,
+            class: "d-flex ms-2" do |f|
+            = f.search_field :title_cont,
+              class: "form-control form-control-sm me-1",
+              placeholder: "Find a course",
+              autocomplete: :off,
+              "aria-label" => "Search"
+
+            %button.btn.btn-primary{ type: "submit" }
+              %span.fa.fa-search{ "aria-hidden" => "true" }
+
       - if current_user
         %ul.navbar-nav.me-2.mb-2.mb-lg-0
           %li.nav-item
@@ -103,7 +133,32 @@
               = link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do
                 .fa.fa-sign-out-alt.me-1
                 %b Sign out
-      -# - else
-      -#   %ul.navbar-nav.mr-right
-      -#     %li.nav-item= link_to 'Sign Up', new_user_registration_path, class: 'nav-link'
-      -#     %li.nav-item= link_to 'Log In', new_user_session_path, class: 'nav-link'
+
+      - else
+        %ul.navbar-nav.me-2.mb-2.mb-lg-0.align-items-center
+          %li.nav-item
+            = link_to "Register", new_user_registration_path, class: "nav-link me-2"
+          %li.nav-item
+            = link_to "Login", new_user_session_path, class: "nav-link me-2"
+
+          %li.nav-item
+            = link_to user_google_oauth2_omniauth_authorize_path,
+              method: :post,
+              title: "google",
+              class: "btn btn-circle btn-google" do
+              %i.fab.fa-google.fs-6
+
+          %li.nav-item
+            = link_to user_github_omniauth_authorize_path,
+              method: :post,
+              title: "github",
+              class: "btn btn-circle btn-github mx-2" do
+              %i.fab.fa-github.fs-6
+
+          %li.nav-item
+            = link_to user_facebook_omniauth_authorize_path,
+              method: :post,
+              title: "facebook",
+              class: "btn btn-circle btn-facebook nav-item" do
+              %i.fab.fa-facebook.fs-6
+
