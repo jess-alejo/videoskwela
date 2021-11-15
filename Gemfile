@@ -54,6 +54,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Gems we required for this application
 gem 'font-awesome-sass', '~> 5.15', '>= 5.15.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'simple_form', '~> 5.1'
@@ -92,12 +94,6 @@ gem 'omniauth-facebook', '~> 4.0'
 # multi-step form
 gem 'wicked'
 
-group :development do
-  gem 'letter_opener', '~> 1.7'
-  gem 'bullet'
-  gem 'hirb', '~> 0.7.3'
-end
-
 # nested forms
 gem 'cocoon', '~> 1.2', '>= 1.2.15'
 
@@ -105,3 +101,17 @@ gem 'cocoon', '~> 1.2', '>= 1.2.15'
 gem 'wicked_pdf', '~> 2.1' # PDF for Ruby on Rails
 gem 'wkhtmltopdf-binary', group: :development
 gem 'wkhtmltopdf-heroku', group: :production
+
+group :development do
+  gem 'letter_opener', '~> 1.7'
+  gem 'bullet'
+  gem 'hirb', '~> 0.7.3'
+end
+
+group :development, :test do
+  # Pry is a runtime developer console and IRB alternative with powerful introspection capabilities.
+  gem 'pry', '~> 0.14.1'
+
+  # rspec-rails is a testing framework for Rails 5+.
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
+end
