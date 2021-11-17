@@ -1,7 +1,11 @@
 class TagsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
+
   def index
-    @tags = Tag.order(course_tags_count: :desc)
-    authorize @tags
+    @tags = Tag.joins(:courses)
+    .where.not(course_tags_count: 0)
+    .where(courses: { workflow_state: :published })
+    .order(course_tags_count: :desc)
   end
 
   def create
