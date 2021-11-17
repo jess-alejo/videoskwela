@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :show
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_course, only: %i[show edit update destroy publish review approve analytics]
   before_action :set_tags
 
