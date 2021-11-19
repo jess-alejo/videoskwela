@@ -1,17 +1,18 @@
-.bg-hero.pt-5
-  .container.hero-image
+.hero
+  .container
     .row
-      .col-12.col-sm-6.align-items-center
-        .pt-5.pb-4
-          %h1.text-white.display-4.fw-bold
-            Welcome to Videoskwela
-          %p.text-white-50.mb-4.lead
-            Free courses curated by our community,
-            helping each other to learn
-            and making education accessible.
+      .col-lg-4
+        %h1.display-4.fw-bold
+          Welcome to Videoskwela
+        %p.mb-4.lead{ style: "opacity: .8" }
+          Free courses curated by our community,
+          helping each other to learn
+          and making education accessible.
 
-          .p-4
-          = render "search_courses"
+    .row
+      .col-lg-4
+        -# .p-4
+        -# = render "search_courses"
 
-          .py-4
-            = render "authentication_links" unless current_user
+        .py-4
+          = render "authentication_links" unless current_user

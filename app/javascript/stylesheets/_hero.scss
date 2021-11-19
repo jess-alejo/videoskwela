@@ -1,9 +1,35 @@
+.hero {
+  background-image: url("/students.jpg");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: -2;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(124, 111, 176, 0.8);
+  z-index: -1;
+}
+
 .bg-hero {
   background-color: #9e8de1;
-
-  .container {
-    width: 1020;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .hero-image {
