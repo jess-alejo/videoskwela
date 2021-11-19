@@ -1,5 +1,6 @@
-.hero
-  .container
+.hero-section
+  .hero-image
+  .container.hero-content
     .row
       .col-lg-4
         %h1.display-4.fw-bold
@@ -8,11 +9,6 @@
           Free courses curated by our community,
           helping each other to learn
           and making education accessible.
-
-    .row
-      .col-lg-4
-        -# .p-4
-        -# = render "search_courses"
 
         .py-4
           = render "authentication_links" unless current_user

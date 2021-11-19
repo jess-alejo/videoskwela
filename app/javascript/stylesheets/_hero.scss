@@ -1,43 +1,46 @@
-.hero {
-  background-image: url("/students.jpg");
-  height: 100vh;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+.hero-section {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 94vh;
   color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: -2;
-}
 
-.hero::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(124, 111, 176, 0.8);
-  z-index: -1;
-}
+  .hero-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background-image: url("/students.jpg");
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed;
+    z-index: -2;
+  }
 
-.bg-hero {
-  background-color: #9e8de1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+  .hero-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(124, 111, 176, 0.6);
+    z-index: -1;
+  }
 
-.hero-image {
-  /* The image used */
-  background-image: url("/hero_image.png");
-  height: 600px;
-  background-position: top right;
-  background-repeat: no-repeat;
-  background-size: cover;
-  // color: white;
+  .hero-content {
+    .hero-section .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      position: relative;
+    }
+  }
 }

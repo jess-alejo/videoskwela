@@ -1,8 +1,12 @@
 .navbar-default {
   background-color: #fff;
-  box-shadow: 0 1px 3px rgba(3,0,71,.09);
+  box-shadow: 0 1px 3px rgba(3, 0, 71, 0.09);
 }
 
 .navbar {
-  padding: .625rem 1rem;
+  padding: 0.625rem 1rem;
+}
+
+.navbar-bg {
+  background-color: #9e8de1;
 }
