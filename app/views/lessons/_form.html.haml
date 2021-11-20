@@ -8,6 +8,8 @@
   = f.input :content, as: :rich_text_area
   = f.hidden_field :course
 
+  = f.input :video_url
+
   - if @lesson.video
     .badge
       = @lesson.video.filename
@@ -53,4 +55,4 @@
       input_html: { class: 'form-control'}
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-primary'

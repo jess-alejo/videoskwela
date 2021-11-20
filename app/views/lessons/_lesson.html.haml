@@ -3,7 +3,7 @@
     %video(oncontextmenu="return false;" controls="true" poster="#{url_for @lesson.video_thumbnail}" width="100%" preload="metadata" controlslist="nodownlaod")
       %source{ src: rails_blob_url(@lesson.video), type: "#{@lesson.video.content_type}" }
   - else
-    .bg-light.mb-4.h-100.w-100{ style: "position: absolute;" }
+    = lesson_video_iframe(@lesson)
 
 .card.mb-3
   .card-header

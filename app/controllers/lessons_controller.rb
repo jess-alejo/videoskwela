@@ -14,7 +14,7 @@ class LessonsController < ApplicationController
     authorize @lesson
     current_user.view_lesson(@lesson)
     @lessons = @course.lessons.rank(:row_order)
-    @comments = @lesson.comments
+    @comments = @lesson.comments.includes(:user)
     @comment = Comment.new(user: current_user, lesson: @lesson)
   end
 
@@ -102,6 +102,6 @@ class LessonsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def lesson_params
-    params.require(:lesson).permit(:title, :content, :row_order_position, :video, :video_thumbnail)
+    params.require(:lesson).permit(:title, :content, :row_order_position, :video_url, :video, :video_thumbnail)
   end
 end
