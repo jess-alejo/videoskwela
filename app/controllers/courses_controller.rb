@@ -8,21 +8,26 @@ class CoursesController < ApplicationController
   # GET /courses or /courses.json
   def index
     @ransack_path = courses_path
-    courses = Course.includes([image_attachment: :blob])
-    @ransack_courses = courses.published.ransack(params[:courses_search], search_key: :courses_search)
+    courses = Course.published.includes([image_attachment: :blob])
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
   def enrolled
     @ransack_path = enrolled_courses_path
-    courses = Course.joins(:enrollments).where(enrollments: { student: current_user })
+    courses = Course.joins(:enrollments)
+                    .where(enrollments: { student: current_user })
+                    .includes(image_attachment: :blob)
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
   def pending_review
     @ransack_path = pending_review_courses_path
-    courses = Course.joins(:enrollments).merge(Enrollment.pending_review).where(enrollments: { student: current_user })
+    courses = Course.joins(:enrollments)
+                    .merge(Enrollment.pending_review)
+                    .where(enrollments: { student: current_user })
+                    .includes(image_attachment: :blob)
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
     render :index
@@ -31,6 +36,7 @@ class CoursesController < ApplicationController
   def authored
     @ransack_path = authored_courses_path
     courses = Course.where(author: current_user)
+                    .includes(image_attachment: :blob)
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
     render :index
@@ -65,7 +71,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to @course, notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -79,7 +85,7 @@ class CoursesController < ApplicationController
     authorize @course
     if @course.destroy
       respond_to do |format|
-        format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+        format.html { redirect_to courses_url, notice: "Course was successfully destroyed." }
         format.json { head :no_content }
       end
     else
