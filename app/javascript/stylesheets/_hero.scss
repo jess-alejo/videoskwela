@@ -3,7 +3,7 @@
   position: relative;
   align-items: center;
   justify-content: center;
-  height: 94vh;
+  height: 600px;
   color: #fff;
 
   .hero-image {
@@ -14,7 +14,7 @@
     right: 0;
     display: flex;
     background-image: url("/students.jpg");
-    height: 100vh;
+    height: 600px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -39,7 +39,6 @@
     .hero-section .hero-content {
       display: flex;
       flex-direction: column;
-      align-self: center;
       position: relative;
     }
   }
