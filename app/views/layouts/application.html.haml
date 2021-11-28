@@ -17,6 +17,10 @@
     = stylesheet_pack_tag "application", media: "all",
       "data-turbolinks-track": "reload"
 
+    %link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}
+    %link{:href => "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap", :rel => "stylesheet"}
+    %link{:href => "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap", :rel => "stylesheet"}
+
     = javascript_pack_tag "application", "data-turbolinks-track": "reload"
     = render "layouts/google_analytics" if Rails.env.production?
   %body
