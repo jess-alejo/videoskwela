@@ -11,4 +11,7 @@
 @import "./footer";
 @import "./buttons";
 @import "./theme.scss";
-@import "./hero"
+@import "./hero";
+
+@import "utils/mixins";
+@import "utils/shared";
