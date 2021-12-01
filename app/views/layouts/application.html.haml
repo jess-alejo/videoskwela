@@ -17,7 +17,7 @@
     = stylesheet_pack_tag "application", media: "all",
       "data-turbolinks-track": "reload"
 
-    = render "fonts"
+    = render "layouts/head"
 
     %link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}
     %link{:href => "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap", :rel => "stylesheet"}
@@ -26,7 +26,7 @@
     = javascript_pack_tag "application", "data-turbolinks-track": "reload"
     = render "layouts/google_analytics" if Rails.env.production?
   %body
-    = render "layouts/header"
+    = render "layouts/navbar"
 
     .container.mt-4
       = render "layouts/messages"
