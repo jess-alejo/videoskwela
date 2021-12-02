@@ -25,7 +25,8 @@
 
     = javascript_pack_tag "application", "data-turbolinks-track": "reload"
     = render "layouts/google_analytics" if Rails.env.production?
-  %body
+  %body{ "data-bs-padding" => "15px" }
+    = render "layouts/modal"
     = render "layouts/navbar"
 
     .container.mt-4

@@ -29,3 +29,45 @@ import "./trix-overrides"
 import "./youtube"
 import "./videos"
 import "./selectize"
+
+// theme related
+// require( 'datatables.net-bs4' )();
+// require( 'datatables.net-autofill-bs4' )();
+// require( 'datatables.net-buttons-bs4' )();
+// require( 'datatables.net-colreorder-bs4' )();
+// require( 'datatables.net-responsive-bs4' )();
+// require( 'datatables.net-rowreorder-bs4' )();
+// require( 'datatables.net-searchPanes' )();
+// require( 'datatables.net-select-bs4' )();
+// import "datatables.net"
+import "datatables"
+// require("datatables.net")
+// import "datatables.net-autofill"
+// import "datatables.net-bs4"
+// require("datatables.net-buttons")()
+// require("datatables.net-colreorder")()
+// require("datatables.net-keytable")()
+// import "moment"
+
+import "autosize"
+import "bootstrap-notify"
+import "bootstrap-submenu"
+
+import "./js/common"
+import "./js/scripts"
+import "./js/base/loader"
+
+
+
+// jquery.validate
+// autoComplete
+// baguetteBox
+// Chart
+// input-spinner
+// jquery.barrating
+// jquery.contextMenu
+// moment-with-locales
+// movecontent
+// OverlayScrollbars
+// quill.active
+// singleimageupload

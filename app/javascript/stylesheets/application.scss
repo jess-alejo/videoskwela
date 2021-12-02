@@ -1,20 +1,30 @@
-@import "variables";
+// @import "variables";
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
-@import "bootstrap/scss/bootstrap";
+// @import "bootstrap/scss/bootstrap";
 
 @import "selectize/dist/css/selectize";
 @import "selectize/dist/css/selectize.default";
 
-@import "./custom.scss";
-@import "./progresses";
-@import "./footer";
-@import "./buttons";
-@import "./theme.scss";
-@import "./hero";
+// @import "./custom.scss";
+// @import "./progresses";
+// @import "./footer";
+// @import "./buttons";
+// @import "./theme.scss";
+// @import "./hero";
 
+// Applying the theme
+// utilities
 @import "./utils/mixins";
 @import "./utils/shared";
 
-// applying theme
-@import "./font/CS-Interface/style.css"
+// font tags
+@import "./font/CS-Interface/style.css";
+
+// vendor styles
+@import "bootstrap/scss/bootstrap";
+@import "./css/vendor/OverlayScrollbars.min.css";
+
+// template based styles
+@import "./css/styles.css";
+@import "./css/main.css";
