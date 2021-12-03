@@ -1,5 +1,14 @@
 !!!
-%html{ lang: "en" }
+%html{ lang: "en", "data-footer"=>"true",
+  "data-placement"=>"vertical",
+  "data-behaviour" => "unpinned",
+  "data-layout"=>"boxed",
+  "data-radius"=>"rounded",
+  "data-color"=>"dark-purple",
+  "data-navcolor"=>"default",
+  "data-show"=>"true",
+  "data-dimension"=>"desktop",
+  "data-menu-animate" => "hidden" }
   %head
     %meta{ charset: "utf-8" }
     %title
@@ -24,5 +33,4 @@
     = render "layouts/google_analytics" if Rails.env.production?
 
   %body{"data-bs-padding" => "15px", :style => ""}
-    %p JESS ALEJO
     = render "layouts/theme"
