@@ -885,6 +885,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@glidejs/glide@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@glidejs/glide/-/glide-3.5.2.tgz#7012c5920ecf202bbda44d8526fc979984b6dd54"
+  integrity sha512-7jGciNJ2bQ4eZLSNlSZ+VAyW63kALf420CvkEpK4lEsUfWJq9odqimci0YCiyNyMUFB+pWHwLYyNc57dijYsCg==
+
 "@npmcli/move-file@^1.0.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@npmcli/move-file/-/move-file-1.1.2.tgz#1a82c3e372f7cae9253eb66d72543d6b8685c674"
@@ -1542,10 +1547,10 @@ bootstrap-submenu@^3.0.1:
   resolved "https://registry.yarnpkg.com/bootstrap-submenu/-/bootstrap-submenu-3.0.1.tgz#688d0f5cafa51f5f01571c00bd8ed1e95e5ae2cc"
   integrity sha512-n7uXhiTuCptXMaSyTh5mki6jmVeA/WDE0EKRb+YZyxrMrVI/oEz9wlMmRGGJ2+mtFr4FYoEPvPOf5v75VZ/1Bg==
 
-bootstrap@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.0.2.tgz#aff23d5e0e03c31255ad437530ee6556e78e728e"
-  integrity sha512-1Ge963tyEQWJJ+8qtXFU6wgmAVj9gweEjibUdbmcCEYsn38tVwRk8107rk2vzt6cfQcRr3SlZ8aQBqaD8aqf+Q==
+bootstrap@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.0.1.tgz#e7939d599119dc818a90478a2a299bdaff037e09"
+  integrity sha512-Fl79+wsLOZKoiU345KeEaWD0ik8WKRI5zm0YSPj2oF1Qr+BO7z0fco6GbUtqjoG1h4VI89PeKJnMsMMVQdKKTw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -3249,13 +3254,6 @@ get-value@^2.0.3, get-value@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
-
-glide@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/glide/-/glide-0.2.0.tgz#d62da76bae30ebc2e488da231e4214105bbd73d2"
-  integrity sha1-1i2na64w68LkiNojHkIUEFu9c9I=
-  dependencies:
-    tween.js "~0.14.0"
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -6789,11 +6787,6 @@ turbolinks@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/turbolinks/-/turbolinks-5.2.0.tgz#e6877a55ea5c1cb3bb225f0a4ae303d6d32ff77c"
   integrity sha512-pMiez3tyBo6uRHFNNZoYMmrES/IaGgMhQQM+VFF36keryjb5ms0XkVpmKHkfW/4Vy96qiGW3K9bz0tF5sK9bBw==
-
-tween.js@~0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/tween.js/-/tween.js-0.14.0.tgz#22df2bd40947e3421901b9fd091bfa43829e2668"
-  integrity sha1-It8r1AlH40IZAbn9CRv6Q4KeJmg=
 
 type-fest@^0.20.2:
   version "0.20.2"

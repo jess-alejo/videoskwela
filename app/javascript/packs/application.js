@@ -12,23 +12,24 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-import 'bootstrap/dist/js/bootstrap'
+// import 'bootstrap/dist/js/bootstrap'
 require("stylesheets/application.scss")
-require("trix")
-require("@rails/actiontext")
 
-import "chartkick/chart.js"
-import "cocoon-js-vanilla"
+// require("trix")
+// require("@rails/actiontext")
 
-require("jquery")
-require("jquery-ui-dist/jquery-ui")
-require("selectize")
+// import "chartkick/chart.js"
+// import "cocoon-js-vanilla"
 
-import "./lesson-sortable"
-import "./trix-overrides"
-import "./youtube"
-import "./videos"
-import "./selectize"
+// require("jquery")
+// require("jquery-ui-dist/jquery-ui")
+// require("selectize")
+
+// import "./lesson-sortable"
+// import "./trix-overrides"
+// import "./youtube"
+// import "./videos"
+// import "./selectize"
 
 // // theme related
 // // require( 'datatables.net-bs4' )();
@@ -57,7 +58,7 @@ import "./selectize"
 
 // // import "./js/common"
 // // import "./js/scripts"
-// // import "./js/base/loader"
+// import "./js/base/loader"
 
 
 
@@ -130,7 +131,8 @@ import "./selectize"
 
 // <!-- Vendor Scripts Start -->
 import "./js/vendor/jquery-3.5.1.min"
-import "./js/vendor/bootstrap.bundle.min"
+// import "./js/vendor/bootstrap.bundle.min"
+import 'bootstrap/dist/js/bootstrap'
 import "./js/vendor/OverlayScrollbars.min"
 import "./js/vendor/autoComplete.min"
 import "./js/vendor/clamp.min"
@@ -152,8 +154,8 @@ import "./js/vendor/jquery.barrating.min"
 
 // <!-- Template Base Scripts Start -->
 import "./js/base/helpers"
-import "./js/base/globals"
-import "./js/base/nav"
+// import "./js/base/globals"
+// import {Nav} from "./js/base/nav"
 import "./js/base/search"
 import "./js/base/settings"
 // <!-- Template Base Scripts End -->

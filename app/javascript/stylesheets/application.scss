@@ -3,8 +3,8 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 // @import "bootstrap/scss/bootstrap";
 
-@import "selectize/dist/css/selectize";
-@import "selectize/dist/css/selectize.default";
+// @import "selectize/dist/css/selectize";
+// @import "selectize/dist/css/selectize.default";
 
 // @import "./custom.scss";
 // @import "./progresses";
@@ -22,9 +22,15 @@
 @import "./font/CS-Interface/style.css";
 
 // vendor styles
-@import "bootstrap/scss/bootstrap";
+// @import "bootstrap/scss/bootstrap";
+@import "./css/vendor/bootstrap.min.css";
 @import "./css/vendor/OverlayScrollbars.min.css";
-@import "./css/vendor/glide.core.min.css";
+
+// @import "./css/vendor/glide.core.min.css";
+// Required Core Stylesheet
+@import "@glidejs/glide/src/assets/sass/glide.core";
+// Optional Theme Stylesheet
+@import "@glidejs/glide/src/assets/sass/glide.theme";
 
 // template based styles
 @import "./css/styles.css";
