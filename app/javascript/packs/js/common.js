@@ -1,4 +1,3 @@
-import { OverlayScrollbars } from "../js/vendor/OverlayScrollbars.min"
 /**
  *
  * Common.js
@@ -8,7 +7,9 @@ import { OverlayScrollbars } from "../js/vendor/OverlayScrollbars.min"
  *
  */
 
-class Common {
+
+import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle"
+export class Common {
   get options() {
     return {};
   }
@@ -94,7 +95,7 @@ class Common {
   // Scrollspy implementation for interface content
   _initScrollspy() {
     if (typeof ScrollSpy !== 'undefined') {
-      const scrollSpy = new ScrollSpy();
+      const scrollSpy = new bootstrap.ScrollSpy();
     }
   }
 
@@ -106,6 +107,7 @@ class Common {
         scrollbars: {autoHide: 'leave', autoHideDelay: 600},
         overflowBehavior: {x: 'hidden', y: 'scroll'},
       });
+      console.log("JEA")
       OverlayScrollbars(document.querySelectorAll('.scroll-horizontal'), {
         scrollbars: {autoHide: 'leave', autoHideDelay: 600},
         overflowBehavior: {x: 'scroll', y: 'hidden'},

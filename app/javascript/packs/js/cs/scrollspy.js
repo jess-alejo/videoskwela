@@ -9,7 +9,7 @@
  *
  */
 
-class ScrollSpy {
+export class ScrollSpy {
   get options() {
     return {
       spyDropdownId: 'scrollSpyDropdown',

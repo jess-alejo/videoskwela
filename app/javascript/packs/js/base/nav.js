@@ -1,5 +1,5 @@
 import { Globals } from "./globals"
-import { Collapse, Dropdown } from "bootstrap"
+import * as bootstrap from "bootstrap"
 /**
  *
  * Nav
@@ -160,7 +160,7 @@ class Nav {
         element.setAttribute('data-role', 'button');
         element.setAttribute('aria-expanded', false);
         element.nextElementSibling.classList.add('collapse');
-        new Collapse(element.nextElementSibling, {
+        new bootstrap.Collapse(element.nextElementSibling, {
           toggle: false,
         });
         if (element.getAttribute('data-bs-target')) {
@@ -201,7 +201,7 @@ class Nav {
     this.notificationDropdown && this.notificationDropdown.dispose();
 
     if (document.querySelector('.user-container .user')) {
-      this.userDropdown = new Dropdown(document.querySelector('.user-container .user'), {
+      this.userDropdown = new bootstrap.Dropdown(document.querySelector('.user-container .user'), {
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom'};
           return newPopperConfig;
@@ -209,7 +209,7 @@ class Nav {
       });
     }
     if (document.querySelector('.language-switch-container .language-button')) {
-      this.languageDropdown = new Dropdown(document.querySelector('.language-switch-container .language-button'), {
+      this.languageDropdown = new bootstrap.Dropdown(document.querySelector('.language-switch-container .language-button'), {
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom'};
           return newPopperConfig;
@@ -217,7 +217,7 @@ class Nav {
       });
     }
     if (document.querySelector('.menu-icons .notification-button')) {
-      this.notificationDropdown = new Dropdown(document.querySelector('.menu-icons .notification-button'), {
+      this.notificationDropdown = new bootstrap.Dropdown(document.querySelector('.menu-icons .notification-button'), {
         reference: document.querySelector('.menu-icons'),
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom'};
@@ -368,7 +368,7 @@ class Nav {
     this.notificationDropdown && this.notificationDropdown.dispose();
 
     if (document.querySelector('.user-container .user')) {
-      this.userDropdown = new Dropdown(document.querySelector('.user-container .user'), {
+      this.userDropdown = new bootstrap.Dropdown(document.querySelector('.user-container .user'), {
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom-end'};
           return newPopperConfig;
@@ -377,7 +377,7 @@ class Nav {
     }
 
     if (document.querySelector('.language-switch-container .language-button')) {
-      this.languageDropdown = new Dropdown(document.querySelector('.language-switch-container .language-button'), {
+      this.languageDropdown = new bootstrap.Dropdown(document.querySelector('.language-switch-container .language-button'), {
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom-end'};
           return newPopperConfig;
@@ -386,7 +386,7 @@ class Nav {
     }
 
     if (document.querySelector('.menu-icons .notification-button')) {
-      this.notificationDropdown = new Dropdown(document.querySelector('.menu-icons .notification-button'), {
+      this.notificationDropdown = new bootstrap.Dropdown(document.querySelector('.menu-icons .notification-button'), {
         popperConfig: function (defaultBsPopperConfig) {
           var newPopperConfig = {placement: 'bottom-end'};
           return newPopperConfig;
@@ -680,7 +680,7 @@ class Nav {
   _collapseMenu() {
     document.querySelectorAll('#menu>li>a').forEach((element) => {
       if (element.getAttribute('data-clicked') === 'true') {
-        const collapse = Collapse.getInstance(element.nextElementSibling);
+        const collapse = bootstrap.Collapse.getInstance(element.nextElementSibling);
         if (collapse) {
           collapse.hide();
         }
@@ -693,7 +693,7 @@ class Nav {
   _unCollapseMenu() {
     document.querySelectorAll('#menu>li>a').forEach((element) => {
       if (element.getAttribute('data-clicked') === 'true') {
-        const collapse = Collapse.getInstance(element.nextElementSibling);
+        const collapse = bootstrap.Collapse.getInstance(element.nextElementSibling);
         if (collapse) {
           collapse.show();
         }
@@ -706,7 +706,7 @@ class Nav {
     const dropdownElementList = [].slice.call(document.querySelectorAll('#menu>li>ul [data-bs-toggle="dropdown"]'));
     dropdownElementList.map(function (dropdownToggleEl) {
       if (dropdownToggleEl.classList.contains('show')) {
-        const dropdown = Dropdown.getInstance(dropdownToggleEl);
+        const dropdown = bootstrap.Dropdown.getInstance(dropdownToggleEl);
         if (dropdown) {
           dropdown.hide();
         }
