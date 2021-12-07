@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index privacy_policy]
-  before_action :authorize_user, except: %i[index privacy_policy]
+  skip_before_action :authenticate_user!, only: %i[index privacy_policy starter]
+  before_action :authorize_user, except: %i[index privacy_policy starter]
 
   def index
     courses = Course.includes(:author, image_attachment: :blob)
@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @popular_courses = courses.published.popular
     @top_rated_courses = courses.published.top_rated
     @new_courses = courses.published.newly_added
-    @course_reviews = Enrollment.includes([:course, :student]).reviewed.latest_good_reviews
+    @course_reviews = Enrollment.includes(%i[course student]).reviewed.latest_good_reviews
     @popular_tags = Tag.order(course_tags_count: :desc).limit(10)
   end
 
@@ -19,6 +19,10 @@ class HomeController < ApplicationController
   def analytics; end
 
   def privacy_policy; end
+
+  def starter
+    render layout: false
+  end
 
   private
 

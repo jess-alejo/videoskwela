@@ -1,0 +1,535 @@
+!!!
+%html{ lang: "en",
+  "data-footer"=>"true",
+  "data-placement"=>"horizontal",
+  "data-behaviour" => "unpinned",
+  "data-layout"=>"boxed",
+  "data-radius"=>"rounded",
+  "data-color"=>"dark-purple",
+  "data-navcolor"=>"default",
+  "data-show"=>"true",
+  "data-dimension"=>"desktop",
+  "data-menu-animate" => "hidden",
+  "data-override" => "{\"attributes\": {\"placement\": \"horizontal\",\"layout\": \"boxed\" }, \"showSettings\":false, \"storagePrefix\": \"starter-project\"}"
+  }
+  %head
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}/
+    %title Acorn Admin Template | Horizontal Menu
+    %meta{:content => "An empty page with a boxed horizontal layout.", :name => "description"}/
+    / Favicon Tags Start
+    %link{:href => "img/favicon/apple-touch-icon-57x57.png", :rel => "apple-touch-icon-precomposed", :sizes => "57x57"}/
+    %link{:href => "img/favicon/apple-touch-icon-114x114.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}/
+    %link{:href => "img/favicon/apple-touch-icon-72x72.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}/
+    %link{:href => "img/favicon/apple-touch-icon-144x144.png", :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}/
+    %link{:href => "img/favicon/apple-touch-icon-60x60.png", :rel => "apple-touch-icon-precomposed", :sizes => "60x60"}/
+    %link{:href => "img/favicon/apple-touch-icon-120x120.png", :rel => "apple-touch-icon-precomposed", :sizes => "120x120"}/
+    %link{:href => "img/favicon/apple-touch-icon-76x76.png", :rel => "apple-touch-icon-precomposed", :sizes => "76x76"}/
+    %link{:href => "img/favicon/apple-touch-icon-152x152.png", :rel => "apple-touch-icon-precomposed", :sizes => "152x152"}/
+    %link{:href => "img/favicon/favicon-196x196.png", :rel => "icon", :sizes => "196x196", :type => "image/png"}/
+    %link{:href => "img/favicon/favicon-96x96.png", :rel => "icon", :sizes => "96x96", :type => "image/png"}/
+    %link{:href => "img/favicon/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}/
+    %link{:href => "img/favicon/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %link{:href => "img/favicon/favicon-128.png", :rel => "icon", :sizes => "128x128", :type => "image/png"}/
+    %meta{:content => " ", :name => "application-name"}/
+    %meta{:content => "#FFFFFF", :name => "msapplication-TileColor"}/
+    %meta{:content => "img/favicon/mstile-144x144.png", :name => "msapplication-TileImage"}/
+    %meta{:content => "img/favicon/mstile-70x70.png", :name => "msapplication-square70x70logo"}/
+    %meta{:content => "img/favicon/mstile-150x150.png", :name => "msapplication-square150x150logo"}/
+    %meta{:content => "img/favicon/mstile-310x150.png", :name => "msapplication-wide310x150logo"}/
+    %meta{:content => "img/favicon/mstile-310x310.png", :name => "msapplication-square310x310logo"}/
+    / Favicon Tags End
+    / Font Tags Start
+
+    = render "layouts/font_tags"
+
+    -# %link{:href => "font/CS-Interface/style.css", :rel => "stylesheet"}/
+    / Font Tags End
+    / Vendor Styles Start
+    -# %link{:href => "css/vendor/bootstrap.min.css", :rel => "stylesheet"}/
+    -# %link{:href => "css/vendor/OverlayScrollbars.min.css", :rel => "stylesheet"}/
+    / Vendor Styles End
+    / Template Base Styles Start
+    -# %link{:href => "css/styles.css", :rel => "stylesheet"}/
+    / Template Base Styles End
+    -# %link{:href => "css/main.css", :rel => "stylesheet"}/
+
+    = stylesheet_pack_tag "application", "data-turbolinks-track" => "reload", media: "all"
+    = javascript_pack_tag "application", "data-turbolinks-track" => "reload"
+    -# %script{:src => "js/base/loader.js"}
+  %body
+    #root
+      #nav.nav-container.d-flex
+        .nav-content.d-flex
+          / Logo Start
+          .logo.position-relative
+            %a{:href => "index.html"}
+              / Logo can be added directly
+              / <img src="img/logo/logo-white.svg" alt="logo" />
+              / Or added via css to provide different ones for different color themes
+              .img
+          / Logo End
+          / Language Switch Start
+          .language-switch-container
+            %button.btn.btn-empty.language-button.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown"} EN
+            .dropdown-menu
+              %a.dropdown-item{:href => "#"} DE
+              %a.dropdown-item.active{:href => "#"} EN
+              %a.dropdown-item{:href => "#"} ES
+          / Language Switch End
+          / User Menu Start
+          .user-container.d-flex
+            %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
+              %img.profile{:alt => "profile", :src => "img/profile/profile-9.webp"}/
+              .name Lisa Jackson
+            .dropdown-menu.dropdown-menu-end.user-menu.wide
+              .row.mb-3.ms-0.me-0
+                .col-12.ps-1.mb-2
+                  .text-extra-small.text-primary ACCOUNT
+                .col-6.ps-1.pe-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} User Info
+                    %li
+                      %a{:href => "#"} Preferences
+                    %li
+                      %a{:href => "#"} Calendar
+                .col-6.pe-1.ps-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} Security
+                    %li
+                      %a{:href => "#"} Billing
+              .row.mb-1.ms-0.me-0
+                .col-12.p-1.mb-2.pt-2
+                  .text-extra-small.text-primary APPLICATION
+                .col-6.ps-1.pe-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} Themes
+                    %li
+                      %a{:href => "#"} Language
+                .col-6.pe-1.ps-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"} Devices
+                    %li
+                      %a{:href => "#"} Storage
+              .row.mb-1.ms-0.me-0
+                .col-12.p-1.mb-3.pt-3
+                  .separator-light
+                .col-6.ps-1.pe-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"}
+                        %i.me-2{"data-acorn-icon" => "help", "data-acorn-size" => "17"}
+                        %span.align-middle Help
+                    %li
+                      %a{:href => "#"}
+                        %i.me-2{"data-acorn-icon" => "file-text", "data-acorn-size" => "17"}
+                        %span.align-middle Docs
+                .col-6.pe-1.ps-1
+                  %ul.list-unstyled
+                    %li
+                      %a{:href => "#"}
+                        %i.me-2{"data-acorn-icon" => "gear", "data-acorn-size" => "17"}
+                        %span.align-middle Settings
+                    %li
+                      %a{:href => "#"}
+                        %i.me-2{"data-acorn-icon" => "logout", "data-acorn-size" => "17"}
+                        %span.align-middle Logout
+          / User Menu End
+          / Icons Menu Start
+          %ul.list-unstyled.list-inline.text-center.menu-icons
+            %li.list-inline-item
+              %a{"data-bs-target" => "#searchPagesModal", "data-bs-toggle" => "modal", :href => "#"}
+                %i{"data-acorn-icon" => "search", "data-acorn-size" => "18"}
+            %li.list-inline-item
+              %a#pinButton.pin-button{:href => "#"}
+                %i.unpin{"data-acorn-icon" => "lock-on", "data-acorn-size" => "18"}
+                %i.pin{"data-acorn-icon" => "lock-off", "data-acorn-size" => "18"}
+            %li.list-inline-item
+              %a#colorButton{:href => "#"}
+                %i.light{"data-acorn-icon" => "light-on", "data-acorn-size" => "18"}
+                %i.dark{"data-acorn-icon" => "light-off", "data-acorn-size" => "18"}
+            %li.list-inline-item
+              %a.notification-button{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-target" => "#notifications", "data-bs-toggle" => "dropdown", :href => "#"}
+                .position-relative.d-inline-flex
+                  %i{"data-acorn-icon" => "bell", "data-acorn-size" => "18"}
+                  %span.position-absolute.notification-dot.rounded-xl
+              #notifications.dropdown-menu.dropdown-menu-end.wide.notification-dropdown.scroll-out
+                .scroll
+                  %ul.list-unstyled.border-last-none
+                    %li.mb-3.pb-3.border-bottom.border-separator-light.d-flex
+                      %img.me-3.sw-4.sh-4.rounded-xl.align-self-center{:alt => "...", :src => "img/profile/profile-1.webp"}/
+                      .align-self-center
+                        %a{:href => "#"} Joisse Kaycee just sent a new comment!
+                    %li.mb-3.pb-3.border-bottom.border-separator-light.d-flex
+                      %img.me-3.sw-4.sh-4.rounded-xl.align-self-center{:alt => "...", :src => "img/profile/profile-2.webp"}/
+                      .align-self-center
+                        %a{:href => "#"} New order received! It is total $147,20.
+                    %li.mb-3.pb-3.border-bottom.border-separator-light.d-flex
+                      %img.me-3.sw-4.sh-4.rounded-xl.align-self-center{:alt => "...", :src => "img/profile/profile-3.webp"}/
+                      .align-self-center
+                        %a{:href => "#"} 3 items just added to wish list by a user!
+                    %li.pb-3.pb-3.border-bottom.border-separator-light.d-flex
+                      %img.me-3.sw-4.sh-4.rounded-xl.align-self-center{:alt => "...", :src => "img/profile/profile-6.webp"}/
+                      .align-self-center
+                        %a{:href => "#"} Kirby Peters just sent a new message!
+          / Icons Menu End
+          / Menu Start
+          .menu-container.flex-grow-1
+            %ul#menu.menu
+              %li
+                %a{:href => "Horizontal.html"}
+                  %i.icon{"data-acorn-icon" => "grid-2", "data-acorn-size" => "18"}
+                  %span.label Horizontal
+              %li
+                %a{:href => "Vertical.html"}
+                  %i.icon{"data-acorn-icon" => "grid-3", "data-acorn-size" => "18"}
+                  %span.label Vertical
+          / Menu End
+          / Mobile Buttons Start
+          .mobile-buttons-container
+            / Scrollspy Mobile Button Start
+            %a#scrollSpyButton.spy-button{"data-bs-toggle" => "dropdown", :href => "#"}
+              %i{"data-acorn-icon" => "menu-dropdown"}
+            / Scrollspy Mobile Button End
+            / Scrollspy Mobile Dropdown Start
+            #scrollSpyDropdown.dropdown-menu.dropdown-menu-end
+            / Scrollspy Mobile Dropdown End
+            / Menu Button Start
+            %a#mobileMenuButton.menu-button{:href => "#"}
+              %i{"data-acorn-icon" => "menu"}
+            / Menu Button End
+          / Mobile Buttons End
+        .nav-shadow
+      %main
+        .container
+          / Title and Top Buttons Start
+          .page-title-container
+            .row
+              / Title Start
+              .col-12.col-md-7
+                %h1#title.mb-0.pb-0.display-4 Horizontal Starter Page
+                %nav.breadcrumb-container.d-inline-block{"aria-label" => "breadcrumb"}
+                  %ul.breadcrumb.pt-0
+                    %li.breadcrumb-item
+                      %a{:href => "index.html"} Home
+              / Title End
+          / Title and Top Buttons End
+          / Content Start
+          .card.mb-2
+            .card-body.h-100 An empty page with a boxed horizontal layout.
+          / Content End
+      / Layout Footer Start
+      %footer
+        .footer-content
+          .container
+            .row
+              .col-12.col-sm-6
+                %p.mb-0.text-muted.text-medium Colored Strategies 2021
+              .col-sm-6.d-none.d-sm-block
+                %ul.breadcrumb.pt-0.pe-0.mb-0.float-end
+                  %li.breadcrumb-item.mb-0.text-medium
+                    %a.btn-link{:href => "https://1.envato.market/BX5oGy", :target => "_blank"} Review
+                  %li.breadcrumb-item.mb-0.text-medium
+                    %a.btn-link{:href => "https://1.envato.market/BX5oGy", :target => "_blank"} Purchase
+                  %li.breadcrumb-item.mb-0.text-medium
+                    %a.btn-link{:href => "https://acorn-html-docs.coloredstrategies.com/", :target => "_blank"} Docs
+      / Layout Footer End
+    / Theme Settings Modal Start
+    #settings.modal.fade.modal-right.scroll-out-negative{"aria-hidden" => "true", "aria-labelledby" => "settings", "data-bs-backdrop" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog.modal-dialog-scrollable.full{:role => "document"}
+        .modal-content
+          .modal-header
+            %h5.modal-title Theme Settings
+            %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+          .modal-body
+            .scroll-track-visible
+              #color.mb-5
+                %label.mb-3.d-inline-block.form-label Color
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-blue", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .blue-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT BLUE
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-blue", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .blue-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK BLUE
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-teal", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .teal-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT TEAL
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-teal", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .teal-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK TEAL
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-sky", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .sky-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT SKY
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-sky", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .sky-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK SKY
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-red", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .red-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT RED
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-red", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .red-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK RED
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-green", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .green-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT GREEN
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-green", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .green-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK GREEN
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-lime", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .lime-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT LIME
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-lime", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .lime-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK LIME
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-pink", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .pink-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT PINK
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-pink", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .pink-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK PINK
+                .row.d-flex.g-3.justify-content-between.flex-wrap.mb-3
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "light-purple", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .purple-light
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT PURPLE
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "color", "data-value" => "dark-purple", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow.color
+                      .purple-dark
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK PURPLE
+              #navcolor.mb-5
+                %label.mb-3.d-inline-block.form-label Override Nav Palette
+                .row.d-flex.g-3.justify-content-between.flex-wrap
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "navcolor", "data-value" => "default", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DEFAULT
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "navcolor", "data-value" => "light", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-secondary.figure-light.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle LIGHT
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "navcolor", "data-value" => "dark", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-muted.figure-dark.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle DARK
+              #placement.mb-5
+                %label.mb-3.d-inline-block.form-label Menu Placement
+                .row.d-flex.g-3.justify-content-between.flex-wrap
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "placement", "data-value" => "horizontal", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle HORIZONTAL
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "placement", "data-value" => "vertical", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.left
+                      .figure.figure-secondary.right
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle VERTICAL
+              #behaviour.mb-5
+                %label.mb-3.d-inline-block.form-label Menu Behaviour
+                .row.d-flex.g-3.justify-content-between.flex-wrap
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "behaviour", "data-value" => "pinned", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.left.large
+                      .figure.figure-secondary.right.small
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle PINNED
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "behaviour", "data-value" => "unpinned", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.left
+                      .figure.figure-secondary.right
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle UNPINNED
+              #layout.mb-5
+                %label.mb-3.d-inline-block.form-label Layout
+                .row.d-flex.g-3.justify-content-between.flex-wrap
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "layout", "data-value" => "fluid", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle FLUID
+                  %a.flex-grow-1.w-50.option.col{"data-parent" => "layout", "data-value" => "boxed", :href => "#"}
+                    .card.rounded-md.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom.small
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle BOXED
+              #radius.mb-5
+                %label.mb-3.d-inline-block.form-label Radius
+                .row.d-flex.g-3.justify-content-between.flex-wrap
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "radius", "data-value" => "rounded", :href => "#"}
+                    .card.rounded-md.radius-rounded.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle ROUNDED
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "radius", "data-value" => "standard", :href => "#"}
+                    .card.rounded-md.radius-regular.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle STANDARD
+                  %a.flex-grow-1.w-33.option.col{"data-parent" => "radius", "data-value" => "flat", :href => "#"}
+                    .card.rounded-md.radius-flat.p-3.mb-1.no-shadow
+                      .figure.figure-primary.top
+                      .figure.figure-secondary.bottom
+                    .text-muted.text-part
+                      %span.text-extra-small.align-middle FLAT
+    / Theme Settings Modal End
+    / Niches Modal Start
+    #niches.modal.fade.modal-right.scroll-out-negative{"aria-hidden" => "true", "aria-labelledby" => "niches", "data-bs-backdrop" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog.modal-dialog-scrollable.full{:role => "document"}
+        .modal-content
+          .modal-header
+            %h5.modal-title Niches
+            %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+          .modal-body
+            .scroll-track-visible
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Classic Dashboard
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/classic-dashboard.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-classic-dashboard.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-classic-dashboard.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-classic-dashboard.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Medical Assistant
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/medical-assistant.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-medical-assistant.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-medical-assistant.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-medical-assistant.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Service Provider
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/service-provider.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-service-provider.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-service-provider.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-service-provider.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Elearning Portal
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/elearning-portal.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-elearning-portal.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-elearning-portal.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-elearning-portal.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Ecommerce Platform
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/ecommerce-platform.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-ecommerce-platform.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-ecommerce-platform.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-ecommerce-platform.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+              .mb-5
+                %label.mb-2.d-inline-block.form-label Starter Project
+                .hover-reveal-buttons.position-relative.hover-reveal.cursor-default
+                  .position-relative.mb-3.mb-lg-5.rounded-sm
+                    %img.img-fluid.rounded-sm.lower-opacity.border.border-separator-light{:alt => "card image", :src => "https://acorn.coloredstrategies.com/img/page/starter-project.webp"}/
+                    .position-absolute.reveal-content.rounded-sm.absolute-center-vertical.text-center.w-100
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-html-starter-project.coloredstrategies.com/", :target => "_blank"}
+                        Html
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-laravel-starter-project.coloredstrategies.com/", :target => "_blank"}
+                        Laravel
+                      %a.btn.btn-primary.btn-sm.sw-10.sw-lg-12.d-block.mx-auto.my-1{:href => "https://acorn-dotnet-starter-project.coloredstrategies.com/", :target => "_blank"}
+                        \.Net5
+    / Niches Modal End
+    / Theme Settings & Niches Buttons Start
+    .settings-buttons-container
+      %button#settingsButton.btn.settings-button.btn-primary.p-0{"data-bs-target" => "#settings", "data-bs-toggle" => "modal", :type => "button"}
+        %span.d-inline-block.no-delay{"data-bs-delay" => "0", "data-bs-offset" => "0,3", "data-bs-placement" => "left", "data-bs-toggle" => "tooltip", :title => "Settings"}
+          %i.position-relative{"data-acorn-icon" => "paint-roller"}
+      %button#nichesButton.btn.settings-button.btn-primary.p-0{"data-bs-target" => "#niches", "data-bs-toggle" => "modal", :type => "button"}
+        %span.d-inline-block.no-delay{"data-bs-delay" => "0", "data-bs-offset" => "0,3", "data-bs-placement" => "left", "data-bs-toggle" => "tooltip", :title => "Niches"}
+          %i.position-relative{"data-acorn-icon" => "toy"}
+    / Theme Settings & Niches Buttons End
+    / Search Modal Start
+    #searchPagesModal.modal.fade.modal-under-nav.modal-search.modal-close-out{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header.border-0.p-0
+            %button.btn-close.btn.btn-icon.btn-icon-only.btn-foreground{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+          .modal-body.ps-5.pe-5.pb-0.border-0
+            %input#searchPagesInput.form-control.form-control-xl.borderless.ps-0.pe-0.mb-1.auto-complete{:autocomplete => "off", :type => "text"}/
+          .modal-footer.border-top.justify-content-start.ps-5.pe-5.pb-3.pt-3.border-0
+            %span.text-alternate.d-inline-block.m-0.me-3
+              %i.text-alternate.align-middle.me-1{"data-acorn-icon" => "arrow-bottom", "data-acorn-size" => "15"}
+              %span.align-middle.text-medium Navigate
+            %span.text-alternate.d-inline-block.m-0.me-3
+              %i.text-alternate.align-middle.me-1{"data-acorn-icon" => "arrow-bottom-left", "data-acorn-size" => "15"}
+              %span.align-middle.text-medium Select
+    / Search Modal End
+    = render "layouts/scripts"

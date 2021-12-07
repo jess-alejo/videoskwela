@@ -31,7 +31,16 @@ require("stylesheets/application.scss")
 // import "./videos"
 // import "./selectize"
 
+
 // // theme related
+
+// import acorn icons
+import "../icon/acorn-icons"
+import "../icon/acorn-icons-interface"
+import "../icon/acorn-icons-learning"
+
+
+
 // // require( 'datatables.net-bs4' )();
 // // require( 'datatables.net-autofill-bs4' )();
 // // require( 'datatables.net-buttons-bs4' )();

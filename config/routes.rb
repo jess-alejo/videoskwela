@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # devise_for :users
-  devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: "users/omniauth_callbacks" }
 
   resources :lessons
   resources :enrollments do
@@ -42,19 +42,20 @@ Rails.application.routes.draw do
       end
     end
     resources :enrollments, only: %i[new create]
-    # resources :course_wizard, module: 'courses'
-    resources :course_wizard, controller: 'courses/course_wizard'
+    # resources :course_wizard, module: "courses"
+    resources :course_wizard, controller: "courses/course_wizard"
   end
 
   resources :users, only: %i[index show edit update]
   resources :youtube, only: :show
   resources :tags, only: %i[index create destroy]
 
-  get 'privacy_policy', to: 'home#privacy_policy'
-  get 'activity',       to: 'home#activity'
-  get 'analytics',      to: 'home#analytics'
+  get "privacy_policy", to: "home#privacy_policy"
+  get "activity",       to: "home#activity"
+  get "analytics",      to: "home#analytics"
+  get "starter",        to: "home#starter"
 
-  root 'home#index'
+  root "home#index"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
