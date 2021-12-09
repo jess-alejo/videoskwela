@@ -1,0 +1,72 @@
+.col-12.col-lg-auto.h-100.pb-4.px-4.pt-0.p-lg-0
+  .sw-lg-70.min-h-100.bg-foreground.d-flex.justify-content-center.align-items-center.shadow-deep.py-5.full-page-content-right-border
+    .sw-lg-50.px-5
+      .sh-11
+        %a.navbar-brand.d-flex{ href: root_url }
+          = image_tag("logo-light.svg", alt: "Videoskwela logo", width: 32, height: 32)
+          %span.d-inline.ms-2.text-light
+            Videoskwela
+      .mb-5
+        %h2.cta-1.mb-0.text-primary Welcome,
+        %h2.cta-1.text-primary let's get started!
+      .mb-5
+        %p.h6 Please use your credentials to login.
+        %p.h6
+          If you are not a member, please
+          = succeed "." do
+            = link_to "register", new_user_registration_path
+
+      %div
+        = form_for(resource, as: resource_name, url: session_path(resource_name), class: "tooltip-end-bottom") do |f|
+          .mb-3.filled.form-group.tooltip-end-top
+            %i{"data-acorn-icon" => "email"}
+            = f.email_field :email,
+              required: true,
+              autofocus: true,
+              placeholder: "Email",
+              class: "form-control"
+
+          .mb-3.filled.form-group.tooltip-end-top
+            %i{"data-acorn-icon" => "lock-off"}
+            = f.password_field :password,
+              required: true,
+              placeholder: "Password",
+              class: "form-control pe-7"
+            = link_to "Forgot?", new_user_password_path, class: "text-small position-absolute t-3 e-3"
+
+          - if devise_mapping.rememberable?
+            .mb-3.filled.form-group.tooltip-end-top
+              .form-check
+                = f.check_box :remember_me, as: :boolean, class: "form-check-input"
+                = f.label :remember_me, class: "form-check-label boolean optional"
+
+          .form-actions.mb-3
+            = f.submit "Login", class: 'btn btn-lg btn-primary'
+
+
+      .small
+        - if devise_mapping.confirmable? && controller_name != 'confirmations'
+          %p.h6
+            Didn't receive confirmation instructions?
+            = succeed "." do
+              = link_to "Resend", new_confirmation_path(resource_name)
+
+      %hr
+      .mb-3
+        %p.h6  Or sign in with
+
+      .d-flex.justify-content-between
+        = link_to user_google_oauth2_omniauth_authorize_path,
+          method: :post,
+          title: "google" do
+          %i.mb-3.d-inline-block.text-primary.icon-24.bi-google
+
+        = link_to user_github_omniauth_authorize_path,
+          method: :post,
+          title: "github" do
+          %i.mb-3.d-inline-block.text-primary.icon-24.bi-github
+
+        = link_to user_facebook_omniauth_authorize_path,
+          method: :post,
+          title: "facebook" do
+          %i.mb-3.d-inline-block.text-primary.icon-24.bi-facebook

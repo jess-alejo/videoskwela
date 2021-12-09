@@ -9,7 +9,7 @@
 // @import "./custom.scss";
 // @import "./progresses";
 // @import "./footer";
-// @import "./buttons";
+@import "./buttons";
 // @import "./theme.scss";
 // @import "./hero";
 
@@ -35,3 +35,5 @@
 // template based styles
 @import "./css/styles.css";
 @import "./css/main.css";
+
+@import "./overwrites"
