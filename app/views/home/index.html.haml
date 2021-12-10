@@ -16,39 +16,16 @@
   .d-flex.justify-content-between
     %h2.small-title Popular
     .mt-n1
-      %button.btn.btn-icon.btn-icon-end.btn-background.pe-0.pt-0{:type => "button"}
+      = link_to courses_path(courses_search: { s: "enrollments_count desc" }),
+        class: "btn btn-icon btn-icon-end btn-background pe-0 pt-0" do
         %span View All
-        %svg.acorn-icons.acorn-icons-chevron-right.undefined{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-          %path{:d => "M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"}
+        %i{ data: { "acorn-icon" => "chevron-right" } }
+
   .row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-3.mb-5
-    .col
-      .card.h-100
-        %img.card-img-top.sh-22{:alt => "card image", :src => "img/course/small/course-1.webp"}/
-        .card-body
-          %h5.heading.mb-0
-            %a.body-link.stretched-link{:href => "Course.Detail.html"} Advanced React Web Developer Course
-        .card-footer.border-0.pt-0
-          .mb-2
-            .br-wrapper.br-theme-cs-icon.d-inline-block
-              .br-wrapper
-                %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                  %option{:value => "1"} 1
-                  %option{:value => "2"} 2
-                  %option{:value => "3"} 3
-                  %option{:value => "4"} 4
-                  %option{:value => "5"} 5
-                .br-widget.br-readonly
-                  %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                  %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                  %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                  %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                  %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                  .br-current-rating 5
-            .text-muted.d-inline-block.text-small.align-text-top (114)
-          .card-text.mb-0
-            .text-muted.text-overline.text-small
-              %del $ 24.60
-            %div $ 18.90
+    - @popular_courses.each do |course|
+      .col
+        = render "courses/course_card", course: course
+
     .col
       .card.h-100
         %img.card-img-top.sh-22{:alt => "card image", :src => "img/course/small/course-2.webp"}/

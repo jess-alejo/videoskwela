@@ -1,56 +1,36 @@
-.card
+.card.h-100
   - if course.image.attached?
     = image_tag course.image,
-      class: "card-img-top p-1",
-      height: 200
+      class: "card-img-top sh-22",
+      alt: "course image"
+
 
   .card-body
-    %h5.card-title
-      .fa.fa-graduation-cap.me-1
-      = course.title
+    %h5.heading.mb-0
+      = link_to course_path(course), class: "body-link stretched-link" do
+        = course.title.truncate(50)
+  .card-footer.border-0.pt-0
+    .mb-2
+      .br-wrapper.br-theme-cs-icon.d-inline-block
+        .br-wrapper
+          %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+            %option{:value => "1"} 1
+            %option{:value => "2"} 2
+            %option{:value => "3"} 3
+            %option{:value => "4"} 4
+            %option{:value => "5"} 5
+          .br-widget.br-readonly
+            %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+            %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+            %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+            %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+            %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+            .br-current-rating
+              = course.average_rating
 
-    .row.g-0
-      .col-sm-9.col-xl-12
-        = simple_format(course.short_description)
-    %table.table.table-sm.mt-2.mb-4
-      %tbody
-        %tr
-          %th Language
-          %td= course.language
-        %tr
-          %th Level
-          %td= course.level
-        %tr
-          %th Price
-          %td
-            .d-grid
-              = price_caption(course)
-              .mt-2
-                = enrollment_button(course)
-        %tr
-          %th Author
-          %td= link_to course.author, user_path(course.author)
-
-        - if current_user && (policy(course).author? || current_user.has_role?(:admin))
-          %tr
-            %th Status
-            %td
-              = badge_for_course_status(course)
-              - if policy(course).author? && course.can_publish?
-                = link_to 'Publish', publish_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1'
-              - if current_user.has_role? :admin
-                = link_to 'Review', review_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_review?
-                = link_to 'Approve', approve_course_path(course), method: :patch, class: 'btn btn-primary btn-sm ms-1' if course.can_approve?
-        %tr
-          %th Tags
-          %td
-            - course.tags.each do |tag|
-              .badge.bg-info
-                = tag.name
-
-    = render "courses/certificate", course: course if policy(course).certificate?
-
-  - if policy(course).edit?
-    .card-footer.bg-white
-      = link_to 'Add lesson', new_course_lesson_path(course), class: 'btn btn-sm btn-primary' if policy(course).author?
-      = link_to 'Edit', course_course_wizard_index_path(course), class: 'btn btn-sm btn-outline-warning'
+      .text-muted.d-inline-block.text-small.align-text-top (114)
+    .card-text.mb-0
+      .text-muted.text-overline.text-small
+        %del
+          = number_to_currency(course.price)
+      %div FREE
