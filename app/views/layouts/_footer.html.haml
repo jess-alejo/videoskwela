@@ -1,17 +1,18 @@
-%footer.footer.bg-light.p-4
-  .container
-    .row
-      .col-md-4
-        Copyright © 2021 Videoskwela.
-        .row
-        .fa.fa-envelope.me-1
-        = mail_to 'jess.programmer@gmail.com'
-        .row
-      .col-md-4
-        = link_to 'Privacy policy', privacy_policy_path
-        .row
-        Terms and conditions
-      .col-md-4
-        About us
-        .row
-        = link_to 'Teach on Videoskwela', new_course_path
+/ Layout Footer Start
+%footer
+  .footer-content
+    .container
+      .row
+        .col-12.col-sm-6
+          %p.mb-0.text-muted.text-medium Videoskwela 2021
+        .col-sm-6.d-none.d-sm-block
+          %ul.breadcrumb.pt-0.pe-0.mb-0.float-end
+            %li.breadcrumb-item.mb-0.text-medium
+              = link_to 'Privacy Policy', privacy_policy_path, target: "_blank", class: "btn-link"
+            %li.breadcrumb-item.mb-0.text-medium
+              = mail_to 'jess.programmer@gmail.com', class: "btn-link" do
+                .fa.fa-envelope.me-1
+                Email Me
+            %li.breadcrumb-item.mb-0.text-medium
+              = link_to 'Curate a course', new_course_path, target: "_blank", class: "btn-link"
+/ Layout Footer End
