@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     courses = Course.includes(:author, image_attachment: :blob)
     @enrolled_courses ||= recent_enrolled_courses
     @popular_courses = courses.published.popular
-    @top_rated_courses = courses.published.top_rated
+    @trending_courses = courses.published.top_rated
     @new_courses = courses.published.newly_added
     @course_reviews = Enrollment.includes(%i[course student]).reviewed.latest_good_reviews
     @popular_tags = Tag.order(course_tags_count: :desc).limit(10)

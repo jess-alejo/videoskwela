@@ -4,31 +4,34 @@
       class: "card-img-top sh-22",
       alt: "course image"
 
-
   .card-body
     %h5.heading.mb-0
-      = link_to course_path(course), class: "body-link stretched-link" do
-        = course.title.truncate(50)
+      = link_to course_path(course), class: "body-link stretched-link course-title" do
+        = course.title
   .card-footer.border-0.pt-0
     .mb-2
       .br-wrapper.br-theme-cs-icon.d-inline-block
+        - stars = course.average_rating.to_i
         .br-wrapper
-          %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+          %select.rating{:autocomplete => "off", "data-initial-rating" => "#{stars}", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
             %option{:value => "1"} 1
             %option{:value => "2"} 2
             %option{:value => "3"} 3
             %option{:value => "4"} 4
             %option{:value => "5"} 5
           .br-widget.br-readonly
-            %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-            %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-            %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-            %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-            %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+            %a{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#", class: class_names({"br-selected" => stars >= 1, "br-current" => stars == 1}) }
+            %a{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#", class: class_names({"br-selected" => stars >= 2, "br-current" => stars == 2})}
+            %a{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#", class: class_names({"br-selected" => stars >= 3, "br-current" => stars == 3})}
+            %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#", class: class_names({"br-selected" => stars >= 4, "br-current" => stars == 4})}
+            %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#", class: class_names({"br-selected" => stars >= 5, "br-current" => stars == 5})}
             .br-current-rating
               = course.average_rating
 
-      .text-muted.d-inline-block.text-small.align-text-top (114)
+      .text-muted.d-inline-block.text-small.align-text-top
+        \(
+        = course.enrollments_count
+        \)
     .card-text.mb-0
       .text-muted.text-overline.text-small
         %del

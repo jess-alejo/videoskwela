@@ -5,3 +5,11 @@
   background-position: top;
   background-attachment: fixed;
 }
+
+.course-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
