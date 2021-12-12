@@ -1,74 +1,646 @@
 - page_title @course.title
-
-%nav{"aria-label" => "breadcrumb"}
-  %ol.breadcrumb
-    %li.breadcrumb-item
-      = link_to 'Courses', courses_path
-    %li.breadcrumb-item.active{"aria-current" => "page"}
-      = @course.title
-
-.row
-  .col-lg-8.order-1.order-lg-0.mb-3
-    .rounded.border.mb-4.p-4
-      %h3.card-title
-        .fa.fa-graduation-cap.me-1
-        = @course.title
-
-      %ul.list-group.list-group-flush.border-none
-        %li.list-group-item.border-bottom-0
-          .far.fa-clock.me-1
-          Created
-          = @course.created_at
-        %li.list-group-item.border-bottom-0
-          .far.fa-clock.me-1
-          Last updated
-          = @course.created_at
-        %li.list-group-item.border-bottom-0
-          .fa.fa-globe.me-1
-          = @course.language
-        %li.list-group-item
-          .fa.fa-signal.me-1
-          = @course.level
-
-      .card-body
-        = @course.description
-    %h4
-      .fa.fa-tasks.me-1
-      = pluralize(@course.lessons_count, 'Lesson')
-      .float-end
-        .fa.fa-spinner
-        = number_to_percentage(@course.progress(current_user), precision: 0)
-
-    %ul.list-group.mb-4.lesson-sortable
-      - if policy(@course).author?
-        - @lessons.each do |lesson|
-          = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
-            .list-group-item.d-flex
-              .fa.fa-sort.all-scroll.align-self-center.me-4{:style => "cursor: grab;"}
-              = render 'lessons/lesson_preview', lesson: lesson
-      - else
-        - @lessons.each do |lesson|
-          .list-group-item.d-flex
-            = render 'lessons/lesson_preview', lesson: lesson
-
-    - if @course_reviews.size.positive?
-      %h4
-        .fa.fa-comment.me-1
-        = pluralize(@course_reviews.size, 'Reviews')
-
-      %ul.list-group
-        - @course_reviews.each do |course_review|
-          = render 'enrollments/course_review', course_review: course_review
-
-
-    - if @similar_courses.size.positive?
-      %h4
-        .fa.fa-graduation-cap.me-1
-        Similar Courses
-      .course-container
-        - @similar_courses.each do |course|
-          = render 'courses/course', course: course
-
-  .col-lg-4.order-0.order-lg-1.mb-3
-    .sticky-top
-      = render 'course_card', course: @course
+.container
+  / Title and Top Buttons Start
+  .page-title-container
+    .row
+      / Title Start
+      .col-12.col-sm-6
+        %h1#title.mb-0.pb-0.display-4
+          = @course.title
+        %nav.breadcrumb-container.d-inline-block{"aria-label" => "breadcrumb"}
+          %ul.breadcrumb.pt-0
+            %li.breadcrumb-item
+              = link_to "Home", root_path
+            %li.breadcrumb-item
+              = link_to "Courses", courses_path
+      / Title End
+      / Top Buttons Start
+      .col-12.col-sm-6.d-flex.align-items-start.justify-content-end
+        / Start Now Start
+        %a.btn.btn-primary.btn-icon.btn-icon-start.w-100.w-sm-auto{:href => "Misc.Player.html"}
+          %i{ data: { "acorn-icon" => "chevron-right" } }
+          %span Start Now
+        / Start Now End
+      / Top Buttons End
+  / Title and Top Buttons End
+  / Content Start
+  .row
+    / Left Side Start
+    .col-12.col-xxl-8.mb-5
+      / Preview Start
+      %h2.small-title Preview
+      .card.mb-5
+        .card-img-top
+          .plyr.plyr--full-ui.plyr--video.plyr--html5.plyr--fullscreen-enabled.plyr--paused.plyr--stopped.plyr--pip-supported.plyr__poster-enabled{:tabindex => "0"}
+            .plyr__controls
+              %button.plyr__controls__item.plyr__control{"aria-label" => "Play", "data-plyr" => "play", :type => "button"}
+                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-pause"}
+                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-play"}
+                %span.label--pressed.plyr__sr-only Pause
+                %span.label--not-pressed.plyr__sr-only Play
+              .plyr__controls__item.plyr__progress__container
+                .plyr__progress
+                  %input#plyr-seek-6490{"aria-label" => "Seek", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", "aria-valuetext" => "00:00 of 03:03", :autocomplete => "off", "data-plyr" => "seek", :max => "100", :min => "0", :role => "slider", :step => "0.01", :style => "--value:0%;", :type => "range", :value => "0"}/
+                  %progress.plyr__progress__buffer{"aria-hidden" => "true", :max => "100", :min => "0", :role => "progressbar", :value => "0"} % buffered
+                  %span.plyr__tooltip 00:00
+              .plyr__controls__item.plyr__time--current.plyr__time{"aria-label" => "Current time"} -03:03
+              .plyr__controls__item.plyr__volume
+                %button.plyr__control{"data-plyr" => "mute", :type => "button"}
+                  %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
+                    %use{"xlink:href" => "#plyr-muted"}
+                  %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
+                    %use{"xlink:href" => "#plyr-volume"}
+                  %span.label--pressed.plyr__sr-only Unmute
+                  %span.label--not-pressed.plyr__sr-only Mute
+                %input#plyr-volume-6490{"aria-label" => "Volume", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", "aria-valuetext" => "100.0%", :autocomplete => "off", "data-plyr" => "volume", :max => "1", :min => "0", :role => "slider", :step => "0.05", :style => "--value:100%;", :type => "range", :value => "1"}/
+              %button.plyr__controls__item.plyr__control{"data-plyr" => "captions", :type => "button"}
+                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-captions-on"}
+                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-captions-off"}
+                %span.label--pressed.plyr__sr-only Disable captions
+                %span.label--not-pressed.plyr__sr-only Enable captions
+              .plyr__controls__item.plyr__menu
+                %button.plyr__control{"aria-controls" => "plyr-settings-6490", "aria-expanded" => "false", "aria-haspopup" => "true", "data-plyr" => "settings", :type => "button"}
+                  %svg{"aria-hidden" => "true", :focusable => "false"}
+                    %use{"xlink:href" => "#plyr-settings"}
+                  %span.plyr__sr-only Settings
+                #plyr-settings-6490.plyr__menu__container{:hidden => ""}
+                  %div
+                    #plyr-settings-6490-home
+                      %div{:role => "menu"}
+                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :hidden => "", :role => "menuitem", :type => "button"}
+                          %span
+                            Captions
+                            %span.plyr__menu__value Disabled
+                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :hidden => "", :role => "menuitem", :type => "button"}
+                          %span
+                            Quality
+                            %span.plyr__menu__value 0
+                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :role => "menuitem", :type => "button"}
+                          %span
+                            Speed
+                            %span.plyr__menu__value Normal
+                    #plyr-settings-6490-captions{:hidden => ""}
+                      %button.plyr__control.plyr__control--back{:type => "button"}
+                        %span{"aria-hidden" => "true"} Captions
+                        %span.plyr__sr-only Go back to previous menu
+                      %div{:role => "menu"}
+                    #plyr-settings-6490-quality{:hidden => ""}
+                      %button.plyr__control.plyr__control--back{:type => "button"}
+                        %span{"aria-hidden" => "true"} Quality
+                        %span.plyr__sr-only Go back to previous menu
+                      %div{:role => "menu"}
+                    #plyr-settings-6490-speed{:hidden => ""}
+                      %button.plyr__control.plyr__control--back{:type => "button"}
+                        %span{"aria-hidden" => "true"} Speed
+                        %span.plyr__sr-only Go back to previous menu
+                      %div{:role => "menu"}
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "0.5"}
+                          %span 0.5×
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "0.75"}
+                          %span 0.75×
+                        %button.plyr__control{"aria-checked" => "true", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1"}
+                          %span Normal
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.25"}
+                          %span 1.25×
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.5"}
+                          %span 1.5×
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.75"}
+                          %span 1.75×
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "2"}
+                          %span 2×
+                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "4"}
+                          %span 4×
+              %button.plyr__controls__item.plyr__control{"data-plyr" => "pip", :type => "button"}
+                %svg{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-pip"}
+                %span.plyr__sr-only PIP
+              %button.plyr__controls__item.plyr__control{"data-plyr" => "fullscreen", :type => "button"}
+                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-exit-fullscreen"}
+                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
+                  %use{"xlink:href" => "#plyr-enter-fullscreen"}
+                %span.label--pressed.plyr__sr-only Exit fullscreen
+                %span.label--not-pressed.plyr__sr-only Enter fullscreen
+            .plyr__video-wrapper
+              %video#videoPlayer.player.sh-50.cover{"data-poster" => "img/course/large/course-1.webp", :poster => "img/course/large/course-1.webp"}
+                %source{:src => "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4", :type => "video/mp4"}
+              .plyr__poster{:style => "background-image: url(\"img/course/large/course-1.webp\");"}
+            .plyr__captions
+            %button.plyr__control.plyr__control--overlaid{"aria-label" => "Play", "data-plyr" => "play", :type => "button"}
+              %svg{"aria-hidden" => "true", :focusable => "false"}
+                %use{"xlink:href" => "#plyr-play"}
+              %span.plyr__sr-only Play
+        .card-body
+          %h6 Cookie Macaroon
+          %p.mb-4
+            Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry
+            sweet roll carrot cake cake macaroon gingerbread cookie.Candy pie sweet roll biscuit marzipan. Chocolate bar candy canes macaroon liquorice
+            danish biscuit biscuit.
+          %h6 Muffin
+          %p.mb-4
+            Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake cupcake gummi bears danish. Sesame snaps muffin macaroon tiramisu
+            ice cream. Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear
+            claw. Pastry sweet roll carrot cake cake macaroon gingerbread cookie.
+          %h6 Liquorice
+          %p.mb-4
+            Snaps muffin macaroon tiramisu ice cream toffee carrot sesame tootsie roll.Brownie ice cream marshmallow topping. Icing liquorice oat cake
+            caramels. Sugar plum gummi bears jujubes cookie jelly-o tootsie roll chocolate bar. Jujubes candy jelly-o topping lemon drops. Cupcake
+            gingerbread cookie cookie lemon drops tootsie roll lollipop. Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake
+            cupcake gummi bears danish.
+          %h6 Powder Cake
+          %p.mb-4
+            Sesame snaps brownie gummi bears tootsie roll caramels dragée. Powder cake gummies jelly beans toffee carrot cake bonbon powder muffin.
+            Jujubes candy jelly-o topping lemon drops. Cupcake gingerbread cookie cookie lemon drops tootsie roll lollipop. Liquorice caramels apple pie
+            chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry sweet roll carrot cake cake
+            macaroon gingerbread cookie.Carrot cake jelly-o lemon drops toffee tootsie roll. Brownie topping toffee apple pie apple pie. Wafer pudding
+            chocolate bar pastry bear claw tart carrot cake lemon drops icing. Gingerbread toffee topping. Tootsie roll cotton candy muffin cheesecake
+            liquorice sweet. Sugar plum tart tart marshmallow chocolate wafer apple pie candy canes. Chocolate cake biscuit donut cotton candy soufflé
+            cake macaroon. Halvah chocolate cotton candy sweet roll jelly-o candy danish dragée. Apple pie cotton candy tiramisu biscuit cake muffin
+            tootsie roll bear claw cake. Cupcake cake fruitcake.
+        .card-footer.border-0.pt-0
+          .row.align-items-center
+            .col-6
+              .d-flex.align-items-center
+                .sw-5.d-inline-block.position-relative.me-3
+                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-1.webp"}/
+                .d-inline-block
+                  %a{:href => "#"} Olli Hawkins
+                  .text-muted.text-small Development Lead
+            .col-6.text-muted
+              .row.g-0.justify-content-end
+                .col-auto.pe-3
+                  %svg.acorn-icons.acorn-icons-eye.text-primary.me-1{:fill => "none", :height => "15", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "15", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M2.47466 10.8418C2.15365 10.3203 2.15365 9.67971 2.47466 9.15822C3.49143 7.50643 6.10818 4 10 4C13.8918 4 16.5086 7.50644 17.5253 9.15822C17.8464 9.67971 17.8464 10.3203 17.5253 10.8418C16.5086 12.4936 13.8918 16 10 16C6.10818 16 3.49143 12.4936 2.47466 10.8418Z"}
+                    %path{:d => "M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z"}
+                  %span.align-middle 4.8K
+                .col-auto
+                  %svg.acorn-icons.acorn-icons-message.text-primary.me-1{:fill => "none", :height => "15", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "15", :xmlns => "http://www.w3.org/2000/svg"}
+                    %path{:d => "M14.5 2C15.9045 2 16.6067 2 17.1111 2.33706C17.3295 2.48298 17.517 2.67048 17.6629 2.88886C18 3.39331 18 4.09554 18 5.5L18 10.5C18 11.9045 18 12.6067 17.6629 13.1111C17.517 13.3295 17.3295 13.517 17.1111 13.6629C16.6067 14 15.9045 14 14.5 14L10.4497 14C9.83775 14 9.53176 14 9.24786 14.0861C9.12249 14.1241 9.00117 14.1744 8.88563 14.2362C8.62399 14.376 8.40762 14.5924 7.97487 15.0251L5.74686 17.2531C5.47773 17.5223 5.34317 17.6568 5.2255 17.6452C5.17629 17.6404 5.12962 17.6211 5.0914 17.5897C5 17.5147 5 17.3244 5 16.9438L5 14.6C5 14.5071 5 14.4606 4.99384 14.4218C4.95996 14.2078 4.79216 14.04 4.57822 14.0062C4.53935 14 4.4929 14 4.4 14V14C4.0284 14 3.8426 14 3.68713 13.9754C2.83135 13.8398 2.16017 13.1687 2.02462 12.3129C2 12.1574 2 11.9716 2 11.6L2 5.5C2 4.09554 2 3.39331 2.33706 2.88886C2.48298 2.67048 2.67048 2.48298 2.88886 2.33706C3.39331 2 4.09554 2 5.5 2L14.5 2Z"}
+                  %span.align-middle 12
+      / Preview End
+      / Table of Contents Start
+      %h2.small-title Table of Contents
+      .card.mb-5
+        .card-body
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+                .line-w-1.bg-separator.h-100.position-absolute
+            .col.mb-4
+              .h-100
+                .d-flex.flex-column.justify-content-start
+                  .d-flex.flex-column
+                    %p.heading 01. Dashboards
+                    %ul.list-unstyled
+                      %li - Danish brownie fruitcake tootsie
+                      %li - Fruitcake tart dessert
+                      %li - Bar carrot cake
+                      %li - Snaps muffin macaroon tiramisu
+                      %li - Ice cream marshmallow
+                      %li - Plum caramels fruitcake
+                      %li - Chocolate bar carrot cake
+                      %li - Cotton candy gummies
+                      %li - Danish cake gummies jelly
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1.position-relative.justify-content-center
+                .line-w-1.bg-separator.h-100.position-absolute
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+                .line-w-1.bg-separator.h-100.position-absolute
+            .col.mb-4
+              .h-100
+                .d-flex.flex-column
+                  %p.heading 02. Applications
+                  %ul.list-unstyled
+                    %li - Ice cream marshmallow
+                    %li - Plum caramels fruitcake
+                    %li - Chocolate bar carrot cake
+                    %li - Danish brownie fruitcake tootsie
+                    %li - Fruitcake tart dessert
+                    %li - Bar carrot cake
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1.position-relative.justify-content-center
+                .line-w-1.bg-separator.h-100.position-absolute
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+                .line-w-1.bg-separator.h-100.position-absolute
+            .col.mb-4
+              .h-100
+                .d-flex.flex-column
+                  %p.heading 03. Interface
+                  %ul.list-unstyled
+                    %li - Ice cream marshmallow
+                    %li - Plum caramels fruitcake
+                    %li - Chocolate bar carrot cake
+                    %li - Danish brownie fruitcake tootsie
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1.position-relative.justify-content-center
+                .line-w-1.bg-separator.h-100.position-absolute
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+                .line-w-1.bg-separator.h-100.position-absolute
+            .col.mb-4
+              .h-100
+                .d-flex.flex-column
+                  %p.heading 04. Conclusion
+                  %ul.list-unstyled
+                    %li - Chocolate bar carrot cake
+                    %li - Danish brownie fruitcake tootsie
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1.position-relative.justify-content-center
+                .line-w-1.bg-separator.h-100.position-absolute
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+                .line-w-1.bg-separator.h-100.position-absolute
+            .col.mb-4
+              .h-100
+                .d-flex.flex-column
+                  %p.heading 05. What is Next?
+                  %ul.list-unstyled
+                    %li - Danish brownie fruitcake tootsie
+                    %li - Fruitcake tart dessert
+                    %li - Bar carrot cake
+          .row.g-0
+            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
+              .w-100.d-flex.sh-1.position-relative.justify-content-center
+                .line-w-1.bg-separator.h-100.position-absolute
+              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
+                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
+              .w-100.d-flex.h-100.justify-content-center.position-relative
+            .col
+              .h-100
+                .d-flex.flex-column.justify-content-start
+                  .d-flex.flex-column
+                    %p.heading 06. Credits
+                    %ul.list-unstyled
+                      %li - Chocolate bar carrot cake
+                      %li - Danish brownie fruitcake tootsie
+      / Table of Contents End
+      / Reviews Start
+      %h2.small-title Reviews
+      .card
+        .card-body
+          / Total Rating Start
+          .row.mb-5
+            .col-12.col-sm-auto.mb-3.mb-sm-0
+              .w-100.sw-sm-19.sw-md-23.border.border-separator-light.sh-16.rounded-md.d-flex.flex-column.align-items-center.justify-content-center
+                .cta-1.text-alternate.mb-2 4.8
+                %div
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 5
+                  %span.text-muted (22)
+            .col
+              .row.align-items-center
+                .col
+                  .progress.mb-1
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", :role => "progressbar", :style => "width: 80%;"}
+                .col-auto
+                  %span.me-3.text-muted.text-small %80
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 5
+              .row.align-items-center
+                .col
+                  .progress.mb-1
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 10%;"}
+                .col-auto
+                  %span.me-3.text-muted.text-small %10
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "4", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 4
+              .row.align-items-center
+                .col
+                  .progress.mb-1
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "5", :role => "progressbar", :style => "width: 5%;"}
+                .col-auto
+                  %span.me-3.text-muted.text-small %5
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "3", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 3
+              .row.align-items-center
+                .col
+                  .progress.mb-1
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", :role => "progressbar", :style => "width: 0%;"}
+                .col-auto
+                  %span.me-3.text-muted.text-small %0
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "2", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 2
+              .row.align-items-center
+                .col
+                  .progress.mb-1
+                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "5", :role => "progressbar", :style => "width: 5%;"}
+                .col-auto
+                  %span.me-3.text-muted.text-small %5
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "1", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected.br-current{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 1
+          / Total Rating End
+          / Comments Start
+          .d-flex.align-items-center.border-bottom.border-separator-light.pb-3
+            .row.g-0.w-100
+              .col-auto
+                .sw-5.me-3
+                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-1.webp"}/
+              .col.pe-3
+                %div Cherish Kerr
+                .text-muted.text-small.mb-2 2 days ago
+                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                  .br-wrapper
+                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                      %option{:value => "1"} 1
+                      %option{:value => "2"} 2
+                      %option{:value => "3"} 3
+                      %option{:value => "4"} 4
+                      %option{:value => "5"} 5
+                    .br-widget.br-readonly
+                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                      .br-current-rating 5
+                .text-medium.text-alternate.lh-1-25 Macaroon!
+          .d-flex.align-items-center.border-bottom.border-separator-light.pb-3.mt-3
+            .row.g-0.w-100
+              .col-auto
+                .sw-5.me-3
+                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-2.webp"}/
+              .col.pe-3
+                %div Olli Hawkins
+                .text-muted.text-small.mb-2 3 days ago
+                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                  .br-wrapper
+                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                      %option{:value => "1"} 1
+                      %option{:value => "2"} 2
+                      %option{:value => "3"} 3
+                      %option{:value => "4"} 4
+                      %option{:value => "5"} 5
+                    .br-widget.br-readonly
+                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                      .br-current-rating 5
+                .text-medium.text-alternate.lh-1-25 Cupcake cake fruitcake. Powder chocolate bar soufflé gummi bears topping donut.
+          .d-flex.align-items-center.mt-3
+            .row.g-0.w-100
+              .col-auto
+                .sw-5.me-3
+                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-3.webp"}/
+              .col.pe-3
+                %div Kirby Peters
+                .text-muted.text-small.mb-2 3 days ago
+                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                  .br-wrapper
+                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                      %option{:value => "1"} 1
+                      %option{:value => "2"} 2
+                      %option{:value => "3"} 3
+                      %option{:value => "4"} 4
+                      %option{:value => "5"} 5
+                    .br-widget.br-readonly
+                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                      .br-current-rating 5
+                .text-medium.text-alternate.lh-1-25 Nice, very tasty.
+          / Comments End
+      / Reviews End
+    / Left Side End
+    / Right Side Start
+    .col-12.col-xxl-4.mb-n5
+      / At a Glance Start
+      %h2.small-title At a Glance
+      .card.mb-5
+        .card-body
+          .row.g-0.align-items-center.mb-3
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-clock.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M8 12L9.70711 10.2929C9.89464 10.1054 10 9.851 10 9.58579V6"}
+                  %circle{:cx => "10", :cy => "10", :r => "8"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Duration
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate 14 Hours
+          .row.g-0.align-items-center.mb-3
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-presentation.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M6.5 14C5.09554 14 4.39331 14 3.88886 13.6629C3.67048 13.517 3.48298 13.3295 3.33706 13.1111C3 12.6067 3 11.9045 3 10.5L3 8.5C3 7.09554 3 6.3933 3.33706 5.88886C3.48298 5.67048 3.67048 5.48298 3.88886 5.33706C4.39331 5 5.09554 5 6.5 5L13.5 5C14.9045 5 15.6067 5 16.1111 5.33706C16.3295 5.48298 16.517 5.67048 16.6629 5.88886C17 6.39331 17 7.09554 17 8.5L17 10.5C17 11.9045 17 12.6067 16.6629 13.1111C16.517 13.3295 16.3295 13.517 16.1111 13.6629C15.6067 14 14.9045 14 13.5 14L6.5 14Z"}
+                  %path{:d => "M10 14L10 17"}
+                  %path{:d => "M17.125 2C17.4761 2 17.6517 2 17.7778 2.08427C17.8324 2.12074 17.8793 2.16762 17.9157 2.22221C18 2.34833 18 2.52388 18 2.875L18 4.125C18 4.47612 18 4.65167 17.9157 4.77779C17.8793 4.83238 17.8324 4.87926 17.7778 4.91574C17.6517 5 17.4761 5 17.125 5L2.875 5C2.52388 5 2.34833 5 2.22221 4.91573C2.16762 4.87926 2.12074 4.83238 2.08426 4.77779C2 4.65167 2 4.47612 2 4.125L2 2.875C2 2.52388 2 2.34833 2.08426 2.22221C2.12074 2.16762 2.16762 2.12074 2.22221 2.08426C2.34833 2 2.52388 2 2.875 2L17.125 2Z"}
+                  %circle{:cx => "10", :cy => "17.5", :r => "0.5"}
+                  %path{:d => "M13 8H7M12 11H8"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Content
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate 8 Chapters
+          .row.g-0.align-items-center.mb-3
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-diploma.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M15 4.00001V4.00001C16.1046 4.00001 17 4.89544 17 6.00001L17 14.5C17 15.9045 17 16.6067 16.6629 17.1111C16.517 17.3295 16.3295 17.517 16.1111 17.6629C15.6067 18 14.9045 18 13.5 18L6.5 18C5.09554 18 4.39331 18 3.88886 17.6629C3.67048 17.517 3.48298 17.3295 3.33706 17.1111C3 16.6067 3 15.9045 3 14.5L3 7.50001C3 6.09555 3 5.39332 3.33706 4.88887C3.48298 4.67049 3.67048 4.48299 3.88886 4.33707C4.39331 4.00001 5.09554 4.00001 6.5 4.00001L9.5 4.00001"}
+                  %path{:d => "M14 6L14 13.3252C14 13.5663 14 13.6868 13.9433 13.7319C13.9196 13.7507 13.8908 13.7619 13.8606 13.764C13.7884 13.7691 13.7069 13.6803 13.544 13.5025L13.29 13.2255C12.7767 12.6655 12.5201 12.3856 12.2057 12.3195C12.0701 12.2909 11.9299 12.2909 11.7943 12.3195C11.4799 12.3856 11.2233 12.6655 10.71 13.2255L10.456 13.5025C10.2931 13.6803 10.2116 13.7691 10.1394 13.764C10.1092 13.7619 10.0804 13.7507 10.0567 13.7319C10 13.6868 10 13.5663 10 13.3252L10 6"}
+                  %circle{:cx => "12", :cy => "4", :r => "3"}
+                  %path{:d => "M6 15H7M6 12H7M6 9H7"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Level
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate Beginner
+          .row.g-0.align-items-center.mb-3
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-calendar.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M14.5 4C15.9045 4 16.6067 4 17.1111 4.33706C17.3295 4.48298 17.517 4.67048 17.6629 4.88886C18 5.39331 18 6.09554 18 7.5L18 14.5C18 15.9045 18 16.6067 17.6629 17.1111C17.517 17.3295 17.3295 17.517 17.1111 17.6629C16.6067 18 15.9045 18 14.5 18L5.5 18C4.09554 18 3.39331 18 2.88886 17.6629C2.67048 17.517 2.48298 17.3295 2.33706 17.1111C2 16.6067 2 15.9045 2 14.5L2 7.5C2 6.09554 2 5.39331 2.33706 4.88886C2.48298 4.67048 2.67048 4.48298 2.88886 4.33706C3.39331 4 4.09554 4 5.5 4L14.5 4Z"}
+                  %path{:d => "M2 9H18M7 2 7 5.5M13 2 13 5.5M5 15H6"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Release
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate 05.11.2021
+          .row.g-0.align-items-center.mb-3
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-star.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %path{:d => "M9.09413 2.93747C9.45349 2.16887 10.5465 2.16887 10.9059 2.93747L12.4188 6.17326C12.5602 6.47565 12.8431 6.68755 13.173 6.73816L16.6418 7.2702C17.4452 7.39343 17.7738 8.37275 17.2073 8.9556L14.6304 11.6071C14.4098 11.834 14.3097 12.152 14.3604 12.4644L14.9594 16.1503C15.0933 16.9748 14.2174 17.5904 13.4871 17.1851L10.4852 15.5193C10.1834 15.3518 9.81658 15.3518 9.51477 15.5193L6.51293 17.1851C5.78261 17.5904 4.90669 16.9748 5.04064 16.1503L5.63956 12.4644C5.69032 12.152 5.5902 11.834 5.36961 11.6071L2.79266 8.9556C2.22619 8.37275 2.55478 7.39343 3.35816 7.2702L6.82695 6.73816C7.1569 6.68755 7.43984 6.47565 7.58122 6.17326L9.09413 2.93747Z"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Rating
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate 4.8 (843)
+          .row.g-0.align-items-center.mb-0
+            .col-auto
+              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
+                %svg.acorn-icons.acorn-icons-graduation.text-primary{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+                  %g{"clip-path" => "url(#clip0_418:25)"}
+                    %path{:d => "M8.55872 3.33498C9.22394 2.99352 9.55655 2.82279 9.91115 2.77976C10.0673 2.76081 10.2251 2.76034 10.3814 2.77837C10.7362 2.81932 11.0698 2.9881 11.737 3.32564L15.9358 5.44982C17.0715 6.02437 17.6393 6.31165 17.7593 6.73226C17.8098 6.9096 17.8104 7.09747 17.7608 7.27511C17.6434 7.69642 17.0772 7.98702 15.9449 8.56823L11.5835 10.807C10.9183 11.1485 10.5857 11.3192 10.2311 11.3622C10.0749 11.3812 9.91709 11.3817 9.76084 11.3636C9.40599 11.3227 9.07239 11.1539 8.40518 10.8164L4.20642 8.69217C3.07074 8.11762 2.5029 7.83035 2.38295 7.40974C2.33237 7.2324 2.33182 7.04453 2.38135 6.86689C2.49883 6.44558 3.06497 6.15498 4.19726 5.57376L8.55872 3.33498Z"}
+                    %path{:d => "M4 9V12.1541C4 12.3879 4 12.5048 4.00811 12.6149C4.07044 13.4607 4.48781 14.2406 5.15696 14.7616C5.24405 14.8294 5.34133 14.8942 5.53587 15.0239V15.0239C6.09435 15.3962 6.37359 15.5824 6.64412 15.7302C8.73551 16.8727 11.2645 16.8727 13.3559 15.7302C13.6264 15.5824 13.9057 15.3962 14.4641 15.0239V15.0239C14.6587 14.8942 14.7559 14.8294 14.843 14.7616C15.5122 14.2406 15.9296 13.4607 15.9919 12.6149C16 12.5048 16 12.3879 16 12.1541V9"}
+                  %defs
+                    %clippath#clip0_418:25
+                      %path{:d => "M0 0H20V20H0z"}
+            .col.ps-3
+              .row.g-0
+                .col
+                  .sh-4.d-flex.align-items-center.lh-1-25 Completed By
+                .col-auto
+                  .sh-4.d-flex.align-items-center.text-alternate 1.522
+      / At a Glance End
+      / Tags Start
+      %h2.small-title Tags
+      .card.mb-5
+        .card-body
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Food (12)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Baking (3)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Sweet (1)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Molding (3)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Pastry (5)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Healthy (7)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Rye (3)
+          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
+            %span Simple (3)
+      / Tags End
+      / Badges Start
+      %h2.small-title Badges
+      .card.mb-2.sh-15
+        .card-body.text-center.align-items-center.d-flex.flex-row
+          .d-flex.sw-6.sh-6.bg-gradient-light.align-items-center.justify-content-center.rounded-xl.position-relative.ms-1
+            %svg.acorn-icons.acorn-icons-badge.text-white{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M13 11L13.8819 17.1734C13.9258 17.4809 13.9478 17.6347 13.8803 17.7191C13.8518 17.7547 13.8142 17.7819 13.7713 17.7976C13.6699 17.835 13.531 17.7655 13.2532 17.6266L10.3913 16.1957C10.2271 16.1136 10.1451 16.0725 10.0578 16.0624C10.0194 16.0579 9.98059 16.0579 9.94217 16.0624C9.85494 16.0725 9.77286 16.1136 9.60869 16.1957L6.74684 17.6266C6.46901 17.7655 6.3301 17.835 6.22866 17.7976C6.18584 17.7819 6.14815 17.7547 6.11967 17.7191C6.05219 17.6347 6.07416 17.4809 6.11809 17.1734L7 11"}
+              %circle{:cx => "10", :cy => "7", :r => "5"}
+            .achievement.bg.position-absolute
+              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4518 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.599 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001ZM9.90579 15.1001C10.8175 15.7411 11.03 16.9899 10.3804 17.8895C6.40105 23.4002 4.05405 30.1716 4.05405 37.5C4.05405 44.8284 6.40105 51.5998 10.3804 57.1105C11.03 58.0101 10.8175 59.2589 9.90579 59.8999C8.99405 60.5408 7.72832 60.3312 7.07871 59.4316C2.62373 53.2623 0 45.6836 0 37.5C0 29.3164 2.62373 21.7377 7.07871 15.5684C7.72832 14.6689 8.99404 14.4592 9.90579 15.1001ZM14.9248 64.9584C15.5927 64.0719 16.8625 63.8876 17.7609 64.5466C23.2952 68.606 30.1167 71 37.5 71C44.8833 71 51.7048 68.606 57.2391 64.5465C58.1375 63.8876 59.4073 64.0719 60.0752 64.9584C60.7431 65.8448 60.5562 67.0977 59.6578 67.7567C53.4518 72.3088 45.7883 75 37.5 75C29.2117 75 21.5483 72.3088 15.3422 67.7567C14.4438 67.0977 14.2569 65.8448 14.9248 64.9584Z", "fill-rule" => "evenodd"}
+            .achievement.level.position-absolute
+              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4517 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333Z", "fill-rule" => "evenodd"}
+          .ms-5.text-start
+            %p.mb-1 Javascript Novice
+            %p.mb-0.text-primary Level 1
+      .card.mb-2.sh-15
+        .card-body.text-center.align-items-center.d-flex.flex-row
+          .d-flex.sw-6.sh-6.bg-gradient-light.align-items-center.justify-content-center.rounded-xl.position-relative.ms-1
+            %svg.acorn-icons.acorn-icons-medal.text-white{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+              %circle{:cx => "10", :cy => "14", :r => "4"}
+              %path{:d => "M13 11L15.7501 4.81228C16.3379 3.4897 15.3698 2 13.9225 2H10H6.07752C4.63021 2 3.66209 3.4897 4.2499 4.81228L7 11"}
+              %path{:d => "M11 14H9M10 15 10 13"}
+            .achievement.bg.position-absolute
+              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4518 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.599 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001ZM9.90579 15.1001C10.8175 15.7411 11.03 16.9899 10.3804 17.8895C6.40105 23.4002 4.05405 30.1716 4.05405 37.5C4.05405 44.8284 6.40105 51.5998 10.3804 57.1105C11.03 58.0101 10.8175 59.2589 9.90579 59.8999C8.99405 60.5408 7.72832 60.3312 7.07871 59.4316C2.62373 53.2623 0 45.6836 0 37.5C0 29.3164 2.62373 21.7377 7.07871 15.5684C7.72832 14.6689 8.99404 14.4592 9.90579 15.1001ZM14.9248 64.9584C15.5927 64.0719 16.8625 63.8876 17.7609 64.5466C23.2952 68.606 30.1167 71 37.5 71C44.8833 71 51.7048 68.606 57.2391 64.5465C58.1375 63.8876 59.4073 64.0719 60.0752 64.9584C60.7431 65.8448 60.5562 67.0977 59.6578 67.7567C53.4518 72.3088 45.7883 75 37.5 75C29.2117 75 21.5483 72.3088 15.3422 67.7567C14.4438 67.0977 14.2569 65.8448 14.9248 64.9584Z", "fill-rule" => "evenodd"}
+            .achievement.level.position-absolute
+              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
+                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4517 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.5989 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001Z", "fill-rule" => "evenodd"}
+          .ms-5.text-start
+            %p.mb-1 Frontend Apprentice
+            %p.mb-0.text-primary Level 2
+      / Badges End
+    / Right Side End
+  / Content End

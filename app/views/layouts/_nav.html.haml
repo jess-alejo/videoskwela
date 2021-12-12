@@ -1,7 +1,7 @@
 #nav.nav-container.d-flex
   .nav-content.d-flex
     .logo.position-relative
-      %a{:href => "index.html"}
+      = link_to root_path do
         .img
     .language-switch-container
       %button.btn.btn-empty.language-button.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown"} EN
@@ -11,8 +11,12 @@
         %a.dropdown-item{:href => "#"} ES
     .user-container.d-flex
       %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
-        %img.profile{:alt => "profile", :src => "img/profile/profile-3.webp"}/
-        .name Lisa Jackson
+        = image_tag current_user.avatar_url,
+          alt: "profile",
+          class: "profile"
+        .name
+          = current_user.name
+
       .dropdown-menu.dropdown-menu-end.user-menu.wide
         .row.mb-3.ms-0.me-0
           .col-12.ps-1.mb-2

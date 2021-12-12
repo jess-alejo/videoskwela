@@ -1,5 +1,14 @@
 !!!
-%html{ lang: "en" }
+%html{ lang: "en", "data-footer"=>"true",
+  "data-placement"=>"vertical",
+  "data-behaviour" => "unpinned",
+  "data-layout"=>"boxed",
+  "data-radius"=>"rounded",
+  "data-color"=>"dark-purple",
+  "data-navcolor"=>"default",
+  "data-show"=>"true",
+  "data-dimension"=>"desktop",
+  "data-menu-animate" => "hidden" }
   %head
     %meta{ charset: "utf-8" }
     %title
@@ -19,17 +28,17 @@
 
     = render "layouts/head"
 
-    %link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}
-    %link{:href => "https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap", :rel => "stylesheet"}
-    %link{:href => "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap", :rel => "stylesheet"}
-
     = javascript_pack_tag "application", "data-turbolinks-track": "reload"
     = render "layouts/google_analytics" if Rails.env.production?
+
   %body{ "data-bs-padding" => "15px" }
     = render "layouts/modal"
-    = render "layouts/navbar"
 
-    .container.mt-4
+    #root
+      = render "layouts/nav"
+
+    %main
       = render "layouts/messages"
       = yield
+
     = render "layouts/footer"
