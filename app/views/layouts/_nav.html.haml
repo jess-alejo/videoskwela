@@ -10,78 +10,80 @@
         %a.dropdown-item.active{:href => "#"} EN
         %a.dropdown-item{:href => "#"} ES
     .user-container.d-flex
-      %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
-        = image_tag current_user.avatar_url,
-          alt: "profile",
-          class: "profile"
-        .name
-          = current_user.name
+      - if current_user
+        %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
+          = image_tag current_user.avatar_url,
+            alt: "profile",
+            class: "profile"
+          .name
+            = current_user.name
 
-      .dropdown-menu.dropdown-menu-end.user-menu.wide
-        .row.mb-3.ms-0.me-0
-          .col-12.ps-1.mb-2
-            .text-extra-small.text-primary ACCOUNT
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} User Info
-              %li
-                %a{:href => "#"} Preferences
-              %li
-                %a{:href => "#"} Calendar
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Security
-              %li
-                %a{:href => "#"} Billing
-        .row.mb-1.ms-0.me-0
-          .col-12.p-1.mb-2.pt-2
-            .text-extra-small.text-primary APPLICATION
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Themes
-              %li
-                %a{:href => "#"} Language
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Devices
-              %li
-                %a{:href => "#"} Storage
-        .row.mb-1.ms-0.me-0
-          .col-12.p-1.mb-3.pt-3
-            .separator-light
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"}
-                  %svg.acorn-icons.acorn-icons-help.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
-                    %circle{:cx => "10", :cy => "9.99997", :r => "3", :transform => "rotate(-135 10 9.99997)"}
-                    %path{:d => "M3.63608 3.63602C4.41713 2.85497 5.68346 2.85497 6.46451 3.63602L7.87872 5.05023C8.65977 5.83128 8.65977 7.09761 7.87872 7.87866V7.87866C7.09767 8.6597 5.83134 8.6597 5.05029 7.87866L3.63608 6.46444C2.85503 5.68339 2.85503 4.41706 3.63608 3.63602V3.63602zM12.1214 12.1213C12.9025 11.3403 14.1688 11.3403 14.9499 12.1213L16.3641 13.5355C17.1451 14.3166 17.1451 15.5829 16.3641 16.3639V16.3639C15.583 17.145 14.3167 17.145 13.5356 16.3639L12.1214 14.9497C11.3404 14.1687 11.3404 12.9024 12.1214 12.1213V12.1213z"}
-                    %path{:d => "M5.93558 3.10715C9.00339 1.29528 13.021 1.70728 15.6569 4.34315C18.2927 6.97901 18.7047 10.9966 16.8929 14.0644M3.10715 5.93558C1.29528 9.00339 1.70728 13.021 4.34315 15.6569C6.97901 18.2927 10.9966 18.7047 14.0644 16.8929"}
-                    %path{:d => "M4.34326 15.6569L7.8788 12.1213M15.657 4.34315L12.1214 7.87869"}
-                  %span.align-middle Help
-              %li
-                %a{:href => "#"}
-                  %svg.acorn-icons.acorn-icons-file-text.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M6.5 18H13.5C14.9045 18 15.6067 18 16.1111 17.6629C16.3295 17.517 16.517 17.3295 16.6629 17.1111C17 16.6067 17 15.9045 17 14.5V7.44975C17 6.83775 17 6.53175 16.9139 6.24786C16.8759 6.12249 16.8256 6.00117 16.7638 5.88563C16.624 5.62399 16.4076 5.40762 15.9749 4.97487L14.0251 3.02513L14.0251 3.02512C13.5924 2.59238 13.376 2.37601 13.1144 2.23616C12.9988 2.1744 12.8775 2.12415 12.7521 2.08612C12.4682 2 12.1622 2 11.5503 2H6.5C5.09554 2 4.39331 2 3.88886 2.33706C3.67048 2.48298 3.48298 2.67048 3.33706 2.88886C3 3.39331 3 4.09554 3 5.5V14.5C3 15.9045 3 16.6067 3.33706 17.1111C3.48298 17.3295 3.67048 17.517 3.88886 17.6629C4.39331 18 5.09554 18 6.5 18Z"}
-                    %path{:d => "M13 6 7 6M13 10 7 10M13 14 7 14"}
-                  %span.align-middle Docs
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"}
-                  %svg.acorn-icons.acorn-icons-gear.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M8.32233 3.75427C8.52487 1.45662 11.776 1.3967 11.898 3.68836C11.9675 4.99415 13.2898 5.76859 14.4394 5.17678C16.4568 4.13815 18.0312 7.02423 16.1709 8.35098C15.111 9.10697 15.0829 10.7051 16.1171 11.4225C17.932 12.6815 16.2552 15.6275 14.273 14.6626C13.1434 14.1128 11.7931 14.9365 11.6777 16.2457C11.4751 18.5434 8.22404 18.6033 8.10202 16.3116C8.03249 15.0059 6.71017 14.2314 5.56062 14.8232C3.54318 15.8619 1.96879 12.9758 3.82906 11.649C4.88905 10.893 4.91709 9.29487 3.88295 8.57749C2.06805 7.31848 3.74476 4.37247 5.72705 5.33737C6.85656 5.88718 8.20692 5.06347 8.32233 3.75427Z"}
-                    %path{:d => "M10 8C11.1046 8 12 8.89543 12 10V10C12 11.1046 11.1046 12 10 12V12C8.89543 12 8 11.1046 8 10V10C8 8.89543 8.89543 8 10 8V8Z"}
-                  %span.align-middle Settings
-              %li
-                %a{:href => "#"}
-                  %svg.acorn-icons.acorn-icons-logout.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M7 15 2.35355 10.3536C2.15829 10.1583 2.15829 9.84171 2.35355 9.64645L7 5M3 10H13M12 18 14.5 18C15.9045 18 16.6067 18 17.1111 17.6629 17.3295 17.517 17.517 17.3295 17.6629 17.1111 18 16.6067 18 15.9045 18 14.5L18 5.5C18 4.09554 18 3.39331 17.6629 2.88886 17.517 2.67048 17.3295 2.48298 17.1111 2.33706 16.6067 2 15.9045 2 14.5 2L12 2"}
-                  %span.align-middle Logout
+        .dropdown-menu.dropdown-menu-end.user-menu.wide
+          .row.mb-3.ms-0.me-0
+            .col-12.ps-1.mb-2
+              .text-extra-small.text-primary ACCOUNT
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} User Info
+                %li
+                  %a{:href => "#"} Preferences
+                %li
+                  %a{:href => "#"} Calendar
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Security
+                %li
+                  %a{:href => "#"} Billing
+          .row.mb-1.ms-0.me-0
+            .col-12.p-1.mb-2.pt-2
+              .text-extra-small.text-primary APPLICATION
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Themes
+                %li
+                  %a{:href => "#"} Language
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Devices
+                %li
+                  %a{:href => "#"} Storage
+          .row.mb-1.ms-0.me-0
+            .col-12.p-1.mb-3.pt-3
+              .separator-light
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"}
+                    %svg.acorn-icons.acorn-icons-help.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
+                      %circle{:cx => "10", :cy => "9.99997", :r => "3", :transform => "rotate(-135 10 9.99997)"}
+                      %path{:d => "M3.63608 3.63602C4.41713 2.85497 5.68346 2.85497 6.46451 3.63602L7.87872 5.05023C8.65977 5.83128 8.65977 7.09761 7.87872 7.87866V7.87866C7.09767 8.6597 5.83134 8.6597 5.05029 7.87866L3.63608 6.46444C2.85503 5.68339 2.85503 4.41706 3.63608 3.63602V3.63602zM12.1214 12.1213C12.9025 11.3403 14.1688 11.3403 14.9499 12.1213L16.3641 13.5355C17.1451 14.3166 17.1451 15.5829 16.3641 16.3639V16.3639C15.583 17.145 14.3167 17.145 13.5356 16.3639L12.1214 14.9497C11.3404 14.1687 11.3404 12.9024 12.1214 12.1213V12.1213z"}
+                      %path{:d => "M5.93558 3.10715C9.00339 1.29528 13.021 1.70728 15.6569 4.34315C18.2927 6.97901 18.7047 10.9966 16.8929 14.0644M3.10715 5.93558C1.29528 9.00339 1.70728 13.021 4.34315 15.6569C6.97901 18.2927 10.9966 18.7047 14.0644 16.8929"}
+                      %path{:d => "M4.34326 15.6569L7.8788 12.1213M15.657 4.34315L12.1214 7.87869"}
+                    %span.align-middle Help
+                %li
+                  %a{:href => "#"}
+                    %svg.acorn-icons.acorn-icons-file-text.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M6.5 18H13.5C14.9045 18 15.6067 18 16.1111 17.6629C16.3295 17.517 16.517 17.3295 16.6629 17.1111C17 16.6067 17 15.9045 17 14.5V7.44975C17 6.83775 17 6.53175 16.9139 6.24786C16.8759 6.12249 16.8256 6.00117 16.7638 5.88563C16.624 5.62399 16.4076 5.40762 15.9749 4.97487L14.0251 3.02513L14.0251 3.02512C13.5924 2.59238 13.376 2.37601 13.1144 2.23616C12.9988 2.1744 12.8775 2.12415 12.7521 2.08612C12.4682 2 12.1622 2 11.5503 2H6.5C5.09554 2 4.39331 2 3.88886 2.33706C3.67048 2.48298 3.48298 2.67048 3.33706 2.88886C3 3.39331 3 4.09554 3 5.5V14.5C3 15.9045 3 16.6067 3.33706 17.1111C3.48298 17.3295 3.67048 17.517 3.88886 17.6629C4.39331 18 5.09554 18 6.5 18Z"}
+                      %path{:d => "M13 6 7 6M13 10 7 10M13 14 7 14"}
+                    %span.align-middle Docs
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"}
+                    %svg.acorn-icons.acorn-icons-gear.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M8.32233 3.75427C8.52487 1.45662 11.776 1.3967 11.898 3.68836C11.9675 4.99415 13.2898 5.76859 14.4394 5.17678C16.4568 4.13815 18.0312 7.02423 16.1709 8.35098C15.111 9.10697 15.0829 10.7051 16.1171 11.4225C17.932 12.6815 16.2552 15.6275 14.273 14.6626C13.1434 14.1128 11.7931 14.9365 11.6777 16.2457C11.4751 18.5434 8.22404 18.6033 8.10202 16.3116C8.03249 15.0059 6.71017 14.2314 5.56062 14.8232C3.54318 15.8619 1.96879 12.9758 3.82906 11.649C4.88905 10.893 4.91709 9.29487 3.88295 8.57749C2.06805 7.31848 3.74476 4.37247 5.72705 5.33737C6.85656 5.88718 8.20692 5.06347 8.32233 3.75427Z"}
+                      %path{:d => "M10 8C11.1046 8 12 8.89543 12 10V10C12 11.1046 11.1046 12 10 12V12C8.89543 12 8 11.1046 8 10V10C8 8.89543 8.89543 8 10 8V8Z"}
+                    %span.align-middle Settings
+                %li
+                  %a{:href => "#"}
+                    %svg.acorn-icons.acorn-icons-logout.me-2{:fill => "none", :height => "17", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "17", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{:d => "M7 15 2.35355 10.3536C2.15829 10.1583 2.15829 9.84171 2.35355 9.64645L7 5M3 10H13M12 18 14.5 18C15.9045 18 16.6067 18 17.1111 17.6629 17.3295 17.517 17.517 17.3295 17.6629 17.1111 18 16.6067 18 15.9045 18 14.5L18 5.5C18 4.09554 18 3.39331 17.6629 2.88886 17.517 2.67048 17.3295 2.48298 17.1111 2.33706 16.6067 2 15.9045 2 14.5 2L12 2"}
+                    %span.align-middle Logout
+
     %ul.list-unstyled.list-inline.text-center.menu-icons
       %li.list-inline-item
         %a{"data-bs-target" => "#searchPagesModal", "data-bs-toggle" => "modal", :href => "#"}
