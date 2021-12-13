@@ -45,6 +45,7 @@
     "moment": "2.25.3",
     "mousetrap": "^1.6.5",
     "nouislider": "^15.5.0",
+    "overlayscrollbars": "^1.13.1",
     "plyr": "^3.6.9",
     "progressbar": "^1.3.0",
     "quill": "^1.3.7",

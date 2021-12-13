@@ -2,6 +2,7 @@ import { Globals, Variables } from "./base/globals"
 import { Nav } from "./base/nav"
 import { Common } from "./common"
 import { AcornIcons } from "../../icon/acorn-icons";
+
 /**
  *
  * Scripts
@@ -68,7 +69,13 @@ import { AcornIcons } from "../../icon/acorn-icons";
     if (typeof VerticalPage !== 'undefined') {
       const verticalPage = new VerticalPage();
     }
+
+    // course.explore.js initialization
+    if (typeof CourseExplore !== 'undefined') {
+      const courseExplore = new CourseExplore();
+    }
   }
+
 
   // Settings initialization
   _initSettings() {
@@ -108,7 +115,7 @@ import { AcornIcons } from "../../icon/acorn-icons";
 
 // Shows the template after initialization of the settings, nav, variables and common plugins.
 (function () {
-  window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('turbolinks:load', () => {
     // Initializing of the Scripts
     if (typeof Scripts !== 'undefined') {
       const scripts = new Scripts();

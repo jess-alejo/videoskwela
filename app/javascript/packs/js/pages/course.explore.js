@@ -7,7 +7,7 @@
  *
  */
 
-class CourseExplore {
+export class CourseExplore {
   constructor() {
     this._initBarrating();
   }

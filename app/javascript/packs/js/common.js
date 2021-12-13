@@ -8,7 +8,9 @@
  */
 
 
-import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle"
+import * as bootstrap from "bootstrap"
+import OverlayScrollbars from "overlayscrollbars";
+
 export class Common {
   get options() {
     return {};
@@ -107,7 +109,7 @@ export class Common {
         scrollbars: {autoHide: 'leave', autoHideDelay: 600},
         overflowBehavior: {x: 'hidden', y: 'scroll'},
       });
-      console.log("JEA")
+
       OverlayScrollbars(document.querySelectorAll('.scroll-horizontal'), {
         scrollbars: {autoHide: 'leave', autoHideDelay: 600},
         overflowBehavior: {x: 'scroll', y: 'hidden'},

@@ -149,7 +149,10 @@ import "bootstrap"
 
 // import "./js/vendor/bootstrap.bundle.min"
 // import 'bootstrap/dist/js/bootstrap'
-import OverlayScrollbars from "./js/vendor/OverlayScrollbars.min"
+
+// import OverlayScrollbars from "./js/vendor/OverlayScrollbars.min"
+import "overlayscrollbars"
+
 import "./js/vendor/autoComplete.min"
 import "./js/vendor/clamp.min"
 {/* <script src="icon/acorn-icons.js"></script> */}
@@ -180,6 +183,8 @@ import "./js/cs/charts.extend"
 
 import "./js/pages/dashboard.elearning"
 
-require("./js/common")
+// require("./js/common") // in script
+
 import "./js/scripts"
+
 // <!-- Page Specific Scripts End -->

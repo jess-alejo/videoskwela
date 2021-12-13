@@ -22,9 +22,11 @@
 @import "./font/CS-Interface/style.css";
 
 // vendor styles
-// @import "bootstrap/scss/bootstrap";
-@import "./css/vendor/bootstrap.min.css";
-@import "./css/vendor/OverlayScrollbars.min.css";
+@import "bootstrap/dist/css/bootstrap.min.css";
+// @import "./css/vendor/bootstrap.min.css";
+
+// @import "./css/vendor/OverlayScrollbars.min.css";
+@import "overlayscrollbars/css/OverlayScrollbars.css";
 
 // @import "./css/vendor/glide.core.min.css";
 // Required Core Stylesheet
