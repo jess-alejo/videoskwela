@@ -140,18 +140,22 @@ import "../icon/acorn-icons-learning"
 
 // <!-- Vendor Scripts Start -->
 import "./js/vendor/jquery-3.5.1.min"
+
+import "moment"
+import "bootstrap"
+// import moment from "moment-with-locales-es6"
+// import "moment/locale/es"
+
+
 // import "./js/vendor/bootstrap.bundle.min"
-import 'bootstrap/dist/js/bootstrap'
-import "./js/vendor/OverlayScrollbars.min"
+// import 'bootstrap/dist/js/bootstrap'
+import OverlayScrollbars from "./js/vendor/OverlayScrollbars.min"
 import "./js/vendor/autoComplete.min"
 import "./js/vendor/clamp.min"
 {/* <script src="icon/acorn-icons.js"></script> */}
 {/* <script src="icon/acorn-icons-interface.js"></script> */}
 {/* <script src="icon/acorn-icons-learning.js"></script> */}
 
-// import "../icon/acorn-icons"
-// import "../icon/acorn-icons-interface"
-// import "../icon/acorn-icons-learning"
 
 import "./js/vendor/glide.min"
 
@@ -176,6 +180,6 @@ import "./js/cs/charts.extend"
 
 import "./js/pages/dashboard.elearning"
 
-import "./js/common"
+require("./js/common")
 import "./js/scripts"
 // <!-- Page Specific Scripts End -->
