@@ -171,7 +171,7 @@ import "./js/vendor/jquery.barrating.min"
 // <!-- Template Base Scripts Start -->
 import "./js/base/helpers"
 // import "./js/base/globals"
-// import {Nav} from "./js/base/nav"
+import "./js/base/nav"
 import "./js/base/search"
 import "./js/base/settings"
 // <!-- Template Base Scripts End -->

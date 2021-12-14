@@ -190,8 +190,8 @@ class Nav {
       }
     });
     this._destroyScrollbar();
-    // this._initScrollbar();
-    // this._initOtherDropdownsVertical();
+    this._initScrollbar();
+    this._initOtherDropdownsVertical();
   }
 
   // Using popperjs to align user,language and notification dropdowns in the menu
