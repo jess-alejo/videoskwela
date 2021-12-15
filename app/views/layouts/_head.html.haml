@@ -24,4 +24,6 @@
 
   = javascript_pack_tag "application", "data-turbolinks-track": "reload"
 
+  = render "layouts/google_analytics" if Rails.env.production?
+
 

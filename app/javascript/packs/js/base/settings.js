@@ -1,3 +1,4 @@
+import { Globals } from "./globals";
 /**
  *
  * Settings
@@ -26,7 +27,7 @@
  *
  */
 
-class Settings {
+export class Settings {
   get options() {
     return {
       attributes: {
