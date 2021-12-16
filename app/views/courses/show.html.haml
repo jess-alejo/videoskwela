@@ -166,10 +166,12 @@
             .col-6
               .d-flex.align-items-center
                 .sw-5.d-inline-block.position-relative.me-3
-                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-1.webp"}/
+                  = image_tag(@course.author.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
                 .d-inline-block
-                  %a{:href => "#"} Olli Hawkins
-                  .text-muted.text-small Development Lead
+                  %a{:href => "#"}
+                    = @course.author
+                  .text-muted.text-small
+                    = @course.author.title
             .col-6.text-muted
               .row.g-0.justify-content-end
                 .col-auto.pe-3
@@ -299,24 +301,8 @@
           .row.mb-5
             .col-12.col-sm-auto.mb-3.mb-sm-0
               .w-100.sw-sm-19.sw-md-23.border.border-separator-light.sh-16.rounded-md.d-flex.flex-column.align-items-center.justify-content-center
-                .cta-1.text-alternate.mb-2 4.8
-                %div
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 5
-                  %span.text-muted (22)
+                .cta-1.text-alternate.mb-2 4.5
+                = render "courses/course_rating", stars_count: 4, raters_count: 21, average_rating: 4.5
             .col
               .row.align-items-center
                 .col

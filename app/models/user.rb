@@ -107,6 +107,10 @@ class User < ApplicationRecord
     update_column :balance, (course_income - enrollment_expenses)
   end
 
+  def title
+    roles.pluck(:name).map(&:titleize).to_sentence
+  end
+
   private
 
   def must_have_role

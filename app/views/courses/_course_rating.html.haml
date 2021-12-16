@@ -1,0 +1,22 @@
+-# stars_count
+-# raters_count
+-# average_rating
+
+%div
+  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+    .br-wrapper
+      %select.rating{:autocomplete => "off", "data-initial-rating" => "#{stars_count}", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+        - %w[1 2 3 4 5].each do |v|
+          %option{ value: v }= v
+
+      .br-widget.br-readonly
+        - 1.upto(5).each do |n|
+          %a{"data-rating-text" => n.to_s, "data-rating-value" => n.to_s, :href => "#",
+            class: class_names({"br-selected" => stars_count >= n, "br-current" => stars_count == n }) }
+
+        .br-current-rating
+          = average_rating
+  %span.text-muted
+    \(
+    = raters_count
+    \)
