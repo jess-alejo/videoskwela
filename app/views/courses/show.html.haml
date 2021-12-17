@@ -1,4 +1,6 @@
 - page_title @course.title
+- course_presenter = CoursePresenter.new(@course)
+
 .container
   / Title and Top Buttons Start
   .page-title-container
@@ -293,6 +295,7 @@
                       %li - Chocolate bar carrot cake
                       %li - Danish brownie fruitcake tootsie
       / Table of Contents End
+
       / Reviews Start
       %h2.small-title Reviews
       .card
@@ -301,115 +304,34 @@
           .row.mb-5
             .col-12.col-sm-auto.mb-3.mb-sm-0
               .w-100.sw-sm-19.sw-md-23.border.border-separator-light.sh-16.rounded-md.d-flex.flex-column.align-items-center.justify-content-center
-                .cta-1.text-alternate.mb-2 4.5
-                = render "courses/course_rating", stars_count: 4, raters_count: 21, average_rating: 4.5
+                .cta-1.text-alternate.mb-2
+                  = course_presenter.average_rating
+
+                %div
+                  = render partial: "layouts/rating", locals: { stars_count: course_presenter.stars_count, current_rating: course_presenter.average_rating }
+                  %span.text-muted
+                    \(
+                    = course_presenter.raters_count
+                    \)
             .col
-              .row.align-items-center
-                .col
-                  .progress.mb-1
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", :role => "progressbar", :style => "width: 80%;"}
-                .col-auto
-                  %span.me-3.text-muted.text-small %80
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 5
-              .row.align-items-center
-                .col
-                  .progress.mb-1
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "10", :role => "progressbar", :style => "width: 10%;"}
-                .col-auto
-                  %span.me-3.text-muted.text-small %10
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "4", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 4
-              .row.align-items-center
-                .col
-                  .progress.mb-1
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "5", :role => "progressbar", :style => "width: 5%;"}
-                .col-auto
-                  %span.me-3.text-muted.text-small %5
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "3", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 3
-              .row.align-items-center
-                .col
-                  .progress.mb-1
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", :role => "progressbar", :style => "width: 0%;"}
-                .col-auto
-                  %span.me-3.text-muted.text-small %0
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "2", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 2
-              .row.align-items-center
-                .col
-                  .progress.mb-1
-                    .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "5", :role => "progressbar", :style => "width: 5%;"}
-                .col-auto
-                  %span.me-3.text-muted.text-small %5
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "1", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected.br-current{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 1
+              - 5.downto(1) do |n|
+                .row.align-items-center
+                  - star_rating = course_presenter.star_rating(n)
+                  .col
+                    .progress.mb-1
+                      .progress-bar{ role: "progressbar",
+                        aria: {
+                          valuemax: "100",
+                          valuemin: "0",
+                          valuenow: "#{star_rating}"
+                        },
+                      style: "width: #{star_rating}%;"}
+                  .col-auto
+                    %span.me-3.text-muted.text-small
+                      = number_to_percentage(star_rating, precision: 0)
+                    = render partial: "layouts/rating", locals: { stars_count: n, current_rating: star_rating }
           / Total Rating End
+
           / Comments Start
           .d-flex.align-items-center.border-bottom.border-separator-light.pb-3
             .row.g-0.w-100
