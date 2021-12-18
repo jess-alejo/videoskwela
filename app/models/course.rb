@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Course < ApplicationRecord
+  include Reviewable
+
   # find course by title
   extend FriendlyId
   friendly_id :title, use: :slugged

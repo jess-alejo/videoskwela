@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  include Reviewable
+
   extend FriendlyId
   friendly_id :email, use: :slugged
 

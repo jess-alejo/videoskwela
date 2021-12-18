@@ -114,4 +114,5 @@ group :development, :test do
 
   # rspec-rails is a testing framework for Rails 5+.
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
+  gem "shoulda-matchers", "~> 5.0"
 end

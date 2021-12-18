@@ -330,6 +330,8 @@ GEM
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
     sexp_processor (4.15.3)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -427,6 +429,7 @@ DEPENDENCIES
   rspec-rails (~> 5.0, >= 5.0.2)
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers (~> 5.0)
   simple_form (~> 5.1)
   spring
   turbolinks (~> 5)
