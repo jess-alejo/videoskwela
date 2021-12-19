@@ -7,4 +7,7 @@ RSpec.describe Review, type: :model do
   it { is_expected.to have_db_column(:reviewable_type).of_type(:string) }
 
   it { is_expected.to belong_to(:reviewable) }
+
+  it { should validate_presence_of(:rating) }
+  it { should validate_presence_of(:message) }
 end

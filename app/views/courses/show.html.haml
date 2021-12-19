@@ -310,9 +310,7 @@
                 %div
                   = render partial: "layouts/rating", locals: { stars_count: course_presenter.stars_count, current_rating: course_presenter.average_rating }
                   %span.text-muted
-                    \(
-                    = course_presenter.raters_count
-                    \)
+                    = "(#{course_presenter.raters_count})"
             .col
               - 5.downto(1) do |n|
                 .row.align-items-center
@@ -334,29 +332,31 @@
 
           / Comments Start
           .d-flex.align-items-center.border-bottom.border-separator-light.pb-3
-            .row.g-0.w-100
-              .col-auto
-                .sw-5.me-3
-                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-1.webp"}/
-              .col.pe-3
-                %div Cherish Kerr
-                .text-muted.text-small.mb-2 2 days ago
-                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                  .br-wrapper
-                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                      %option{:value => "1"} 1
-                      %option{:value => "2"} 2
-                      %option{:value => "3"} 3
-                      %option{:value => "4"} 4
-                      %option{:value => "5"} 5
-                    .br-widget.br-readonly
-                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                      .br-current-rating 5
-                .text-medium.text-alternate.lh-1-25 Macaroon!
+            - @course.enrollments.reviewed.each do |review|
+              .row.g-0.w-100
+                .col-auto
+                  .sw-5.me-3
+                    = image_tag(review.student.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
+                .col.pe-3
+                  %div
+                    = review.student.name
+                  .text-muted.text-small.mb-2 2 days ago
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                    .br-wrapper
+                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
+                        %option{:value => "1"} 1
+                        %option{:value => "2"} 2
+                        %option{:value => "3"} 3
+                        %option{:value => "4"} 4
+                        %option{:value => "5"} 5
+                      .br-widget.br-readonly
+                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
+                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
+                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
+                        .br-current-rating 5
+                  .text-medium.text-alternate.lh-1-25 Macaroon!
           .d-flex.align-items-center.border-bottom.border-separator-light.pb-3.mt-3
             .row.g-0.w-100
               .col-auto
@@ -495,27 +495,18 @@
                 .col-auto
                   .sh-4.d-flex.align-items-center.text-alternate 1.522
       / At a Glance End
+
       / Tags Start
       %h2.small-title Tags
       .card.mb-5
         .card-body
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Food (12)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Baking (3)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Sweet (1)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Molding (3)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Pastry (5)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Healthy (7)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Rye (3)
-          %button.btn.btn-sm.btn-icon.btn-icon-end.btn-outline-alternate.mb-1.me-1{:type => "button"}
-            %span Simple (3)
+          - @course.tags.each do |tag|
+            = link_to courses_path(course_search: { course_tags_id_eq: tag.id}),
+              class: "btn btn-sm btn-icon btn-icon-end btn-outline-alternate mb-1 me-1" do
+              %span
+                = "#{tag.name} (#{tag.course_tags_count})"
       / Tags End
+
       / Badges Start
       %h2.small-title Badges
       .card.mb-2.sh-15

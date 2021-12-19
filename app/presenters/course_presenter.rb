@@ -10,10 +10,12 @@ class CoursePresenter < SimpleDelegator
   end
 
   def course_ratings
-    @course_ratings ||= enrollments.where.not(rating: [nil, 0, ""])
+    @course_ratings ||= enrollments.rated
   end
 
   def star_rating(rating)
+    return 0 if total_count_course_rating.zero?
+
     course_ratings.where(rating: rating).count.fdiv(total_count_course_rating) * 100
   end
 
