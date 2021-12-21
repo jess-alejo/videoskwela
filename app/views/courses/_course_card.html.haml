@@ -10,10 +10,10 @@
         = course.title
   .card-footer.border-0.pt-0
     .mb-2
-      = render partial: "layouts/rating", locals: { stars_count: course.average_rating.to_i, current_rating: course.average_rating }
+      = render partial: "layouts/rating", locals: { stars_count: course.reviews.average(:rating).to_i, current_rating: course.reviews.average(:rating) }
 
       .text-muted.d-inline-block.text-small.align-text-top
-        = "(#{course.enrollments.rated.count})"
+        = "(#{course.reviews.count})"
 
     .card-text.mb-0
       .text-muted.text-overline.text-small

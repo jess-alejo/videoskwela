@@ -5,21 +5,17 @@ class CoursePresenter < SimpleDelegator
     average_rating.to_i
   end
 
-  def raters_count
-    course_ratings.count
-  end
-
   def course_ratings
-    @course_ratings ||= enrollments.rated
+    @course_ratings ||= reviews.average(:rating)
   end
 
   def star_rating(rating)
-    return 0 if total_count_course_rating.zero?
+    return 0 if review_count.zero?
 
-    course_ratings.where(rating: rating).count.fdiv(total_count_course_rating) * 100
+    reviews.where(rating: rating).count.fdiv(review_count) * 100
   end
 
-  def total_count_course_rating
-    @total_count_course_rating ||= course_ratings.count
+  def review_count
+    @review_count ||= reviews.count
   end
 end

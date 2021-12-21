@@ -296,11 +296,11 @@
                       %li - Danish brownie fruitcake tootsie
       / Table of Contents End
 
-      / Reviews Start
+      -# Reviews Start
       %h2.small-title Reviews
       .card
         .card-body
-          / Total Rating Start
+          -# Total Rating Start
           .row.mb-5
             .col-12.col-sm-auto.mb-3.mb-sm-0
               .w-100.sw-sm-19.sw-md-23.border.border-separator-light.sh-16.rounded-md.d-flex.flex-column.align-items-center.justify-content-center
@@ -328,85 +328,30 @@
                     %span.me-3.text-muted.text-small
                       = number_to_percentage(star_rating, precision: 0)
                     = render partial: "layouts/rating", locals: { stars_count: n, current_rating: star_rating }
-          / Total Rating End
+          -# Total Rating End
 
-          / Comments Start
-          .d-flex.align-items-center.border-bottom.border-separator-light.pb-3
-            - @course.enrollments.reviewed.each do |review|
+          -# Comments Start
+          - total_reviews = @course.reviews.count - 1
+          - @course.reviews.each_with_index do |review, index|
+            .d-flex.align-items-center{ class: class_names("border-bottom border-separator-light pb-3" => index < total_reviews, "mt-3" => index > 0) }
               .row.g-0.w-100
                 .col-auto
                   .sw-5.me-3
-                    = image_tag(review.student.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
+                    = image_tag(review.user.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
                 .col.pe-3
                   %div
-                    = review.student.name
-                  .text-muted.text-small.mb-2 2 days ago
-                  .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                    .br-wrapper
-                      %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                        %option{:value => "1"} 1
-                        %option{:value => "2"} 2
-                        %option{:value => "3"} 3
-                        %option{:value => "4"} 4
-                        %option{:value => "5"} 5
-                      .br-widget.br-readonly
-                        %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                        %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                        %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                        .br-current-rating 5
-                  .text-medium.text-alternate.lh-1-25 Macaroon!
-          .d-flex.align-items-center.border-bottom.border-separator-light.pb-3.mt-3
-            .row.g-0.w-100
-              .col-auto
-                .sw-5.me-3
-                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-2.webp"}/
-              .col.pe-3
-                %div Olli Hawkins
-                .text-muted.text-small.mb-2 3 days ago
-                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                  .br-wrapper
-                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                      %option{:value => "1"} 1
-                      %option{:value => "2"} 2
-                      %option{:value => "3"} 3
-                      %option{:value => "4"} 4
-                      %option{:value => "5"} 5
-                    .br-widget.br-readonly
-                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                      .br-current-rating 5
-                .text-medium.text-alternate.lh-1-25 Cupcake cake fruitcake. Powder chocolate bar soufflé gummi bears topping donut.
-          .d-flex.align-items-center.mt-3
-            .row.g-0.w-100
-              .col-auto
-                .sw-5.me-3
-                  %img.img-fluid.rounded-xl{:alt => "thumb", :src => "img/profile/profile-3.webp"}/
-              .col.pe-3
-                %div Kirby Peters
-                .text-muted.text-small.mb-2 3 days ago
-                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
-                  .br-wrapper
-                    %select.rating{:autocomplete => "off", "data-initial-rating" => "5", "data-readonly" => "true", :name => "rating", :style => "display: none;"}
-                      %option{:value => "1"} 1
-                      %option{:value => "2"} 2
-                      %option{:value => "3"} 3
-                      %option{:value => "4"} 4
-                      %option{:value => "5"} 5
-                    .br-widget.br-readonly
-                      %a.br-selected{"data-rating-text" => "1", "data-rating-value" => "1", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "2", "data-rating-value" => "2", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "3", "data-rating-value" => "3", :href => "#"}
-                      %a.br-selected{"data-rating-text" => "4", "data-rating-value" => "4", :href => "#"}
-                      %a.br-selected.br-current{"data-rating-text" => "5", "data-rating-value" => "5", :href => "#"}
-                      .br-current-rating 5
-                .text-medium.text-alternate.lh-1-25 Nice, very tasty.
-          / Comments End
-      / Reviews End
+                    = review.user.name
+                  .text-muted.text-small.mb-2
+                    = time_ago_in_words review.created_at
+                    ago
+                  = render partial: "layouts/rating", locals: { stars_count: review.rating, current_rating: review.rating }
+
+                  .text-medium.text-alternate.lh-1-25
+                    = review.message
+
+          -# Comments End
+      -# Reviews End
+
     / Left Side End
     / Right Side Start
     .col-12.col-xxl-4.mb-n5
