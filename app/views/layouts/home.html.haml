@@ -12,7 +12,9 @@
       = render "layouts/nav"
 
       %main
-        = yield
+        .container
+          = render "layouts/page_title"
+          = yield
 
       = render "layouts/footer"
 

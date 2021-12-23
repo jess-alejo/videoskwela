@@ -21,7 +21,8 @@
       = render "layouts/nav"
 
       %main
-        = render "layouts/messages"
-        = yield
+        .container
+          = render "layouts/messages"
+          = yield
 
       = render "layouts/footer"

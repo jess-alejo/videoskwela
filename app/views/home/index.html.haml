@@ -1,107 +1,97 @@
-.container
-  / Title and Top Buttons Start
-  .page-title-container
-    .row
-      / Title Start
-      .col-12.col-md-7
-        %h1#title.mb-0.pb-0.display-4 Course Explore
-        %nav.breadcrumb-container.d-inline-block{"aria-label" => "breadcrumb"}
-          %ul.breadcrumb.pt-0
-            %li.breadcrumb-item
-              %a{:href => "index.html"} Home
-      / Title End
-  / Title and Top Buttons End
-  / Content Start
-  / Popular Start
-  .d-flex.justify-content-between
-    %h2.small-title Popular
-    .mt-n1
-      = link_to courses_path(courses_search: { s: "enrollments_count desc" }),
-        class: "btn btn-icon btn-icon-end btn-background pe-0 pt-1" do
-        %span View All
-        %i{ data: { "acorn-icon" => "chevron-right" } }
+- page_title "Course Explore"
+- breadcrumb link_to "Home", root_url
 
-  .row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-3.mb-5
-    - @popular_courses.each do |course|
-      .col
-        = render "courses/course_card", course: course
-  / Popular End
+/ Content Start
+/ Popular Start
+.d-flex.justify-content-between
+  %h2.small-title Popular
+  .mt-n1
+    = link_to courses_path(courses_search: { s: "enrollments_count desc" }),
+      class: "btn btn-icon btn-icon-end btn-background pe-0 pt-1" do
+      %span View All
+      %i{ data: { "acorn-icon" => "chevron-right" } }
 
-  / Trending Start
-  .d-flex.justify-content-between
-    %h2.small-title Trending
-    .mt-n1
-      = link_to courses_path(courses_search: { s: "average_rating desc" }),
-        class: "btn btn-icon btn-icon-end btn-background pe-0 pt-1" do
-        %span View All
-        %i{ data: { "acorn-icon" => "chevron-right" } }
+.row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-3.mb-5
+  - @popular_courses.each do |course|
+    .col
+      = render "courses/course_card", course: course
+/ Popular End
 
-  .row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-3.mb-5
-    - @trending_courses.each do |course|
-      .col
-        = render "courses/course_card", course: course
-  / Trending End
+/ Trending Start
+.d-flex.justify-content-between
+  %h2.small-title Trending
+  .mt-n1
+    = link_to courses_path(courses_search: { s: "average_rating desc" }),
+      class: "btn btn-icon btn-icon-end btn-background pe-0 pt-1" do
+      %span View All
+      %i{ data: { "acorn-icon" => "chevron-right" } }
 
-  / Paths Start
-  %h2.small-title Paths
-  .row.g-3.row-cols-1.row-cols-xl-2.row-cols-xxl-4.mb-5
+.row.row-cols-1.row-cols-sm-2.row-cols-lg-4.g-3.mb-5
+  - @trending_courses.each do |course|
     .col
-      .card.h-100
-        .card-body
-          .text-center
-            %img.theme-filter{:alt => "performance", :src => "img/illustration/icon-performance.webp"}/
-            .d-flex.flex-column.sh-5
-              %a.heading.stretched-link{:href => "Path.List.html"} Frontend Developer
-          .text-muted Sweet roll apple pie tiramisu bonbon sugar plum muffin sesame snaps chocolate. Lollipop halvah powder.
-    .col
-      .card.h-100
-        .card-body
-          .text-center
-            %img.theme-filter{:alt => "experiment", :src => "img/illustration/icon-experiment.webp"}/
-            .d-flex.flex-column.sh-5
-              %a.heading.stretched-link{:href => "Path.List.html"} CSS Mastery
-          .text-muted Chocolate cake marshmallow bear claw sweet. Apple pie macaroon sesame snaps candy jelly pudding.
-    .col
-      .card.h-100
-        .card-body
-          .text-center
-            %img.theme-filter{:alt => "storage", :src => "img/illustration/icon-storage.webp"}/
-            .d-flex.flex-column.sh-5
-              %a.heading.stretched-link{:href => "Path.List.html"} Webmaster
-          .text-muted Cheesecake chocolate carrot cake pie lollipop lemon drops toffee lollipop.
-    .col
-      .card.h-100
-        .card-body
-          .text-center
-            %img.theme-filter{:alt => "people", :src => "img/illustration/icon-accounts.webp"}/
-            .d-flex.flex-column.sh-5
-              %a.heading.stretched-link{:href => "Path.List.html"} Backend Developer
-          .text-muted Cake tart apple pie bear bonbon sugar plum muffin sesame snaps sweet roll gingerbread bonbon sugar.
-  / Paths End
-  %h2.small-title Sale
-  .row.g-3
-    .col-lg-6.mb-5.position-relative
-      %span.badge.rounded-pill.bg-primary.me-1.position-absolute.e-4.t-n2.z-index-1 -30%
-      .card.w-100.sh-24.hover-img-scale-up
-        %img.card-img.h-100.scale{:alt => "card image", :src => "img/banner/cta-horizontal-short-1.webp"}/
-        .card-img-overlay.d-flex.flex-column.justify-content-between.bg-transparent
-          %div
-            .cta-3.mb-3.text-white.opacity-75.w-75 Introduction to Machine Learning
-            .mb-4.text-white.opacity-75 $ 26.25
-            %a.btn.btn-icon.btn-icon-start.btn-primary.stretched-link{:href => "Course.Detail.html"}
-              %svg.acorn-icons.acorn-icons-chevron-right.undefined{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{:d => "M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"}
-              %span View
-    .col-lg-6.mb-5.position-relative
-      %span.badge.rounded-pill.bg-primary.me-1.position-absolute.e-4.t-n2.z-index-1 -25%
-      .card.w-100.sh-24.hover-img-scale-up
-        %img.card-img.h-100.scale{:alt => "card image", :src => "img/banner/cta-horizontal-short-2.webp"}/
-        .card-img-overlay.d-flex.flex-column.justify-content-between.bg-transparent
-          %div
-            .cta-3.mb-3.text-white.opacity-75.w-75 Basic Robotics Coding with Arduino
-            .mb-4.text-white.opacity-75 $ 19.80
-            %a.btn.btn-icon.btn-icon-start.btn-primary.stretched-link{:href => "Course.Detail.html"}
-              %svg.acorn-icons.acorn-icons-chevron-right.undefined{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{:d => "M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"}
-              %span View
-  / Content End
+      = render "courses/course_card", course: course
+/ Trending End
+
+/ Paths Start
+%h2.small-title Paths
+.row.g-3.row-cols-1.row-cols-xl-2.row-cols-xxl-4.mb-5
+  .col
+    .card.h-100
+      .card-body
+        .text-center
+          %img.theme-filter{:alt => "performance", :src => "img/illustration/icon-performance.webp"}/
+          .d-flex.flex-column.sh-5
+            %a.heading.stretched-link{:href => "Path.List.html"} Frontend Developer
+        .text-muted Sweet roll apple pie tiramisu bonbon sugar plum muffin sesame snaps chocolate. Lollipop halvah powder.
+  .col
+    .card.h-100
+      .card-body
+        .text-center
+          %img.theme-filter{:alt => "experiment", :src => "img/illustration/icon-experiment.webp"}/
+          .d-flex.flex-column.sh-5
+            %a.heading.stretched-link{:href => "Path.List.html"} CSS Mastery
+        .text-muted Chocolate cake marshmallow bear claw sweet. Apple pie macaroon sesame snaps candy jelly pudding.
+  .col
+    .card.h-100
+      .card-body
+        .text-center
+          %img.theme-filter{:alt => "storage", :src => "img/illustration/icon-storage.webp"}/
+          .d-flex.flex-column.sh-5
+            %a.heading.stretched-link{:href => "Path.List.html"} Webmaster
+        .text-muted Cheesecake chocolate carrot cake pie lollipop lemon drops toffee lollipop.
+  .col
+    .card.h-100
+      .card-body
+        .text-center
+          %img.theme-filter{:alt => "people", :src => "img/illustration/icon-accounts.webp"}/
+          .d-flex.flex-column.sh-5
+            %a.heading.stretched-link{:href => "Path.List.html"} Backend Developer
+        .text-muted Cake tart apple pie bear bonbon sugar plum muffin sesame snaps sweet roll gingerbread bonbon sugar.
+/ Paths End
+%h2.small-title Sale
+.row.g-3
+  .col-lg-6.mb-5.position-relative
+    %span.badge.rounded-pill.bg-primary.me-1.position-absolute.e-4.t-n2.z-index-1 -30%
+    .card.w-100.sh-24.hover-img-scale-up
+      %img.card-img.h-100.scale{:alt => "card image", :src => "img/banner/cta-horizontal-short-1.webp"}/
+      .card-img-overlay.d-flex.flex-column.justify-content-between.bg-transparent
+        %div
+          .cta-3.mb-3.text-white.opacity-75.w-75 Introduction to Machine Learning
+          .mb-4.text-white.opacity-75 $ 26.25
+          %a.btn.btn-icon.btn-icon-start.btn-primary.stretched-link{:href => "Course.Detail.html"}
+            %svg.acorn-icons.acorn-icons-chevron-right.undefined{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"}
+            %span View
+  .col-lg-6.mb-5.position-relative
+    %span.badge.rounded-pill.bg-primary.me-1.position-absolute.e-4.t-n2.z-index-1 -25%
+    .card.w-100.sh-24.hover-img-scale-up
+      %img.card-img.h-100.scale{:alt => "card image", :src => "img/banner/cta-horizontal-short-2.webp"}/
+      .card-img-overlay.d-flex.flex-column.justify-content-between.bg-transparent
+        %div
+          .cta-3.mb-3.text-white.opacity-75.w-75 Basic Robotics Coding with Arduino
+          .mb-4.text-white.opacity-75 $ 19.80
+          %a.btn.btn-icon.btn-icon-start.btn-primary.stretched-link{:href => "Course.Detail.html"}
+            %svg.acorn-icons.acorn-icons-chevron-right.undefined{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{:d => "M7 4L12.6464 9.64645C12.8417 9.84171 12.8417 10.1583 12.6464 10.3536L7 16"}
+            %span View
+/ Content End

@@ -1,0 +1,12 @@
+/ Title and Top Buttons Start
+.page-title-container
+  .row
+    / Title Start
+    .col-12.col-md-7
+      %h1#title.mb-0.pb-0.display-4
+        = yield :page_title
+      %nav.breadcrumb-container.d-inline-block{"aria-label" => "breadcrumb"}
+        %ul.breadcrumb.pt-0
+          = yield :breadcrumb
+    / Title End
+/ Title and Top Buttons End

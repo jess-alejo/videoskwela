@@ -6,9 +6,15 @@ module ApplicationHelper
   end
 
   def page_title(title)
-    content_for :title do
-      "Videoskwela | #{title}"
+    content_for :page_title, title
+  end
+
+  def breadcrumb(link)
+    li = tag.li(class: "breadcrumb-item") do
+      link
     end
+
+    content_for :breadcrumb, li
   end
 
   def progress_indicator(_current, _total)
