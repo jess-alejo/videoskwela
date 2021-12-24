@@ -1,20 +1,9 @@
 !!!
-%html{ lang: "en", "data-footer"=>"true",
-  "data-placement"=>"vertical",
-  "data-behaviour" => "unpinned",
-  "data-layout"=>"boxed",
-  "data-radius"=>"rounded",
-  "data-color"=>"dark-purple",
-  "data-navcolor"=>"default",
-  "data-show"=>"true",
-  "data-dimension"=>"desktop",
-  "data-menu-animate" => "hidden" }
-  %head
-    = render "layouts/head"
+%html{ lang: "en", "data-footer"=>"true" }
 
-    = render "layouts/google_analytics" if Rails.env.production?
+  = render "layouts/head"
 
-  %body{ "data-bs-padding" => "15px" }
+  %body{ "data-bs-padding" => "15px"}
     = render "layouts/modal"
 
     #root
@@ -22,7 +11,10 @@
 
       %main
         .container
+          = render "layouts/page_title"
           = render "layouts/messages"
           = yield
 
       = render "layouts/footer"
+
+    = render "layouts/scripts"

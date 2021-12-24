@@ -136,13 +136,13 @@
             %span.label Courses
           %ul#courses
             %li
-              %a{:href => "Course.Explore.html"}
+              = link_to explore_courses_path do
                 %span.label Explore
             %li
-              %a{:href => "Course.List.html"}
+              = link_to list_courses_path do
                 %span.label List
             %li
-              %a{:href => "Course.Detail.html"}
+              = link_to detail_courses_path do
                 %span.label Detail
         %li
           %a{:href => "#quiz"}

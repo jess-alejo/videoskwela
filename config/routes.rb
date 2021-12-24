@@ -21,12 +21,20 @@ Rails.application.routes.draw do
   end
 
   resources :courses, except: :edit do
+    # get "course_explore", to: "courses#explore", as: :course_explore
+    # get "course_list",    to: "courses#list",    as: :course_list
+
     collection do
       get :enrolled
       get :pending_review
       get :authored
       get :pending_approval
+
+      get :explore
+      get :list
+      get :detail
     end
+
     member do
       patch :publish
       patch :review
