@@ -132,7 +132,12 @@ class CoursesController < ApplicationController
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
   end
 
-  def detail; end
+  def detail
+    @course = Course.find_by(slug: params[:slug])
+    @lessons = @course.lessons.rank(:row_order)
+    @course_reviews = @course.enrollments.reviewed
+    @similar_courses = @course.similar_courses
+  end
 
   private
 

@@ -6,7 +6,7 @@
 
   .card-body
     %h5.heading.mb-0
-      = link_to course_path(course), class: "body-link stretched-link course-title" do
+      = link_to detail_courses_path(slug: course.slug), class: "body-link stretched-link course-title" do
         = course.title
   .card-footer.border-0.pt-0
     .mb-2
