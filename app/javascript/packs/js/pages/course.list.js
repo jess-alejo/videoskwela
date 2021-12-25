@@ -7,7 +7,13 @@
  *
  */
 
-class CourseList {
+// TODO: chose between node or local bootstrap
+// import * as bootstrap from "../vendor/bootstrap.bundle.min";
+import * as bootstrap from "bootstrap";
+
+import { MoveContent } from "../vendor/movecontent";
+
+export class CourseList {
   constructor() {
     this.menuButton = document.getElementById('menuButton');
     this.menuModal = new bootstrap.Modal(document.getElementById('menuModal'));

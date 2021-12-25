@@ -3,6 +3,8 @@ import { Nav } from "./base/nav"
 import { Common } from "./common"
 import { Settings } from "./base/settings"
 
+import { CourseList } from "./pages/course.list"
+
 // <!-- Icons Start -->
 import "../../icon/acorn-icons-interface"
 import "../../icon/acorn-icons-learning"
@@ -74,6 +76,11 @@ class Scripts {
     // vertical.js initialization
     if (typeof VerticalPage !== "undefined") {
       const verticalPage = new VerticalPage()
+    }
+
+    // course.list.js initialization
+    if (typeof CourseList !== 'undefined') {
+      const courseList = new CourseList();
     }
 
     // course.explore.js initialization

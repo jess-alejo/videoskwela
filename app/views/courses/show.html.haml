@@ -1,472 +1,74 @@
 - page_title @course.title
-- course_presenter = CoursePresenter.new(@course)
 
-.container
-  / Title and Top Buttons Start
-  .page-title-container
-    .row
-      / Title Start
-      .col-12.col-sm-6
-        %h1#title.mb-0.pb-0.display-4
-          = @course.title
-        %nav.breadcrumb-container.d-inline-block{"aria-label" => "breadcrumb"}
-          %ul.breadcrumb.pt-0
-            %li.breadcrumb-item
-              = link_to "Home", root_path
-            %li.breadcrumb-item
-              = link_to "Courses", courses_path
-      / Title End
-      / Top Buttons Start
-      .col-12.col-sm-6.d-flex.align-items-start.justify-content-end
-        / Start Now Start
-        %a.btn.btn-primary.btn-icon.btn-icon-start.w-100.w-sm-auto{:href => "Misc.Player.html"}
-          %i{ data: { "acorn-icon" => "chevron-right" } }
-          %span Start Now
-        / Start Now End
-      / Top Buttons End
-  / Title and Top Buttons End
-  / Content Start
-  .row
-    / Left Side Start
-    .col-12.col-xxl-8.mb-5
-      / Preview Start
-      %h2.small-title Preview
-      .card.mb-5
-        .card-img-top
-          .plyr.plyr--full-ui.plyr--video.plyr--html5.plyr--fullscreen-enabled.plyr--paused.plyr--stopped.plyr--pip-supported.plyr__poster-enabled{:tabindex => "0"}
-            .plyr__controls
-              %button.plyr__controls__item.plyr__control{"aria-label" => "Play", "data-plyr" => "play", :type => "button"}
-                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-pause"}
-                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-play"}
-                %span.label--pressed.plyr__sr-only Pause
-                %span.label--not-pressed.plyr__sr-only Play
-              .plyr__controls__item.plyr__progress__container
-                .plyr__progress
-                  %input#plyr-seek-6490{"aria-label" => "Seek", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "0", "aria-valuetext" => "00:00 of 03:03", :autocomplete => "off", "data-plyr" => "seek", :max => "100", :min => "0", :role => "slider", :step => "0.01", :style => "--value:0%;", :type => "range", :value => "0"}/
-                  %progress.plyr__progress__buffer{"aria-hidden" => "true", :max => "100", :min => "0", :role => "progressbar", :value => "0"} % buffered
-                  %span.plyr__tooltip 00:00
-              .plyr__controls__item.plyr__time--current.plyr__time{"aria-label" => "Current time"} -03:03
-              .plyr__controls__item.plyr__volume
-                %button.plyr__control{"data-plyr" => "mute", :type => "button"}
-                  %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
-                    %use{"xlink:href" => "#plyr-muted"}
-                  %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
-                    %use{"xlink:href" => "#plyr-volume"}
-                  %span.label--pressed.plyr__sr-only Unmute
-                  %span.label--not-pressed.plyr__sr-only Mute
-                %input#plyr-volume-6490{"aria-label" => "Volume", "aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "100", "aria-valuetext" => "100.0%", :autocomplete => "off", "data-plyr" => "volume", :max => "1", :min => "0", :role => "slider", :step => "0.05", :style => "--value:100%;", :type => "range", :value => "1"}/
-              %button.plyr__controls__item.plyr__control{"data-plyr" => "captions", :type => "button"}
-                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-captions-on"}
-                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-captions-off"}
-                %span.label--pressed.plyr__sr-only Disable captions
-                %span.label--not-pressed.plyr__sr-only Enable captions
-              .plyr__controls__item.plyr__menu
-                %button.plyr__control{"aria-controls" => "plyr-settings-6490", "aria-expanded" => "false", "aria-haspopup" => "true", "data-plyr" => "settings", :type => "button"}
-                  %svg{"aria-hidden" => "true", :focusable => "false"}
-                    %use{"xlink:href" => "#plyr-settings"}
-                  %span.plyr__sr-only Settings
-                #plyr-settings-6490.plyr__menu__container{:hidden => ""}
-                  %div
-                    #plyr-settings-6490-home
-                      %div{:role => "menu"}
-                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :hidden => "", :role => "menuitem", :type => "button"}
-                          %span
-                            Captions
-                            %span.plyr__menu__value Disabled
-                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :hidden => "", :role => "menuitem", :type => "button"}
-                          %span
-                            Quality
-                            %span.plyr__menu__value 0
-                        %button.plyr__control.plyr__control--forward{"aria-haspopup" => "true", "data-plyr" => "settings", :role => "menuitem", :type => "button"}
-                          %span
-                            Speed
-                            %span.plyr__menu__value Normal
-                    #plyr-settings-6490-captions{:hidden => ""}
-                      %button.plyr__control.plyr__control--back{:type => "button"}
-                        %span{"aria-hidden" => "true"} Captions
-                        %span.plyr__sr-only Go back to previous menu
-                      %div{:role => "menu"}
-                    #plyr-settings-6490-quality{:hidden => ""}
-                      %button.plyr__control.plyr__control--back{:type => "button"}
-                        %span{"aria-hidden" => "true"} Quality
-                        %span.plyr__sr-only Go back to previous menu
-                      %div{:role => "menu"}
-                    #plyr-settings-6490-speed{:hidden => ""}
-                      %button.plyr__control.plyr__control--back{:type => "button"}
-                        %span{"aria-hidden" => "true"} Speed
-                        %span.plyr__sr-only Go back to previous menu
-                      %div{:role => "menu"}
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "0.5"}
-                          %span 0.5×
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "0.75"}
-                          %span 0.75×
-                        %button.plyr__control{"aria-checked" => "true", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1"}
-                          %span Normal
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.25"}
-                          %span 1.25×
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.5"}
-                          %span 1.5×
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "1.75"}
-                          %span 1.75×
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "2"}
-                          %span 2×
-                        %button.plyr__control{"aria-checked" => "false", "data-plyr" => "speed", :role => "menuitemradio", :type => "button", :value => "4"}
-                          %span 4×
-              %button.plyr__controls__item.plyr__control{"data-plyr" => "pip", :type => "button"}
-                %svg{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-pip"}
-                %span.plyr__sr-only PIP
-              %button.plyr__controls__item.plyr__control{"data-plyr" => "fullscreen", :type => "button"}
-                %svg.icon--pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-exit-fullscreen"}
-                %svg.icon--not-pressed{"aria-hidden" => "true", :focusable => "false"}
-                  %use{"xlink:href" => "#plyr-enter-fullscreen"}
-                %span.label--pressed.plyr__sr-only Exit fullscreen
-                %span.label--not-pressed.plyr__sr-only Enter fullscreen
-            .plyr__video-wrapper
-              %video#videoPlayer.player.sh-50.cover{"data-poster" => "img/course/large/course-1.webp", :poster => "img/course/large/course-1.webp"}
-                %source{:src => "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4", :type => "video/mp4"}
-              .plyr__poster{:style => "background-image: url(\"img/course/large/course-1.webp\");"}
-            .plyr__captions
-            %button.plyr__control.plyr__control--overlaid{"aria-label" => "Play", "data-plyr" => "play", :type => "button"}
-              %svg{"aria-hidden" => "true", :focusable => "false"}
-                %use{"xlink:href" => "#plyr-play"}
-              %span.plyr__sr-only Play
-        .card-body
-          %h6 Cookie Macaroon
-          %p.mb-4
-            Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry
-            sweet roll carrot cake cake macaroon gingerbread cookie.Candy pie sweet roll biscuit marzipan. Chocolate bar candy canes macaroon liquorice
-            danish biscuit biscuit.
-          %h6 Muffin
-          %p.mb-4
-            Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake cupcake gummi bears danish. Sesame snaps muffin macaroon tiramisu
-            ice cream. Liquorice caramels apple pie chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear
-            claw. Pastry sweet roll carrot cake cake macaroon gingerbread cookie.
-          %h6 Liquorice
-          %p.mb-4
-            Snaps muffin macaroon tiramisu ice cream toffee carrot sesame tootsie roll.Brownie ice cream marshmallow topping. Icing liquorice oat cake
-            caramels. Sugar plum gummi bears jujubes cookie jelly-o tootsie roll chocolate bar. Jujubes candy jelly-o topping lemon drops. Cupcake
-            gingerbread cookie cookie lemon drops tootsie roll lollipop. Tiramisu toffee brownie sweet roll sesame snaps halvah. Icing carrot cake
-            cupcake gummi bears danish.
-          %h6 Powder Cake
-          %p.mb-4
-            Sesame snaps brownie gummi bears tootsie roll caramels dragée. Powder cake gummies jelly beans toffee carrot cake bonbon powder muffin.
-            Jujubes candy jelly-o topping lemon drops. Cupcake gingerbread cookie cookie lemon drops tootsie roll lollipop. Liquorice caramels apple pie
-            chupa chups bonbon. Jelly-o candy apple pie sugar plum icing chocolate cake lollipop jujubes bear claw. Pastry sweet roll carrot cake cake
-            macaroon gingerbread cookie.Carrot cake jelly-o lemon drops toffee tootsie roll. Brownie topping toffee apple pie apple pie. Wafer pudding
-            chocolate bar pastry bear claw tart carrot cake lemon drops icing. Gingerbread toffee topping. Tootsie roll cotton candy muffin cheesecake
-            liquorice sweet. Sugar plum tart tart marshmallow chocolate wafer apple pie candy canes. Chocolate cake biscuit donut cotton candy soufflé
-            cake macaroon. Halvah chocolate cotton candy sweet roll jelly-o candy danish dragée. Apple pie cotton candy tiramisu biscuit cake muffin
-            tootsie roll bear claw cake. Cupcake cake fruitcake.
-        .card-footer.border-0.pt-0
-          .row.align-items-center
-            .col-6
-              .d-flex.align-items-center
-                .sw-5.d-inline-block.position-relative.me-3
-                  = image_tag(@course.author.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
-                .d-inline-block
-                  %a{:href => "#"}
-                    = @course.author
-                  .text-muted.text-small
-                    = @course.author.title
-            .col-6.text-muted
-              .row.g-0.justify-content-end
-                .col-auto.pe-3
-                  %svg.acorn-icons.acorn-icons-eye.text-primary.me-1{:fill => "none", :height => "15", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "15", :xmlns => "http://www.w3.org/2000/svg"}
-                    %path{:d => "M2.47466 10.8418C2.15365 10.3203 2.15365 9.67971 2.47466 9.15822C3.49143 7.50643 6.10818 4 10 4C13.8918 4 16.5086 7.50644 17.5253 9.15822C17.8464 9.67971 17.8464 10.3203 17.5253 10.8418C16.5086 12.4936 13.8918 16 10 16C6.10818 16 3.49143 12.4936 2.47466 10.8418Z"}
-                    %path{:d => "M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z"}
-                  %span.align-middle 4.8K
-                .col-auto
-                  %i.text-primary.me-1{ data: { acorn: { icon: "message", height: 15 } } }
-                  %span.align-middle
-                    = @course.reviews.count
-      / Preview End
-      / Table of Contents Start
-      %h2.small-title Table of Contents
-      .card.mb-5
-        .card-body
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-                .line-w-1.bg-separator.h-100.position-absolute
-            .col.mb-4
-              .h-100
-                .d-flex.flex-column.justify-content-start
-                  .d-flex.flex-column
-                    %p.heading 01. Dashboards
-                    %ul.list-unstyled
-                      %li - Danish brownie fruitcake tootsie
-                      %li - Fruitcake tart dessert
-                      %li - Bar carrot cake
-                      %li - Snaps muffin macaroon tiramisu
-                      %li - Ice cream marshmallow
-                      %li - Plum caramels fruitcake
-                      %li - Chocolate bar carrot cake
-                      %li - Cotton candy gummies
-                      %li - Danish cake gummies jelly
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1.position-relative.justify-content-center
-                .line-w-1.bg-separator.h-100.position-absolute
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-                .line-w-1.bg-separator.h-100.position-absolute
-            .col.mb-4
-              .h-100
-                .d-flex.flex-column
-                  %p.heading 02. Applications
-                  %ul.list-unstyled
-                    %li - Ice cream marshmallow
-                    %li - Plum caramels fruitcake
-                    %li - Chocolate bar carrot cake
-                    %li - Danish brownie fruitcake tootsie
-                    %li - Fruitcake tart dessert
-                    %li - Bar carrot cake
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1.position-relative.justify-content-center
-                .line-w-1.bg-separator.h-100.position-absolute
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-                .line-w-1.bg-separator.h-100.position-absolute
-            .col.mb-4
-              .h-100
-                .d-flex.flex-column
-                  %p.heading 03. Interface
-                  %ul.list-unstyled
-                    %li - Ice cream marshmallow
-                    %li - Plum caramels fruitcake
-                    %li - Chocolate bar carrot cake
-                    %li - Danish brownie fruitcake tootsie
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1.position-relative.justify-content-center
-                .line-w-1.bg-separator.h-100.position-absolute
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-                .line-w-1.bg-separator.h-100.position-absolute
-            .col.mb-4
-              .h-100
-                .d-flex.flex-column
-                  %p.heading 04. Conclusion
-                  %ul.list-unstyled
-                    %li - Chocolate bar carrot cake
-                    %li - Danish brownie fruitcake tootsie
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1.position-relative.justify-content-center
-                .line-w-1.bg-separator.h-100.position-absolute
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-                .line-w-1.bg-separator.h-100.position-absolute
-            .col.mb-4
-              .h-100
-                .d-flex.flex-column
-                  %p.heading 05. What is Next?
-                  %ul.list-unstyled
-                    %li - Danish brownie fruitcake tootsie
-                    %li - Fruitcake tart dessert
-                    %li - Bar carrot cake
-          .row.g-0
-            .col-auto.sw-1.d-flex.flex-column.justify-content-center.align-items-center.position-relative.me-4
-              .w-100.d-flex.sh-1.position-relative.justify-content-center
-                .line-w-1.bg-separator.h-100.position-absolute
-              .rounded-xl.shadow.d-flex.flex-shrink-0.justify-content-center.align-items-center
-                .bg-gradient-light.sw-1.sh-1.rounded-xl.position-relative
-              .w-100.d-flex.h-100.justify-content-center.position-relative
-            .col
-              .h-100
-                .d-flex.flex-column.justify-content-start
-                  .d-flex.flex-column
-                    %p.heading 06. Credits
-                    %ul.list-unstyled
-                      %li - Chocolate bar carrot cake
-                      %li - Danish brownie fruitcake tootsie
-      / Table of Contents End
+%nav{"aria-label" => "breadcrumb"}
+  %ol.breadcrumb
+    %li.breadcrumb-item
+      = link_to 'Courses', courses_path
+    %li.breadcrumb-item.active{"aria-current" => "page"}
+      = @course.title
 
-      -# Reviews Start
-      %h2.small-title Reviews
-      .card
-        .card-body
-          -# Total Rating Start
-          .row.mb-5
-            .col-12.col-sm-auto.mb-3.mb-sm-0
-              .w-100.sw-sm-19.sw-md-23.border.border-separator-light.sh-16.rounded-md.d-flex.flex-column.align-items-center.justify-content-center
-                .cta-1.text-alternate.mb-2
-                  = course_presenter.average_rating
+.row
+  .col-lg-8.order-1.order-lg-0.mb-3
+    .rounded.border.mb-4.p-4
+      %h3.card-title
+        .fa.fa-graduation-cap.me-1
+        = @course.title
 
-                %div
-                  = render partial: "layouts/rating", locals: { stars_count: course_presenter.stars_count, current_rating: course_presenter.average_rating }
-                  %span.text-muted
-                    = "(#{course_presenter.review_count})"
-            .col
-              - 5.downto(1) do |n|
-                .row.align-items-center
-                  - star_rating = course_presenter.star_rating(n)
-                  .col
-                    .progress.mb-1
-                      .progress-bar{ role: "progressbar",
-                        aria: {
-                          valuemax: "100",
-                          valuemin: "0",
-                          valuenow: "#{star_rating}"
-                        },
-                      style: "width: #{star_rating}%;"}
-                  .col-auto
-                    %span.me-3.text-muted.text-small
-                      = number_to_percentage(star_rating, precision: 0)
-                    = render partial: "layouts/rating", locals: { stars_count: n, current_rating: star_rating }
-          -# Total Rating End
+      %ul.list-group.list-group-flush.border-none
+        %li.list-group-item.border-bottom-0
+          .far.fa-clock.me-1
+          Created
+          = @course.created_at
+        %li.list-group-item.border-bottom-0
+          .far.fa-clock.me-1
+          Last updated
+          = @course.created_at
+        %li.list-group-item.border-bottom-0
+          .fa.fa-globe.me-1
+          = @course.language
+        %li.list-group-item
+          .fa.fa-signal.me-1
+          = @course.level
 
-          -# Comments Start
-          - total_reviews = @course.reviews.count - 1
-          - @course.reviews.each_with_index do |review, index|
-            .d-flex.align-items-center{ class: class_names("border-bottom border-separator-light pb-3" => index < total_reviews, "mt-3" => index > 0) }
-              .row.g-0.w-100
-                .col-auto
-                  .sw-5.me-3
-                    = image_tag(review.user.avatar_url, alt: "thumb", class: "img-fluid rounded-xl")
-                .col.pe-3
-                  %div
-                    = review.user.name
-                  .text-muted.text-small.mb-2
-                    = time_ago_in_words review.created_at
-                    ago
-                  = render partial: "layouts/rating", locals: { stars_count: review.rating, current_rating: review.rating }
+      .card-body
+        = @course.description
+    %h4
+      .fa.fa-tasks.me-1
+      = pluralize(@course.lessons_count, 'Lesson')
+      .float-end
+        .fa.fa-spinner
+        = number_to_percentage(@course.progress(current_user), precision: 0)
 
-                  .text-medium.text-alternate.lh-1-25
-                    = review.message
+    %ul.list-group.mb-4.lesson-sortable
+      - if policy(@course).author?
+        - @lessons.each do |lesson|
+          = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
+            .list-group-item.d-flex
+              .fa.fa-sort.all-scroll.align-self-center.me-4{:style => "cursor: grab;"}
+              = render 'lessons/lesson_preview', lesson: lesson
+      - else
+        - @lessons.each do |lesson|
+          .list-group-item.d-flex
+            = render 'lessons/lesson_preview', lesson: lesson
 
-          -# Comments End
-      -# Reviews End
+    - if @course_reviews.size.positive?
+      %h4
+        .fa.fa-comment.me-1
+        = pluralize(@course_reviews.size, 'Reviews')
 
-    / Left Side End
-    / Right Side Start
-    .col-12.col-xxl-4.mb-n5
-      / At a Glance Start
-      %h2.small-title At a Glance
-      .card.mb-5
-        .card-body
-          .row.g-0.align-items-center.mb-3
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "clock" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Duration
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate 14 Hours
-          .row.g-0.align-items-center.mb-3
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "presentation" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Content
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate 8 Chapters
-          .row.g-0.align-items-center.mb-3
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "diploma" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Level
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate
-                    = @course.level
-          .row.g-0.align-items-center.mb-3
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "calendar" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Release
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate 05.11.2021
-          .row.g-0.align-items-center.mb-3
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "star" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Rating
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate
-                    = "#{@course.reviews.average(:rating).to_f} (#{@course.reviews.count})"
-          .row.g-0.align-items-center.mb-0
-            .col-auto
-              .sw-3.sh-4.d-flex.justify-content-center.align-items-center
-                %i.text-primary{ data: { "acorn-icon" => "graduation" } }
-            .col.ps-3
-              .row.g-0
-                .col
-                  .sh-4.d-flex.align-items-center.lh-1-25 Completed By
-                .col-auto
-                  .sh-4.d-flex.align-items-center.text-alternate 1.522
-      / At a Glance End
+      %ul.list-group
+        - @course_reviews.each do |course_review|
+          = render 'enrollments/course_review', course_review: course_review
 
-      / Tags Start
-      %h2.small-title Tags
-      .card.mb-5
-        .card-body
-          - @course.tags.each do |tag|
-            = link_to courses_path(course_search: { course_tags_id_eq: tag.id}),
-              class: "btn btn-sm btn-icon btn-icon-end btn-outline-alternate mb-1 me-1" do
-              %span
-                = "#{tag.name} (#{tag.course_tags_count})"
-      / Tags End
 
-      / Badges Start
-      %h2.small-title Badges
-      .card.mb-2.sh-15
-        .card-body.text-center.align-items-center.d-flex.flex-row
-          .d-flex.sw-6.sh-6.bg-gradient-light.align-items-center.justify-content-center.rounded-xl.position-relative.ms-1
-            %svg.acorn-icons.acorn-icons-badge.text-white{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-              %path{:d => "M13 11L13.8819 17.1734C13.9258 17.4809 13.9478 17.6347 13.8803 17.7191C13.8518 17.7547 13.8142 17.7819 13.7713 17.7976C13.6699 17.835 13.531 17.7655 13.2532 17.6266L10.3913 16.1957C10.2271 16.1136 10.1451 16.0725 10.0578 16.0624C10.0194 16.0579 9.98059 16.0579 9.94217 16.0624C9.85494 16.0725 9.77286 16.1136 9.60869 16.1957L6.74684 17.6266C6.46901 17.7655 6.3301 17.835 6.22866 17.7976C6.18584 17.7819 6.14815 17.7547 6.11967 17.7191C6.05219 17.6347 6.07416 17.4809 6.11809 17.1734L7 11"}
-              %circle{:cx => "10", :cy => "7", :r => "5"}
-            .achievement.bg.position-absolute
-              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4518 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.599 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001ZM9.90579 15.1001C10.8175 15.7411 11.03 16.9899 10.3804 17.8895C6.40105 23.4002 4.05405 30.1716 4.05405 37.5C4.05405 44.8284 6.40105 51.5998 10.3804 57.1105C11.03 58.0101 10.8175 59.2589 9.90579 59.8999C8.99405 60.5408 7.72832 60.3312 7.07871 59.4316C2.62373 53.2623 0 45.6836 0 37.5C0 29.3164 2.62373 21.7377 7.07871 15.5684C7.72832 14.6689 8.99404 14.4592 9.90579 15.1001ZM14.9248 64.9584C15.5927 64.0719 16.8625 63.8876 17.7609 64.5466C23.2952 68.606 30.1167 71 37.5 71C44.8833 71 51.7048 68.606 57.2391 64.5465C58.1375 63.8876 59.4073 64.0719 60.0752 64.9584C60.7431 65.8448 60.5562 67.0977 59.6578 67.7567C53.4518 72.3088 45.7883 75 37.5 75C29.2117 75 21.5483 72.3088 15.3422 67.7567C14.4438 67.0977 14.2569 65.8448 14.9248 64.9584Z", "fill-rule" => "evenodd"}
-            .achievement.level.position-absolute
-              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4517 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333Z", "fill-rule" => "evenodd"}
-          .ms-5.text-start
-            %p.mb-1 Javascript Novice
-            %p.mb-0.text-primary Level 1
-      .card.mb-2.sh-15
-        .card-body.text-center.align-items-center.d-flex.flex-row
-          .d-flex.sw-6.sh-6.bg-gradient-light.align-items-center.justify-content-center.rounded-xl.position-relative.ms-1
-            %svg.acorn-icons.acorn-icons-medal.text-white{:fill => "none", :height => "20", :stroke => "currentColor", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "1.5", :viewbox => "0 0 20 20", :width => "20", :xmlns => "http://www.w3.org/2000/svg"}
-              %circle{:cx => "10", :cy => "14", :r => "4"}
-              %path{:d => "M13 11L15.7501 4.81228C16.3379 3.4897 15.3698 2 13.9225 2H10H6.07752C4.63021 2 3.66209 3.4897 4.2499 4.81228L7 11"}
-              %path{:d => "M11 14H9M10 15 10 13"}
-            .achievement.bg.position-absolute
-              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4518 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.599 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001ZM9.90579 15.1001C10.8175 15.7411 11.03 16.9899 10.3804 17.8895C6.40105 23.4002 4.05405 30.1716 4.05405 37.5C4.05405 44.8284 6.40105 51.5998 10.3804 57.1105C11.03 58.0101 10.8175 59.2589 9.90579 59.8999C8.99405 60.5408 7.72832 60.3312 7.07871 59.4316C2.62373 53.2623 0 45.6836 0 37.5C0 29.3164 2.62373 21.7377 7.07871 15.5684C7.72832 14.6689 8.99404 14.4592 9.90579 15.1001ZM14.9248 64.9584C15.5927 64.0719 16.8625 63.8876 17.7609 64.5466C23.2952 68.606 30.1167 71 37.5 71C44.8833 71 51.7048 68.606 57.2391 64.5465C58.1375 63.8876 59.4073 64.0719 60.0752 64.9584C60.7431 65.8448 60.5562 67.0977 59.6578 67.7567C53.4518 72.3088 45.7883 75 37.5 75C29.2117 75 21.5483 72.3088 15.3422 67.7567C14.4438 67.0977 14.2569 65.8448 14.9248 64.9584Z", "fill-rule" => "evenodd"}
-            .achievement.level.position-absolute
-              %svg{:fill => "black", :height => "75", :viewbox => "0 0 75 75", :width => "75", :xmlns => "http://www.w3.org/2000/svg"}
-                %path{"clip-rule" => "evenodd", :d => "M15.3422 7.24333C21.5482 2.69119 29.2117 0 37.5 0C45.7883 0 53.4517 2.69119 59.6578 7.24333C60.5562 7.90233 60.7431 9.15516 60.0752 10.0416C59.4073 10.9281 58.1375 11.1124 57.2391 10.4534C51.7048 6.39402 44.8833 4 37.5 4C30.1167 4 23.2952 6.39403 17.7609 10.4535C16.8625 11.1124 15.5927 10.9281 14.9248 10.0416C14.2569 9.15516 14.4438 7.90233 15.3422 7.24333ZM65.0942 15.1001C66.006 14.4592 67.2717 14.6688 67.9213 15.5684C72.3763 21.7377 75 29.3164 75 37.5C75 45.6836 72.3763 53.2623 67.9213 59.4316C67.2717 60.3311 66.006 60.5408 65.0942 59.8999C64.1825 59.2589 63.97 58.0101 64.6196 57.1105C68.599 51.5998 70.9459 44.8284 70.9459 37.5C70.9459 30.1716 68.5989 23.4002 64.6196 17.8895C63.97 16.9899 64.1825 15.7411 65.0942 15.1001Z", "fill-rule" => "evenodd"}
-          .ms-5.text-start
-            %p.mb-1 Frontend Apprentice
-            %p.mb-0.text-primary Level 2
-      / Badges End
-    / Right Side End
-  / Content End
+    - if @similar_courses.size.positive?
+      %h4
+        .fa.fa-graduation-cap.me-1
+        Similar Courses
+      .course-container
+        - @similar_courses.each do |course|
+          = render 'courses/course', course: course
+
+  .col-lg-4.order-0.order-lg-1.mb-3
+    .sticky-top
+      = render 'course_card', course: @course

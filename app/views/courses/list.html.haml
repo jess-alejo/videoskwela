@@ -1,0 +1,114 @@
+- page_title "Course List"
+- breadcrumb link_to "Home", root_url
+- breadcrumb link_to "Courses", explore_courses_path
+
+/ Content Start
+.row.g-0
+  .col-auto.d-none.d-lg-flex
+    #menuColumn.nav.flex-column.sw-30.pe-7
+      / Content of this will be moved from #menuMoveContent div based on the responsive breakpoint.
+  .col
+    / List Items Start
+    .row.g-3.row-cols-1.row-cols-md-2.row-cols-xl-3.row-cols-xxl-4.mb-5
+      - @courses.each do |course|
+        .col
+          = render partial: "course_card", locals: { course: course }
+
+    .row
+      .col-12.text-center
+        %button.btn.btn-outline-primary.sw-25 Load More
+    / List Items End
+/ Menu Content Start
+#menuModal.modal.modal-right.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h5.modal-title Course Filters
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+      .modal-body
+        / Content of below will be moved to #menuColumn or back in here based on the data-move-breakpoint attribute below
+        / Content will be here if the screen size is smaller than lg
+        #menuMoveContent{"data-move-breakpoint" => "lg", "data-move-target" => "#menuColumn"}
+          .menu-items
+            .mb-5
+              %p.text-small.text-muted.mb-2 CATEGORY
+              .mt-3
+                .form-check
+                  %input#category1.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "category1"} Bread
+                .form-check
+                  %input#category2.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "category2"} Cake
+                .form-check
+                  %input#category3.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "category3"} Fruit
+                .form-check
+                  %input#category4.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "category4"} Vegetable
+                .form-check
+                  %input#category5.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "category5"} Sandwich
+            .mb-5
+              %p.text-small.text-muted.mb-2 DURATION
+              .mt-3
+                .form-check
+                  %input#duration1.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "duration1"} 0-5 Hours
+                .form-check
+                  %input#duration2.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "duration2"} 5-10 Hours
+                .form-check
+                  %input#duration3.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "duration3"} 10-20 Hours
+                .form-check
+                  %input#duration4.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "duration4"} 20-50 Hours
+                .form-check
+                  %input#duration5.form-check-input{:type => "checkbox"}/
+                  %label.form-check-label{:for => "duration5"} 50-100 Hours
+            .mb-5
+              %p.text-small.text-muted.mb-2 PRICE
+              .row.g-1
+                .col
+                  %input.form-control{:placeholder => "Min", :type => "text"}/
+                .col
+                  %input.form-control{:placeholder => "Max", :type => "text"}/
+                .col-auto
+                  %button.btn.btn-icon.btn-icon-only.btn-outline-primary{:type => "button"}
+                    %i{"data-acorn-icon" => "chevron-right"}
+            .mb-5
+              %p.text-small.text-muted.mb-2 SEARCH
+              .row.g-1
+                .col
+                  %input.form-control{:placeholder => "Keyword", :type => "text"}/
+                .col-auto
+                  %button.btn.btn-icon.btn-icon-only.btn-outline-primary{:type => "button"}
+                    %i{"data-acorn-icon" => "chevron-right"}
+            .mb-5
+              %p.text-small.text-muted.mb-2 RATING
+              .form-check
+                %input#rating5.form-check-input{:name => "ratings", :type => "radio"}/
+                .form-check-label
+                  = render partial: "layouts/rating", locals: { stars_count: 5, current_rating: 5 }
+              .form-check
+                %input#rating4.form-check-input{:name => "ratings", :type => "radio"}/
+                .form-check-label
+                  = render partial: "layouts/rating", locals: { stars_count: 4, current_rating: 4 }
+              .form-check
+                %input#rating3.form-check-input{:name => "ratings", :type => "radio"}/
+                .form-check-label
+                  = render partial: "layouts/rating", locals: { stars_count: 3, current_rating: 3 }
+              .form-check
+                %input#rating2.form-check-input{:name => "ratings", :type => "radio"}/
+                .form-check-label
+                  = render partial: "layouts/rating", locals: { stars_count: 2, current_rating: 2 }
+              .form-check
+                %input#rating1.form-check-input{:name => "ratings", :type => "radio"}/
+                .form-check-label
+                  = render partial: "layouts/rating", locals: { stars_count: 1, current_rating: 1 }
+            .mb-5
+              .d-flex.flex-row.justify-content-between.w-100
+                %button.btn.btn-outline-primary.w-100.me-2{:type => "button"} Clear
+                %button.btn.btn-primary.w-100{:type => "button"} Filter
+/ Menu Content End
+/ Content End

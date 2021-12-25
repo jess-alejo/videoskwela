@@ -125,7 +125,12 @@ class CoursesController < ApplicationController
     @popular_tags = Tag.order(course_tags_count: :desc).limit(10)
   end
 
-  def list; end
+  def list
+    @ransack_path = courses_path
+    courses = Course.published.includes([image_attachment: :blob])
+    @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
+    @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
+  end
 
   def detail; end
 

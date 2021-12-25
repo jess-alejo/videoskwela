@@ -31,7 +31,8 @@ import "stylesheets/application.scss"
 
 // <!-- Vendor Scripts Start -->
 import "moment"
-import "bootstrap"
+// import "bootstrap"
+// import "./js/vendor/bootstrap.bundle.min";
 
 // import "./js/vendor/jquery-3.5.1.min"
 // import "overlayscrollbars"

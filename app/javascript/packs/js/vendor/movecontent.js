@@ -6,7 +6,9 @@
  *
  */
 
-class MoveContent {
+ import { Globals } from "../base/globals"
+
+export class MoveContent {
   get options() {
     return {
       targetSelector: '',
