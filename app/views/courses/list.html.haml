@@ -29,7 +29,7 @@
         / Content of below will be moved to #menuColumn or back in here based on the data-move-breakpoint attribute below
         / Content will be here if the screen size is smaller than lg
         #menuMoveContent{"data-move-breakpoint" => "lg", "data-move-target" => "#menuColumn"}
-          .menu-items
+          = search_form_for @ransack_courses, as: :courses_search, url: @ransack_path, class: "menu-items" do |f|
             .mb-5
               %p.text-small.text-muted.mb-2 CATEGORY
               .mt-3
@@ -80,7 +80,7 @@
               %p.text-small.text-muted.mb-2 SEARCH
               .row.g-1
                 .col
-                  %input.form-control{:placeholder => "Keyword", :type => "text"}/
+                  = f.text_field :title_cont, placeholder: "Keyword", class: "form-control"
                 .col-auto
                   %button.btn.btn-icon.btn-icon-only.btn-outline-primary{:type => "button"}
                     %i{"data-acorn-icon" => "chevron-right"}
@@ -89,26 +89,36 @@
               .form-check
                 %input#rating5.form-check-input{:name => "ratings", :type => "radio"}/
                 .form-check-label
-                  = render partial: "layouts/rating", locals: { stars_count: 5, current_rating: 5 }
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.pe-none
+                    .br-wrapper
+                      = render partial: "layouts/rating", locals: { stars_count: 5, current_rating: 5 }
               .form-check
                 %input#rating4.form-check-input{:name => "ratings", :type => "radio"}/
                 .form-check-label
-                  = render partial: "layouts/rating", locals: { stars_count: 4, current_rating: 4 }
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.pe-none
+                    .br-wrapper
+                      = render partial: "layouts/rating", locals: { stars_count: 4, current_rating: 4 }
               .form-check
                 %input#rating3.form-check-input{:name => "ratings", :type => "radio"}/
                 .form-check-label
-                  = render partial: "layouts/rating", locals: { stars_count: 3, current_rating: 3 }
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.pe-none
+                    .br-wrapper
+                      = render partial: "layouts/rating", locals: { stars_count: 3, current_rating: 3 }
               .form-check
                 %input#rating2.form-check-input{:name => "ratings", :type => "radio"}/
                 .form-check-label
-                  = render partial: "layouts/rating", locals: { stars_count: 2, current_rating: 2 }
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.pe-none
+                    .br-wrapper
+                      = render partial: "layouts/rating", locals: { stars_count: 2, current_rating: 2 }
               .form-check
                 %input#rating1.form-check-input{:name => "ratings", :type => "radio"}/
                 .form-check-label
-                  = render partial: "layouts/rating", locals: { stars_count: 1, current_rating: 1 }
+                  .br-wrapper.br-theme-cs-icon.d-inline-block.pe-none
+                    .br-wrapper
+                      = render partial: "layouts/rating", locals: { stars_count: 1, current_rating: 1 }
             .mb-5
               .d-flex.flex-row.justify-content-between.w-100
-                %button.btn.btn-outline-primary.w-100.me-2{:type => "button"} Clear
-                %button.btn.btn-primary.w-100{:type => "button"} Filter
+                = link_to "Clear", @ransack_path, class: "btn btn-outline-primary w-100 me-2"
+                = f.submit "Filter", class: "btn btn-primary w-100"
 / Menu Content End
 / Content End

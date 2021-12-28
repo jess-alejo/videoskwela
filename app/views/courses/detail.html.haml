@@ -286,7 +286,9 @@
                 = course_presenter.average_rating
 
               %div
-                = render partial: "layouts/rating", locals: { stars_count: course_presenter.stars_count, current_rating: course_presenter.average_rating }
+                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                  .br-wrapper
+                    = render partial: "layouts/rating", locals: { stars_count: course_presenter.stars_count, current_rating: course_presenter.average_rating }
                 %span.text-muted
                   = "(#{course_presenter.review_count})"
           .col
@@ -305,7 +307,9 @@
                 .col-auto
                   %span.me-3.text-muted.text-small
                     = number_to_percentage(star_rating, precision: 0)
-                  = render partial: "layouts/rating", locals: { stars_count: n, current_rating: star_rating }
+                    .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                      .br-wrapper
+                        = render partial: "layouts/rating", locals: { stars_count: n, current_rating: star_rating }
         -# Total Rating End
 
         -# Comments Start
@@ -322,7 +326,9 @@
                 .text-muted.text-small.mb-2
                   = time_ago_in_words review.created_at
                   ago
-                = render partial: "layouts/rating", locals: { stars_count: review.rating, current_rating: review.rating }
+                .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+                  .br-wrapper
+                    = render partial: "layouts/rating", locals: { stars_count: review.rating, current_rating: review.rating }
 
                 .text-medium.text-alternate.lh-1-25
                   = review.message

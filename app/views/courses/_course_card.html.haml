@@ -10,7 +10,9 @@
         = course.title
   .card-footer.border-0.pt-0
     .mb-2
-      = render partial: "layouts/rating", locals: { stars_count: course.reviews.average(:rating).to_i, current_rating: course.reviews.average(:rating) }
+      .br-wrapper.br-theme-cs-icon.d-inline-block.mb-2
+        .br-wrapper
+          = render partial: "layouts/rating", locals: { stars_count: course.reviews.average(:rating).to_i, current_rating: course.reviews.average(:rating) }
 
       .text-muted.d-inline-block.text-small.align-text-top
         = "(#{course.reviews.count})"

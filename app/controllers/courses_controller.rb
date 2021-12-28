@@ -126,7 +126,7 @@ class CoursesController < ApplicationController
   end
 
   def list
-    @ransack_path = courses_path
+    @ransack_path = list_courses_path
     courses = Course.published.includes([image_attachment: :blob])
     @ransack_courses = courses.ransack(params[:courses_search], search_key: :courses_search)
     @pagy, @courses = pagy(@ransack_courses.result.includes(:author))
