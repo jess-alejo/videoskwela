@@ -17,6 +17,18 @@ module ApplicationHelper
     content_for :breadcrumb, li
   end
 
+  def top_button(text, url, options = {})
+    icon = tag.i(data: { "acorn-icon" => options[:icon] }, class: "me-1")
+    label = tag.span(text)
+
+    class_names = class_names("btn btn-primary btn-icon btn-icon-start w-100 w-sm-auto ms-1", options[:class])
+    button = content_tag(:a, href: url, class: class_names) do
+      icon.concat(label)
+    end
+
+    content_for :top_button, button
+  end
+
   def progress_indicator(_current, _total)
     content_tag(:div, class: 'container.d-flex.justify-content-center.align-items-center.mb-4') do
       content_tag(:div, class: 'progresses') do
