@@ -1,9 +1,15 @@
-- page_title @course.title
-- course_presenter = CoursePresenter.new(@course)
-- breadcrumb link_to "Home", root_url
-- breadcrumb link_to "Courses", explore_courses_path
+:ruby
+  page_title @course.title
+  course_presenter = CoursePresenter.new(@course)
+  breadcrumb link_to "Home", root_url
+  breadcrumb link_to "Courses", explore_courses_path
 
-- top_button "Start Now", "#", class: "btn-primary", icon: "chevron-right"
+  if policy(@course).edit?
+    top_button("Add Lesson", new_course_lesson_path(@course), icon: "plus") if policy(@course).author?
+    top_button "Edit", course_course_wizard_index_path(@course), icon: "edit-square"
+  else
+    top_button "Start Now", "#", class: "btn-primary", icon: "chevron-right"
+  end
 
 / Content Start
 .row
