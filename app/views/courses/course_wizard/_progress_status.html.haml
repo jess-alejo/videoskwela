@@ -1,5 +1,10 @@
-.container.d-flex.justify-content-center.align-items-center.mb-5
-  .progresses
-    - wizard_steps.each do |step|
-      = wicked_progress(step)
-      = wicked_progress_line(step)
+%ul.nav.nav-tabs.justify-content-center{:role => "tablist"}
+  - wizard_steps.each_with_index do |step, index|
+    %li.nav-item{ role: "presentation" }
+      = link_to(wizard_path(step),
+        class: class_names("nav-link text-center", { done: past_step?(step) }, { active: current_step?(step) }),
+        role: "tab") do
+        .mb-1.title.d-none.d-sm-block
+          = step.to_s.titleize
+        .text-small.description.d-none.d-md-block
+          = index + 1

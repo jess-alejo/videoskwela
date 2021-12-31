@@ -9,19 +9,21 @@
     %li.breadcrumb-item.active{"aria-current" => "page"}
       = step.to_s.humanize
 
-.card
-  .card-body
+.card.mb-5.wizard
+  .card-header.border-0.pb-0
     = render 'progress_status'
-
+  .card-body
     = yield
+  .card-footer.text-center.border-0.pt-1
+    = link_to previous_wizard_path,
+      class: class_names("btn btn-icon btn-icon-start btn-outline-primary btn-prev", { disabled: wizard_steps.index(step).zero? }) do
+      %i{"data-acorn-icon" => "chevron-left"}
+      %span Back
 
-  .card-footer
-    .float-start
-      - previous_path = wizard_steps.index(step) == 0 ? course_path(@course) : previous_wizard_path
-      = link_to previous_path, class: 'btn btn-sm btn-info' do
-        %i.fa.fa-arrow-left
-        Back
-    .float-end
-      = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
-        %i.fa.fa-arrow-right
-        = wizard_steps.index(step) + 1 == wizard_steps.count ? 'Finish' : 'Skip'
+    = space
+    = link_to next_wizard_path, class: 'btn btn-icon btn-icon-end btn-outline-primary btn-next' do
+      - if wizard_steps.index(step) + 1 == wizard_steps.count
+        %span Finish
+      - else
+        %span Skip
+        %i{"data-acorn-icon" => "chevron-right"}
