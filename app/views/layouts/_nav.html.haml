@@ -8,77 +8,80 @@
         / Or added via css to provide different ones for different color themes
         .img
     / Logo End
-    / Language Switch Start
-    .language-switch-container
-      %button.btn.btn-empty.language-button.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown"} EN
-      .dropdown-menu
-        %a.dropdown-item{:href => "#"} DE
-        %a.dropdown-item.active{:href => "#"} EN
-        %a.dropdown-item{:href => "#"} ES
-    / Language Switch End
-    / User Menu Start
-    .user-container.d-flex
-      %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
-        = image_tag(current_user.avatar_url, alt: "profile", class: "profile")
-        .name
-          = current_user.name
-      .dropdown-menu.dropdown-menu-end.user-menu.wide
-        .row.mb-3.ms-0.me-0
-          .col-12.ps-1.mb-2
-            .text-extra-small.text-primary ACCOUNT
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} User Info
-              %li
-                %a{:href => "#"} Preferences
-              %li
-                %a{:href => "#"} Calendar
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Security
-              %li
-                %a{:href => "#"} Billing
-        .row.mb-1.ms-0.me-0
-          .col-12.p-1.mb-2.pt-2
-            .text-extra-small.text-primary APPLICATION
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Themes
-              %li
-                %a{:href => "#"} Language
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"} Devices
-              %li
-                %a{:href => "#"} Storage
-        .row.mb-1.ms-0.me-0
-          .col-12.p-1.mb-3.pt-3
-            .separator-light
-          .col-6.ps-1.pe-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"}
-                  %i.me-2{"data-acorn-icon" => "help", "data-acorn-size" => "17"}
-                  %span.align-middle Help
-              %li
-                %a{:href => "#"}
-                  %i.me-2{"data-acorn-icon" => "file-text", "data-acorn-size" => "17"}
-                  %span.align-middle Docs
-          .col-6.pe-1.ps-1
-            %ul.list-unstyled
-              %li
-                %a{:href => "#"}
-                  %i.me-2{"data-acorn-icon" => "gear", "data-acorn-size" => "17"}
-                  %span.align-middle Settings
-              %li
-                %a{:href => "#"}
-                  %i.me-2{"data-acorn-icon" => "logout", "data-acorn-size" => "17"}
-                  %span.align-middle Logout
-    / User Menu End
+    - if user_signed_in?
+      / Language Switch Start
+      .language-switch-container
+        %button.btn.btn-empty.language-button.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown"} EN
+        .dropdown-menu
+          %a.dropdown-item{:href => "#"} DE
+          %a.dropdown-item.active{:href => "#"} EN
+          %a.dropdown-item{:href => "#"} ES
+      / Language Switch End
+
+      / User Menu Start
+      .user-container.d-flex
+        %a.d-flex.user.position-relative{"aria-expanded" => "false", "aria-haspopup" => "true", "data-bs-toggle" => "dropdown", :href => "#"}
+          = image_tag(current_user.avatar_url, alt: "profile", class: "profile")
+          .name
+            = current_user.name
+        .dropdown-menu.dropdown-menu-end.user-menu.wide
+          .row.mb-3.ms-0.me-0
+            .col-12.ps-1.mb-2
+              .text-extra-small.text-primary ACCOUNT
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} User Info
+                %li
+                  %a{:href => "#"} Preferences
+                %li
+                  %a{:href => "#"} Calendar
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Security
+                %li
+                  %a{:href => "#"} Billing
+          .row.mb-1.ms-0.me-0
+            .col-12.p-1.mb-2.pt-2
+              .text-extra-small.text-primary APPLICATION
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Themes
+                %li
+                  %a{:href => "#"} Language
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"} Devices
+                %li
+                  %a{:href => "#"} Storage
+          .row.mb-1.ms-0.me-0
+            .col-12.p-1.mb-3.pt-3
+              .separator-light
+            .col-6.ps-1.pe-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"}
+                    %i.me-2{"data-acorn-icon" => "help", "data-acorn-size" => "17"}
+                    %span.align-middle Help
+                %li
+                  %a{:href => "#"}
+                    %i.me-2{"data-acorn-icon" => "file-text", "data-acorn-size" => "17"}
+                    %span.align-middle Docs
+            .col-6.pe-1.ps-1
+              %ul.list-unstyled
+                %li
+                  %a{:href => "#"}
+                    %i.me-2{"data-acorn-icon" => "gear", "data-acorn-size" => "17"}
+                    %span.align-middle Settings
+                %li
+                  = link_to destroy_user_session_path, method: :delete do
+                    %i.me-2{"data-acorn-icon" => "logout", "data-acorn-size" => "17"}
+                    %span.align-middle Logout
+      / User Menu End
+
     / Icons Menu Start
     %ul.list-unstyled.list-inline.text-center.menu-icons
       %li.list-inline-item
